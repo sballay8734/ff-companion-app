@@ -1,0 +1,13 @@
+{
+  "name": "ff-companion-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm run start --prefix client & npm run dev --prefix server",
+    "prod": "npm run start --prefix client & npm run prod --prefix server",
+    "build": "npm run build --prefix server"
+  },
+  "author": "",
+  "license": "ISC"
+}

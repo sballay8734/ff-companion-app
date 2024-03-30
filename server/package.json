@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "dev": "NODE_ENV=dev nodemon src/index.ts",
+    "prod": "NODE_ENV=prod node dist/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,8 +20,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.4",
     "node-cron": "^3.0.3",
-    "nodemon": "^3.1.0",
-    "ts-node": "^10.9.2"
+    "nodemon": "^3.1.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -29,6 +30,7 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   }
 }

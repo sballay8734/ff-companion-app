@@ -11,7 +11,7 @@
     // "disableReferencedProjectLoad": true,
 
     /* Language and Environment ********************************************* */
-    "target": "ES6",
+    "target": "ES2020",
     // "lib": [],
     // "jsx": "preserve",
     // "experimentalDecorators": true,
@@ -25,9 +25,9 @@
     // "moduleDetection": "auto",
 
     /* Modules ************************************************************** */
-    "module": "ES6",
+    "module": "CommonJS",
     "rootDir": "./src",
-    "typeRoots": ["@types", "src/types/express.d.ts"],                                  
+    // "typeRoots": ["@types"],                                  
     // "moduleResolution": "node10",
     // "baseUrl": "./",
     // "paths": {},
@@ -106,5 +106,5 @@
     "skipLibCheck": true,
     // "skipDefaultLibCheck": true
   },
-  "include": ["src/**/*", "./src/types/express.d.ts"],
+  // "include": ["src/**/*"],
 }

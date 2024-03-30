@@ -19,7 +19,7 @@ const createServer = () => {
     // Middleware
     app
         .disable("x-powered-by")
-        .use((0, cors_1.default)({ credentials: true, origin: "http://localhost:5173" }))
+        .use((0, cors_1.default)({ credentials: true }))
         .use((0, body_parser_1.urlencoded)({ extended: true }))
         .use((0, body_parser_1.json)())
         .use((0, cookie_parser_1.default)());

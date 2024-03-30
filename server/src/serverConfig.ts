@@ -21,7 +21,7 @@ export const createServer = (): Express => {
   // Middleware
   app
     .disable("x-powered-by")
-    .use(cors({ credentials: true, origin: "http://localhost:5173" }))
+    .use(cors({ credentials: true }))
     .use(urlencoded({ extended: true }))
     .use(json())
     .use(cookieParser())

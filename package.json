@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run start --prefix client & npm run dev --prefix server",
+    "dev-ios": "npm run ios --prefix client & npm run dev --prefix server",
+    "dev-android": "npm run android --prefix client & npm run dev --prefix server",
+    "dev-web": "npm run web --prefix client & npm run dev --prefix server",
     "prod": "npm run start --prefix client & npm run prod --prefix server",
     "build": "npm run build --prefix server"
   },

@@ -1,13 +1,10 @@
-// ! LAUNCH SERVER AND CLIENT FROM ONE TERMINAL
-// ! PREFIX OR COLOR LOGS WITH WHERE THEY CAME FROM (CLIENT SERVER)
-
 import { StatusBar } from "expo-status-bar"
 import { StyleSheet, Text, View } from "react-native"
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Initialized</Text>
       <StatusBar style="auto" />
     </View>
   )

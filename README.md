@@ -13,7 +13,6 @@ An app to enhance your league's experience. Inspired by the "Legendary League of
 - Node
 - Xcode (for iOS development)
 - Android Studio (for Android development)
-
 - Docker
 - Docker Compose
 

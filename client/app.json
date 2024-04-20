@@ -1,5 +1,7 @@
 {
   "expo": {
+    "main": "expo-router/entry",
+    "scheme": "your-app-scheme",
     "name": "ff-companion-app",
     "slug": "ff-companion-app",
     "version": "1.0.0",
@@ -24,7 +26,11 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

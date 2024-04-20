@@ -10,9 +10,7 @@ An app to enhance your league's experience. Inspired by the "Legendary League of
 
 ## Future Requirements (Planned)
 
-- Node
-- Xcode (for iOS development)
-- Android Studio (for Android development)
+- ...all above requirements
 - Docker
 - Docker Compose
 
@@ -28,3 +26,15 @@ An app to enhance your league's experience. Inspired by the "Legendary League of
 ## Status
 
 The project is **currently in development**.
+
+## TODO
+
+- [ ] Routing
+- [ ] Setup database
+- [ ] Attach database
+- [ ] Add authentication (w/ Clerk) \*Check it's compatibility with 3rd party APIs
+- [ ] Add splash screen
+- [ ] Error management
+- [ ] Analytics (posthog)
+- [ ] Ratelimiting
+- [ ] Animations (w/ react-native-reanimated)

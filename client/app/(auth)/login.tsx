@@ -1,5 +1,11 @@
 import { useState } from "react"
-import { Text, TextInput, TouchableOpacity, View } from "react-native"
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  StyleSheet
+} from "react-native"
 import { useSignIn } from "@clerk/clerk-expo"
 
 export default function LoginScreen() {
@@ -25,8 +31,8 @@ export default function LoginScreen() {
     }
   }
   return (
-    <View>
-      <View>
+    <View style={{ width: "100%" }}>
+      <View style={styles.input}>
         <TextInput
           autoCapitalize="none"
           value={emailAddress}
@@ -35,7 +41,7 @@ export default function LoginScreen() {
         />
       </View>
 
-      <View>
+      <View style={styles.input}>
         <TextInput
           value={password}
           placeholder="Password..."
@@ -44,9 +50,33 @@ export default function LoginScreen() {
         />
       </View>
 
-      <TouchableOpacity onPress={onSignInPress}>
-        <Text>Sign in</Text>
+      <TouchableOpacity style={styles.btn} onPress={onSignInPress}>
+        <Text style={{ color: "#ffffff" }}>Sign in</Text>
       </TouchableOpacity>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  input: {
+    backgroundColor: "#fff",
+    borderColor: "#000000",
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    width: "100%",
+    marginBottom: 10
+  },
+  btn: {
+    backgroundColor: "#7a00b3",
+    borderColor: "#7a00b3",
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    width: "100%",
+    marginBottom: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+})

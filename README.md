@@ -29,10 +29,10 @@ The project is **currently in development**.
 
 ## TODO
 
+- [ ] Add authentication (w/ Clerk) \*Check it's compatibility with 3rd party APIs
 - [ ] Routing
 - [ ] Setup database
 - [ ] Attach database
-- [ ] Add authentication (w/ Clerk) \*Check it's compatibility with 3rd party APIs
 - [ ] Add splash screen
 - [ ] Error management
 - [ ] Analytics (posthog)

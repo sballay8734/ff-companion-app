@@ -1,10 +1,13 @@
 {
   "expo": {
     "main": "expo-router/entry",
-    "scheme": "your-app-scheme",
+    "scheme": "my-app-schema",
     "name": "ff-companion-app",
     "slug": "ff-companion-app",
     "version": "1.0.0",
+    "extra": {
+    "clerkPublishableKey": "process.env.CLERK_PUBLISHABLE_KEY"
+    },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

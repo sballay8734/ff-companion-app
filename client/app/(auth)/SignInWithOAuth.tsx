@@ -50,7 +50,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 })
-
-{
-  /* <Button title="Sign in with Google" onPress={onPress} /> */
-}

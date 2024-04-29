@@ -7,6 +7,7 @@ import {
   StyleSheet
 } from "react-native"
 import { useSignIn } from "@clerk/clerk-expo"
+import SignInWithOAuth from "./SignInWithOAuth"
 
 export default function LoginScreen() {
   const { signIn, setActive, isLoaded } = useSignIn()
@@ -53,6 +54,7 @@ export default function LoginScreen() {
       <TouchableOpacity style={styles.btn} onPress={onSignInPress}>
         <Text style={{ color: "#ffffff" }}>Sign in</Text>
       </TouchableOpacity>
+      <SignInWithOAuth />
     </View>
   )
 }

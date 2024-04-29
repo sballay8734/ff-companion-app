@@ -6,10 +6,10 @@ import React from "react"
 import { SafeAreaView, Text, StyleSheet, View, Button } from "react-native"
 import { ClerkProvider, SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo"
 // import Constants from "expo-constants"
-import LoginScreen from "./(auth)/Login"
+import LoginScreen from "./(auth)/login"
 import * as SecureStore from "expo-secure-store"
-import RegisterScreen from "./(auth)/Register"
-import SignInWithOAuth from "./(auth)/SignInWithOAuth"
+import RegisterScreen from "./(auth)/register"
+import SignedInEntry from "./(main)/SignedInEntry"
 
 const tokenCache = {
   async getToken(key: string) {
@@ -54,14 +54,12 @@ export default function App() {
     >
       <SafeAreaView style={styles.container}>
         <SignedIn>
-          <Text>You are Signed in</Text>
-          <SignOut />
+          <SignedInEntry />
         </SignedIn>
         <SignedOut>
           <View
             style={{
-              borderColor: "#ff0000",
-              borderWidth: 2,
+              backgroundColor: "#222222",
               width: "100%",
               paddingHorizontal: 10,
               flexGrow: 1,
@@ -70,7 +68,6 @@ export default function App() {
             }}
           >
             <LoginScreen />
-            <SignInWithOAuth />
             <Text style={styles.btn}>Sign in with Apple (not setup)</Text>
           </View>
         </SignedOut>
@@ -83,7 +80,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#222222",
     alignItems: "center",
     justifyContent: "center"
   },

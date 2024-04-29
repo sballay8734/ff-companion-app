@@ -1,22 +1,19 @@
-import { Text, View, StyleSheet } from "react-native"
-import SignOutBtn from "../../components/SignOutBtn"
+import { Text, View } from "react-native"
 
-export default function LoggedInEntry() {
+import { useAuth } from "@clerk/clerk-expo"
+
+export default function Index() {
+  const { signOut } = useAuth()
   return (
-    <View style={styles.container}>
-      <Text>You are Signed in yo!</Text>
-      <SignOutBtn />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text
+        onPress={() => {
+          // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
+          signOut()
+        }}
+      >
+        Sign Out
+      </Text>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-})

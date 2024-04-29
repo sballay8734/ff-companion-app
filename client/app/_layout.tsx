@@ -1,56 +1,36 @@
-import { useEffect } from "react"
-import { Stack } from "expo-router"
+import { Slot } from "expo-router"
+import * as SecureStore from "expo-secure-store"
+import { ClerkProvider } from "@clerk/clerk-expo"
+import { registerRootComponent } from "expo"
+import { View, Text } from "react-native"
+import App from "./index"
 
-import FontAwesome from "@expo/vector-icons/FontAwesome"
-import { useFonts } from "expo-font"
-import * as SplashScreen from "expo-splash-screen"
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary
-} from "expo-router"
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "(tabs)"
-}
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync()
-
-export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
-    ...FontAwesome.font
-  })
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error
-  }, [error])
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync()
+const tokenCache = {
+  async getToken(key: string) {
+    try {
+      return SecureStore.getItemAsync(key)
+    } catch (err) {
+      return null
     }
-  }, [loaded])
-
-  if (!loaded) {
-    return null
+  },
+  async saveToken(key: string, value: string) {
+    try {
+      return SecureStore.setItemAsync(key, value)
+    } catch (err) {
+      return
+    }
   }
-
-  return <RootLayoutNav />
 }
 
-function RootLayoutNav() {
-  // const colorScheme = useColorScheme()
-
+function RootLayout() {
   return (
-    // <ThemeProvider>
-    <Stack>
-      <Stack.Screen name="(auth)" options={{ headerTitle: "Auth" }} />
-      <Stack.Screen name="(main)" options={{ headerTitle: "Main" }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}
+    >
+      <App />
+    </ClerkProvider>
   )
 }
+
+registerRootComponent(RootLayout)

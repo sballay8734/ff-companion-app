@@ -30,31 +30,26 @@ const tokenCache = {
 
 export default function App() {
   return (
-    <ClerkProvider
-      tokenCache={tokenCache}
-      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}
-    >
-      <SafeAreaView style={styles.container}>
-        <SignedIn>
-          <LoggedInEntry />
-        </SignedIn>
-        <SignedOut>
-          <View
-            style={{
-              backgroundColor: "#222222",
-              width: "100%",
-              paddingHorizontal: 10,
-              flexGrow: 1,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <LoginScreen />
-            <Text style={styles.btn}>Sign in with Apple (not setup)</Text>
-          </View>
-        </SignedOut>
-      </SafeAreaView>
-    </ClerkProvider>
+    <SafeAreaView style={styles.container}>
+      <SignedIn>
+        <LoggedInEntry />
+      </SignedIn>
+      <SignedOut>
+        <View
+          style={{
+            backgroundColor: "#222222",
+            width: "100%",
+            paddingHorizontal: 10,
+            flexGrow: 1,
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <LoginScreen />
+          <Text style={styles.btn}>Sign in with Apple (not setup)</Text>
+        </View>
+      </SignedOut>
+    </SafeAreaView>
   )
 }
 

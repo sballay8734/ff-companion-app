@@ -7,6 +7,8 @@ import {
   StyleSheet
 } from "react-native"
 import { useSignIn } from "@clerk/clerk-expo"
+import { router } from "expo-router"
+
 import SignInWithOAuth from "./SignInWithOAuth"
 
 export default function LoginScreen() {
@@ -27,6 +29,7 @@ export default function LoginScreen() {
       })
       // This indicates the user is signed in
       await setActive({ session: completeSignIn.createdSessionId })
+      router.replace("/")
     } catch (err: any) {
       console.log(err)
     }

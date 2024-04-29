@@ -1,9 +1,9 @@
-import { Slot } from "expo-router"
 import * as SecureStore from "expo-secure-store"
 import { ClerkProvider } from "@clerk/clerk-expo"
 import { registerRootComponent } from "expo"
-import { View, Text } from "react-native"
-import App from "./index"
+import { View, Text, StyleSheet, SafeAreaView } from "react-native"
+
+import Index from "./index"
 
 const tokenCache = {
   async getToken(key: string) {
@@ -28,7 +28,7 @@ function RootLayout() {
       tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}
     >
-      <App />
+      <Index />
     </ClerkProvider>
   )
 }

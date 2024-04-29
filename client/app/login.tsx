@@ -58,6 +58,9 @@ export default function LoginScreen() {
         <Text style={{ color: "#ffffff" }}>Sign in</Text>
       </TouchableOpacity>
       <SignInWithOAuth />
+      <TouchableOpacity style={styles.apple} onPress={onSignInPress}>
+        <Text style={{ color: "#ffffff" }}>Sign in with Apple (Not setup)</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -75,6 +78,18 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: "#7a00b3",
     borderColor: "#7a00b3",
+    borderWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 6,
+    width: "100%",
+    marginBottom: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  apple: {
+    backgroundColor: "#111111",
+    borderColor: "#111111",
     borderWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 6,

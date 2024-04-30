@@ -54,7 +54,8 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View>
+    <View
+      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {!pendingVerification && (
         <View>
           <View>

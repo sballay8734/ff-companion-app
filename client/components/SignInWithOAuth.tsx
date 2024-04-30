@@ -31,7 +31,7 @@ const SignInWithOAuth = () => {
 
   return (
     <TouchableOpacity style={styles.btn} onPress={onPress}>
-      <Text style={{ color: '#ffffff' }}>Continue with Google</Text>
+      <Text style={{ color: '#ffffff', fontSize: 16 }}>Continue with Google</Text>
       <AntDesign style={{ position: 'absolute', left: 20 }} name="google" size={16} color="white" />
     </TouchableOpacity>
   );
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     borderColor: '#0063bf',
     borderWidth: 1,
     borderRadius: 4,
-    paddingVertical: 14,
+    paddingVertical: 18,
     paddingHorizontal: 6,
     width: '100%',
     marginBottom: 10,

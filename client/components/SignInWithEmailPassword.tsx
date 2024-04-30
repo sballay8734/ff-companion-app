@@ -1,6 +1,6 @@
 import React from 'react';
 import * as WebBrowser from 'expo-web-browser';
-import { TouchableOpacity, Text, StyleSheet, View, TextInput } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View, TextInput, Button } from 'react-native';
 
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
 
@@ -19,27 +19,34 @@ const SignInWithEmailPassword = () => {
 
   return (
     <View style={{ width: '100%' }}>
-      <Text>Your email</Text>
+      <Text style={{ color: '#f4f4f4', fontWeight: 'bold', paddingBottom: 4 }}>Email</Text>
       <View style={styles.input}>
         <TextInput
+          placeholderTextColor="#929293"
           autoCapitalize="none"
-          value={'Setup'}
+          // value={'Setup'}
           placeholder="Email..."
           onChangeText={() => console.log('Setup')}
         />
       </View>
 
-      <Text>Your password</Text>
+      <Text style={{ color: '#f4f4f4', fontWeight: 'bold', paddingBottom: 4 }}>Password</Text>
       <View style={styles.input}>
         <TextInput
-          value={'Setup'}
+          placeholderTextColor="#929293"
+          // value={'Setup'}
           placeholder="Password..."
           secureTextEntry={true}
           onChangeText={() => console.log('Setup')}
         />
       </View>
+      {/* <TouchableOpacity>
+        <Text style={{ color: '#f4f4f4', paddingBottom: 10, textAlign: 'right' }}>
+          Forgot password
+        </Text>
+      </TouchableOpacity> */}
       <TouchableOpacity style={styles.btn} onPress={onPress}>
-        <Text style={{ color: '#000000' }}>Login</Text>
+        <Text style={{ color: '#000000', fontSize: 16 }}>Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -53,7 +60,7 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius: 4,
     borderWidth: 1,
-    paddingVertical: 14,
+    paddingVertical: 18,
     paddingHorizontal: 6,
     width: '100%',
     marginBottom: 10,
@@ -64,8 +71,8 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   input: {
-    backgroundColor: '#fff',
-    borderColor: '#000000',
+    backgroundColor: '#272728',
+    borderColor: '#262626',
     borderWidth: 1,
     paddingVertical: 14,
     paddingHorizontal: 6,

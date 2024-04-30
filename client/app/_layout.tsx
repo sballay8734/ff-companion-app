@@ -32,37 +32,6 @@ const tokenCache = {
   },
 };
 
-// !TODO: This stack layout is never being rendered because of RootLayout rendering rules (Must render slot or other navigator)
-
-// !TODO: See this page (https://clerk.com/docs/quickstarts/expo) - you're just going to have to modify your app structure with an additional nested layer/_layout.tsx page. There's no way around it
-const StackLayout = () => {
-  const { isSignedIn, isLoaded, sessionId, getToken } = useAuth();
-  const segments = useSegments();
-  const router = useRouter();
-
-  if (!isLoaded) {
-    // Handle loading state however you like
-    return <Text>Loading...</Text>;
-  }
-
-  if (!isSignedIn) {
-    router.replace('/');
-  }
-
-  // TODO: May need to fetch user data here
-  // const fetchDataFromExternalResource = async () => {
-  //   const token = await getToken();
-  //   // Add logic to fetch your data
-  //   return data;
-  // };
-  return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-    </Stack>
-  );
-};
-
 export default function RootLayout() {
   return (
     <ClerkProvider

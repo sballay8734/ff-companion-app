@@ -1,14 +1,46 @@
 // TODO: This will be login page: See link below for example (7:00)
 // https://www.youtube.com/watch?v=cMi6Vwo6C2M
 
-import { View, Text, StyleSheet } from 'react-native';
+import { useAuth, useSignIn } from '@clerk/clerk-expo';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import SignInWithOAuth from '~/components/SignInWithOAuth';
+import { Link, useRouter } from 'expo-router';
+import { useEffect } from 'react';
+import SignInWithApple from '~/components/SignInWithApple';
+import SignInWithEmailPassword from '~/components/SignInWithEmailPassword';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Login() {
-  return (
-    <View style={styles.container}>
-      <Text>Login</Text>
-    </View>
-  );
+  const { isSignedIn, isLoaded } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      router.replace('/(protected)');
+    }
+  }, [isSignedIn]);
+
+  if (!isLoaded) {
+    // Handle loading state however you like
+    return <Text>Loading...</Text>;
+  }
+
+  if (!isSignedIn) {
+    return (
+      <View style={styles.container}>
+        <SignInWithOAuth />
+        <SignInWithApple />
+        <Text style={{ paddingVertical: 14 }}>OR</Text>
+        <SignInWithEmailPassword />
+        <View style={styles.noAccount}>
+          <Text>Don't have an account?</Text>
+          <Link style={styles.link} href="/register">
+            Sign up
+          </Link>
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -18,5 +50,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+  },
+  noAccount: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 4,
   },
 });

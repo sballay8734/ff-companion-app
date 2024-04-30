@@ -32,6 +32,7 @@ const tokenCache = {
   },
 };
 
+// !TODO: This stack layout is never being rendered because of RootLayout rendering rules (Must render slot or other navigator)
 const StackLayout = () => {
   const { isSignedIn, isLoaded, sessionId, getToken } = useAuth();
   const segments = useSegments();
@@ -52,7 +53,6 @@ const StackLayout = () => {
   //   // Add logic to fetch your data
   //   return data;
   // };
-
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />

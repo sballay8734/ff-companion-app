@@ -1,36 +1,72 @@
-import * as SecureStore from "expo-secure-store"
-import { ClerkProvider } from "@clerk/clerk-expo"
-import { registerRootComponent } from "expo"
-import { View, Text, StyleSheet, SafeAreaView } from "react-native"
+import * as SecureStore from 'expo-secure-store';
+import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
+import { Stack, useSegments, useRouter, Slot } from 'expo-router';
+import { View, Text } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useEffect } from 'react';
 
-import Index from "./index"
+// export const unstable_settings = {
+//   // Ensure that reloading on `/modal` keeps a back button present.
+//   initialRouteName: '(protected)',
+// };
+
+export enum Role {
+  COMMISSIONER = 'commissioner',
+  MEMBER = 'member',
+}
 
 const tokenCache = {
   async getToken(key: string) {
     try {
-      return SecureStore.getItemAsync(key)
+      return SecureStore.getItemAsync(key);
     } catch (err) {
-      return null
+      return null;
     }
   },
   async saveToken(key: string, value: string) {
     try {
-      return SecureStore.setItemAsync(key, value)
+      return SecureStore.setItemAsync(key, value);
     } catch (err) {
-      return
+      return;
     }
-  }
-}
+  },
+};
 
-function RootLayout() {
+const StackLayout = () => {
+  const { isSignedIn, isLoaded, sessionId, getToken } = useAuth();
+  const segments = useSegments();
+  const router = useRouter();
+
+  if (!isLoaded) {
+    // Handle loading state however you like
+    return <Text>Loading...</Text>;
+  }
+
+  if (!isSignedIn) {
+    router.replace('/');
+  }
+
+  // TODO: May need to fetch user data here
+  // const fetchDataFromExternalResource = async () => {
+  //   const token = await getToken();
+  //   // Add logic to fetch your data
+  //   return data;
+  // };
+
+  return (
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+    </Stack>
+  );
+};
+
+export default function RootLayout() {
   return (
     <ClerkProvider
       tokenCache={tokenCache}
-      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}
-    >
-      <Index />
+      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
+      <Slot />
     </ClerkProvider>
-  )
+  );
 }
-
-registerRootComponent(RootLayout)

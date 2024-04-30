@@ -1,16 +1,11 @@
 import * as SecureStore from 'expo-secure-store';
-import { ClerkProvider, useAuth } from '@clerk/clerk-expo';
-import { Slot } from 'expo-router';
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { Slot, Stack } from 'expo-router';
 import { SafeAreaView, StyleSheet } from 'react-native';
 // export const unstable_settings = {
 //   // Ensure that reloading on `/modal` keeps a back button present.
 //   initialRouteName: '(protected)',
 // };
-
-export enum Role {
-  COMMISSIONER = 'commissioner',
-  MEMBER = 'member',
-}
 
 const tokenCache = {
   async getToken(key: string) {
@@ -28,9 +23,6 @@ const tokenCache = {
     }
   },
 };
-
-// !TODO: Since you added SafeAreaView, (protected is not rendering on login)
-// !TODO: There's still something not right with your flow and routing
 
 export default function RootLayout() {
   return (

@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import SignInWithOAuth from '~/components/SignInWithOAuth';
 import SignInWithApple from '~/components/SignInWithApple';
 import SignInWithEmailPassword from '~/components/SignInWithEmailPassword';
+import { register } from 'module';
+import { registerRootComponent } from 'expo';
 
 export enum Role {
   COMMISSIONER = 'commissioner',
@@ -38,6 +40,16 @@ const StackLayout = () => {
   );
 };
 
-export default function RootLayout() {
-  return <StackLayout />;
+// export default function Main() {
+//   return <StackLayout />;
+// }
+
+export default function Main() {
+  return (
+    <View>
+      <Text>MAIN</Text>
+    </View>
+  );
 }
+
+registerRootComponent(Main);

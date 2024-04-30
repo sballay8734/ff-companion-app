@@ -1,7 +1,9 @@
 import * as SecureStore from 'expo-secure-store';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import { Slot, Stack } from 'expo-router';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 // export const unstable_settings = {
 //   // Ensure that reloading on `/modal` keeps a back button present.
 //   initialRouteName: '(protected)',
@@ -29,20 +31,7 @@ export default function RootLayout() {
     <ClerkProvider
       tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
-      <SafeAreaView style={styles.safeArea}>
-        <Slot />
-      </SafeAreaView>
+      <Slot />
     </ClerkProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#151515',
-    alignItems: 'center',
-    justifyContent: 'center',
-    // paddingHorizontal: 0,
-    width: '100%',
-  },
-});

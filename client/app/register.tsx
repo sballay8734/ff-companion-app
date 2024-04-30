@@ -1,27 +1,21 @@
-import { useState } from "react"
-import {
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  StyleSheet
-} from "react-native"
-import { useSignUp } from "@clerk/clerk-expo"
+import * as React from 'react';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useSignUp } from '@clerk/clerk-expo';
 
-export default function RegisterScreen() {
-  const { isLoaded, signUp, setActive } = useSignUp()
+export default function SignUpScreen() {
+  const { isLoaded, signUp, setActive } = useSignUp();
 
-  const [firstName, setFirstName] = useState("")
-  const [lastName, setLastName] = useState("")
-  const [emailAddress, setEmailAddress] = useState("")
-  const [password, setPassword] = useState("")
-  const [pendingVerification, setPendingVerification] = useState(false)
-  const [code, setCode] = useState("")
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [emailAddress, setEmailAddress] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [pendingVerification, setPendingVerification] = React.useState(false);
+  const [code, setCode] = React.useState('');
 
   // start the sign up process.
   const onSignUpPress = async () => {
     if (!isLoaded) {
-      return
+      return;
     }
 
     try {
@@ -29,41 +23,42 @@ export default function RegisterScreen() {
         firstName,
         lastName,
         emailAddress,
-        password
-      })
+        password,
+      });
 
       // send the email.
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" })
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
 
       // change the UI to our pending section.
-      setPendingVerification(true)
+      setPendingVerification(true);
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2))
+      console.error(JSON.stringify(err, null, 2));
     }
-  }
+  };
 
   // This verifies the user using email code that is delivered.
   const onPressVerify = async () => {
     if (!isLoaded) {
-      return
+      return;
     }
 
     try {
       const completeSignUp = await signUp.attemptEmailAddressVerification({
-        code
-      })
+        code,
+      });
 
-      await setActive({ session: completeSignUp.createdSessionId })
+      await setActive({ session: completeSignUp.createdSessionId });
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2))
+      console.error(JSON.stringify(err, null, 2));
     }
-  }
+  };
 
   return (
-    <View style={{ width: "100%", paddingHorizontal: 10 }}>
+    <View
+      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       {!pendingVerification && (
-        <View style={{ width: "100%" }}>
-          <View style={styles.input}>
+        <View>
+          <View>
             <TextInput
               autoCapitalize="none"
               value={firstName}
@@ -71,7 +66,7 @@ export default function RegisterScreen() {
               onChangeText={(firstName) => setFirstName(firstName)}
             />
           </View>
-          <View style={styles.input}>
+          <View>
             <TextInput
               autoCapitalize="none"
               value={lastName}
@@ -79,7 +74,7 @@ export default function RegisterScreen() {
               onChangeText={(lastName) => setLastName(lastName)}
             />
           </View>
-          <View style={styles.input}>
+          <View>
             <TextInput
               autoCapitalize="none"
               value={emailAddress}
@@ -88,7 +83,7 @@ export default function RegisterScreen() {
             />
           </View>
 
-          <View style={styles.input}>
+          <View>
             <TextInput
               value={password}
               placeholder="Password..."
@@ -98,7 +93,7 @@ export default function RegisterScreen() {
             />
           </View>
 
-          <TouchableOpacity style={styles.input} onPress={onSignUpPress}>
+          <TouchableOpacity onPress={onSignUpPress}>
             <Text>Sign up</Text>
           </TouchableOpacity>
         </View>
@@ -106,11 +101,7 @@ export default function RegisterScreen() {
       {pendingVerification && (
         <View>
           <View>
-            <TextInput
-              value={code}
-              placeholder="Code..."
-              onChangeText={(code) => setCode(code)}
-            />
+            <TextInput value={code} placeholder="Code..." onChangeText={(code) => setCode(code)} />
           </View>
           <TouchableOpacity onPress={onPressVerify}>
             <Text>Verify Email</Text>
@@ -118,18 +109,5 @@ export default function RegisterScreen() {
         </View>
       )}
     </View>
-  )
+  );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 10,
-    borderWidth: 1,
-    padding: 4,
-    paddingVertical: 10,
-    width: "100%"
-  }
-})

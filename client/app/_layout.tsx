@@ -1,36 +1,48 @@
-import * as SecureStore from "expo-secure-store"
-import { ClerkProvider } from "@clerk/clerk-expo"
-import { registerRootComponent } from "expo"
-import { View, Text, StyleSheet, SafeAreaView } from "react-native"
-
-import Index from "./index"
+import * as SecureStore from 'expo-secure-store';
+import { ClerkProvider } from '@clerk/clerk-expo';
+import { Slot, Stack } from 'expo-router';
+import { SafeAreaView, StyleSheet } from 'react-native';
+// export const unstable_settings = {
+//   // Ensure that reloading on `/modal` keeps a back button present.
+//   initialRouteName: '(protected)',
+// };
 
 const tokenCache = {
   async getToken(key: string) {
     try {
-      return SecureStore.getItemAsync(key)
+      return SecureStore.getItemAsync(key);
     } catch (err) {
-      return null
+      return null;
     }
   },
   async saveToken(key: string, value: string) {
     try {
-      return SecureStore.setItemAsync(key, value)
+      return SecureStore.setItemAsync(key, value);
     } catch (err) {
-      return
+      return;
     }
-  }
-}
+  },
+};
 
-function RootLayout() {
+export default function RootLayout() {
   return (
     <ClerkProvider
       tokenCache={tokenCache}
-      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}
-    >
-      <Index />
+      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
+      <SafeAreaView style={styles.safeArea}>
+        <Slot />
+      </SafeAreaView>
     </ClerkProvider>
-  )
+  );
 }
 
-registerRootComponent(RootLayout)
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#151515',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // paddingHorizontal: 0,
+    width: '100%',
+  },
+});

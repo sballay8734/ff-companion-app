@@ -34,7 +34,7 @@ const tokenCache = {
 
 // !TODO: This stack layout is never being rendered because of RootLayout rendering rules (Must render slot or other navigator)
 
-// !TODO: See this page (https://clerk.com/docs/quickstarts/expo) - you're just going to have to modify your app structure with an additional nested layer. There's no way around it
+// !TODO: See this page (https://clerk.com/docs/quickstarts/expo) - you're just going to have to modify your app structure with an additional nested layer/_layout.tsx page. There's no way around it
 const StackLayout = () => {
   const { isSignedIn, isLoaded, sessionId, getToken } = useAuth();
   const segments = useSegments();

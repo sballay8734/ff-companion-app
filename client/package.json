@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "main": "app/index.tsx",
+  "main": "expo-router/entry",
   "scripts": {
     "android": "expo start --android",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" && prettier -c \"**/*.{js,jsx,ts,tsx,json}\"",

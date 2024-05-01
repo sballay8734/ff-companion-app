@@ -34,7 +34,7 @@ export default SignInWithApple;
 const styles = StyleSheet.create({
   btn: {
     borderColor: '#000000',
-    borderRadius: 4,
+    borderRadius: 10,
     borderWidth: 1,
     paddingVertical: 18,
     paddingHorizontal: 6,

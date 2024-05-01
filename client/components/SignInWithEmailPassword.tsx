@@ -95,7 +95,7 @@ export default SignInWithEmailPassword;
 const styles = StyleSheet.create({
   btn: {
     color: 'black',
-    borderRadius: 4,
+    borderRadius: 10,
     borderWidth: 1,
     paddingVertical: 18,
     paddingHorizontal: 6,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     paddingVertical: 18,
     paddingHorizontal: 10,
-    borderRadius: 4,
+    borderRadius: 10,
     width: '100%',
     marginBottom: 10,
     position: 'relative',

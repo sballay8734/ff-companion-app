@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   heroSection: {
-    flexGrow: 1,
+    flexGrow: 3,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     // justifyContent: 'space-between',
-    flexGrow: 2,
+    flexGrow: 4,
   },
   link: {
     fontWeight: 'bold',

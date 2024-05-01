@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   btn: {
     borderColor: '#0063bf',
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 10,
     paddingVertical: 18,
     paddingHorizontal: 6,
     width: '100%',

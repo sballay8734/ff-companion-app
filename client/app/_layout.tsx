@@ -9,7 +9,6 @@ import { useColorScheme, Platform } from 'react-native';
 import { ThemeProvider } from '@react-navigation/native';
 
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
-import { CustomThemeProvider } from '~/components/ThemeContext';
 
 const tokenCache = {
   async getToken(key: string) {
@@ -38,7 +37,7 @@ export default function RootLayout() {
     <ClerkProvider
       tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
-      <CustomThemeProvider value={theme}>
+      <ThemeProvider value={theme}>
         <SafeAreaProvider style={{ flexGrow: 1 }}>
           {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop */}
           <SafeAreaView
@@ -60,7 +59,7 @@ export default function RootLayout() {
             </Stack>
           </SafeAreaView>
         </SafeAreaProvider>
-      </CustomThemeProvider>
+      </ThemeProvider>
     </ClerkProvider>
   );
 }

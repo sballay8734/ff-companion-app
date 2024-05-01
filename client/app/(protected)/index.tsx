@@ -1,11 +1,11 @@
+import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SignOutButton from '~/components/SignOutButton';
-import { useCustomTheme } from '~/components/ThemeContext';
 
 export default function HomePage() {
-  const theme = useCustomTheme();
+  const theme = useTheme();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -13,7 +13,7 @@ export default function HomePage() {
       <View style={styles.container}>
         <Text>Home</Text>
         <SignOutButton />
-        <ActivityIndicator size="large" color={theme.colors.appBar} />
+        <ActivityIndicator size="large" color={theme.colors.background} />
       </View>
     </SafeAreaView>
   );

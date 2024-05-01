@@ -1,23 +1,30 @@
 import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { View, Text, useColorScheme } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import SignOutButton from '~/components/SignOutButton';
 
 export default function HomePage() {
   const theme = useTheme();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen
-        options={{
-          title: 'Home',
-          headerStyle: { backgroundColor: theme.colors.background },
-          headerTitleStyle: { color: 'white' },
-        }}
-      />
-      <View>
+      <Stack.Screen options={{ title: 'Home' }} />
+      <View style={styles.container}>
         <Text>Home</Text>
+        <SignOutButton />
       </View>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    borderColor: 'red',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    height: '100%',
+  },
+});

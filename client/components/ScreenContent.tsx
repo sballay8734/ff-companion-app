@@ -3,29 +3,12 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import EditScreenInfo from './EditScreenInfo';
 import { useAuth } from '@clerk/clerk-expo';
 import { router } from 'expo-router';
+import SignOutButton from './SignOutButton';
 
 type ScreenContentProps = {
   title: string;
   path: string;
   children?: React.ReactNode;
-};
-
-// TODO: Needs to be moved to own component once flow is correct
-const SignOut = () => {
-  const { isLoaded, signOut } = useAuth();
-  if (!isLoaded) {
-    return null;
-  }
-  return (
-    <View>
-      <Button
-        title="Sign Out"
-        onPress={() => {
-          signOut();
-        }}
-      />
-    </View>
-  );
 };
 
 export const ScreenContent = ({ title, path, children }: ScreenContentProps) => {
@@ -35,7 +18,7 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
       <View style={styles.separator} />
       <EditScreenInfo path={path} />
       {children}
-      <SignOut />
+      <SignOutButton />
     </View>
   );
 };

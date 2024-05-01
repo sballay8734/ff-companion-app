@@ -38,10 +38,10 @@ export default function RootLayout() {
       tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
       <ThemeProvider value={theme}>
-        <SafeAreaProvider>
+        <SafeAreaProvider style={{ flexGrow: 1 }}>
           {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop */}
           <SafeAreaView
-            style={{ flex: 1, backgroundColor: theme.colors.appBar}}
+            style={{ flexGrow: 1, backgroundColor: theme.colors.appBar }}
             edges={['right', 'left']}>
             <Stack>
               <Stack.Screen

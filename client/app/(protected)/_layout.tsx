@@ -1,18 +1,16 @@
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Link, useRouter, useSegments } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter, useSegments } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 
-import { HeaderButton } from '../../components/HeaderButton';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAuth } from '@clerk/clerk-expo';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // TODO: Why isn't HomeScreen default?
 
 const DrawerLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();
-  const [isReady, setIsReady] = useState<boolean>(false);
   const segments = useSegments();
   const router = useRouter();
 
@@ -27,7 +25,7 @@ const DrawerLayout = () => {
   }, [isSignedIn, isLoaded]);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flexGrow: 1 }}>
       <Drawer initialRouteName="index">
         <Drawer.Screen
           name="index"
@@ -45,7 +43,7 @@ const DrawerLayout = () => {
             headerTitle: 'Admin',
             drawerLabel: 'Admin',
             drawerIcon: ({ size, color }) => (
-              <Ionicons name="home-outline" size={size} color={color} />
+              <MaterialIcons name="admin-panel-settings" size={24} color={color} />
             ),
           }}
         />

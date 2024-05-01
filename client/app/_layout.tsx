@@ -1,4 +1,5 @@
 // REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator
+// !TODO: FIRST - Extend reacts built in theme in ThemeProvider
 
 import * as SecureStore from 'expo-secure-store';
 import { Stack } from 'expo-router/stack';

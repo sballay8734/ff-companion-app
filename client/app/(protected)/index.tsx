@@ -1,17 +1,17 @@
+import { useTheme } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { View, Text } from 'react-native';
+import { View, Text, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { Container } from '~/components/Container';
-import { ScreenContent } from '~/components/ScreenContent';
-
 export default function HomePage() {
+  const theme = useTheme();
+
   return (
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen
         options={{
           title: 'Home',
-          headerStyle: { backgroundColor: '#171717' },
+          headerStyle: { backgroundColor: theme.colors.background },
           headerTitleStyle: { color: 'white' },
         }}
       />

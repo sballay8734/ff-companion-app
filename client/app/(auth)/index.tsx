@@ -1,37 +1,54 @@
-// WARNING: Expo handles the navigation properly because (auth) is shorter than (protected). If you add a shorter group name, it will not work
-
-import { useAuth } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
 import { View, Image, Text, StyleSheet, ActivityIndicator, SafeAreaView } from 'react-native';
 import SignInWithApple from '~/components/SignInWithApple';
 import SignInWithEmailPassword from '~/components/SignInWithEmailPassword';
 import SignInWithOAuth from '~/components/SignInWithOAuth';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export default function Login() {
+  const theme = useCustomTheme();
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.heroSection}>
           <Image style={styles.heroImage} source={require('../../assets/american-football.png')} />
         </View>
         <View style={styles.onBoarding}>
-          <Text style={styles.welcome}>Welcome Back</Text>
-          <Text style={styles.message}>Login to your account</Text>
-          <SignInWithOAuth />
-          <SignInWithApple />
           <Text
             style={{
-              marginBottom: 30,
+              ...styles.welcome,
+              fontFamily: 'RobotoBlack',
+              color: theme.colors.primaryText,
+            }}>
+            Welcome Back
+          </Text>
+          <Text
+            style={{
+              ...styles.message,
+              fontFamily: 'RobotoMono',
+              color: theme.colors.secondaryText,
+            }}>
+            Log in to your account
+          </Text>
+          <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'space-between',
               width: '100%',
-              height: 1,
-              backgroundColor: '#303030',
-            }}></Text>
-          <SignInWithEmailPassword />
-          <View style={styles.noAccount}>
-            <Text style={{ color: '#929293' }}>Don't have an account?</Text>
-            <Link style={styles.link} href="/register">
-              Sign up
-            </Link>
+              flexGrow: 1,
+            }}>
+            <SignInWithEmailPassword />
+            <View style={{ width: '100%' }}>
+              <SignInWithOAuth />
+              <SignInWithApple />
+              <View style={styles.noAccount}>
+                <Text style={{ color: theme.colors.disabledText }}>Don't have an account?</Text>
+                <Link style={{ ...styles.link, color: theme.colors.primary }} href="/register">
+                  Sign up
+                </Link>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -47,7 +64,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#171717',
   },
   heroSection: {
     flexGrow: 1,
@@ -64,9 +80,10 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     alignItems: 'center',
+    // justifyContent: 'space-between',
+    flexGrow: 2,
   },
   link: {
-    color: '#f4f4f4',
     fontWeight: 'bold',
   },
   noAccount: {
@@ -78,11 +95,18 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 40,
-    color: 'white',
   },
   message: {
-    color: '#929293',
     paddingTop: 20,
     paddingBottom: 30,
+  },
+  divider: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+    width: '100%',
+    marginTop: 10,
   },
 });

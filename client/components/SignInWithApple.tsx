@@ -3,12 +3,13 @@ import * as WebBrowser from 'expo-web-browser';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
-
 import { AntDesign } from '@expo/vector-icons';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithApple = () => {
+  const theme = useCustomTheme();
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
@@ -18,8 +19,12 @@ const SignInWithApple = () => {
   }, []);
 
   return (
-    <TouchableOpacity style={styles.btn} onPress={onPress}>
-      <Text style={{ color: '#ffffff', fontSize: 16 }}>Continue with Apple</Text>
+    <TouchableOpacity
+      style={{ ...styles.btn, backgroundColor: theme.colors.statusBar }}
+      onPress={onPress}>
+      <Text style={{ color: theme.colors.primaryText, fontSize: 16, fontFamily: 'RobotoBlack' }}>
+        Continue with Apple
+      </Text>
       <AntDesign style={{ position: 'absolute', left: 20 }} name="apple1" size={16} color="white" />
     </TouchableOpacity>
   );
@@ -28,7 +33,6 @@ export default SignInWithApple;
 
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: '#000000',
     borderColor: '#000000',
     borderRadius: 4,
     borderWidth: 1,

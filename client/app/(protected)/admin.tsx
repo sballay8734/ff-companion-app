@@ -9,8 +9,6 @@ export default function AdminTools() {
       <Stack.Screen
         options={{
           title: 'Admin',
-          headerStyle: { backgroundColor: '#171717' },
-          headerTitleStyle: { color: 'white' },
         }}
       />
       <View style={styles.container}>

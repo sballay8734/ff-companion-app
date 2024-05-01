@@ -1,5 +1,6 @@
 // REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator
-// !TODO: FIRST - Extend reacts built in theme in ThemeProvider
+// TODO: Declare a custom text component, inject the fonts, and re-import all Text from the custom file
+// TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 
 import * as SecureStore from 'expo-secure-store';
 import { Stack } from 'expo-router/stack';
@@ -8,8 +9,11 @@ import { ClerkProvider } from '@clerk/clerk-expo';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme, Platform } from 'react-native';
 import { ThemeProvider } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
 
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
+import { useCallback } from 'react';
+import { SplashScreen } from 'expo-router';
 
 const tokenCache = {
   async getToken(key: string) {
@@ -34,6 +38,21 @@ export default function RootLayout() {
   // TODO: Eventually you need to add light theme (see constants/themes)
   const theme = colorScheme === 'light' ? AppLightTheme : AppDarkTheme;
 
+  const [fontsLoaded, fontError] = useFonts({
+    RobotoBlack: require('../assets/fonts/Roboto/Roboto-Black.ttf'),
+    RobotoMono: require('../assets/fonts/Roboto_Mono/RobotoMono-Regular.ttf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   return (
     <ClerkProvider
       tokenCache={tokenCache}
@@ -42,8 +61,9 @@ export default function RootLayout() {
         <SafeAreaProvider style={{ flexGrow: 1 }}>
           {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop */}
           <SafeAreaView
-            style={{ flexGrow: 1, backgroundColor: theme.colors.appBar }}
-            edges={['right', 'left']}>
+            style={{ flexGrow: 1 }}
+            edges={['right', 'left']}
+            onLayout={onLayoutRootView}>
             <Stack>
               <Stack.Screen
                 name="(auth)"

@@ -1,6 +1,6 @@
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 
-export type CustomTheme = {
+export type CustomTheme = Theme & {
   dark: boolean;
   colors: {
     primary: string;
@@ -13,11 +13,13 @@ export type CustomTheme = {
     // Your additions below
     primaryText: string;
     secondaryText: string;
+    accentText: string;
     disabledText: string;
 
     statusBar: string;
     appBar: string;
     cards: string;
+    google: string;
   };
 };
 
@@ -26,14 +28,18 @@ export const AppDarkTheme: CustomTheme = {
   dark: true,
   colors: {
     ...DarkTheme.colors,
+    primary: '#9d80ff',
     primaryText: '#FFFFFF',
-    secondaryText: '#B3FFFFFF',
-    disabledText: '#80FFFFFF',
+    accentText: '#59498c',
+    secondaryText: 'rgba(255, 255, 255, 0.7)',
+    disabledText: 'rgba(255, 255, 255, 0.5)',
 
     statusBar: '#000000',
     appBar: '#212121',
-    background: '#303030',
-    cards: '#424242',
+    // try [#111c37, #2a3751, #222c47]
+    background: '#15192d',
+    cards: '#272842',
+    google: '#4c8cf2',
   },
 };
 
@@ -43,13 +49,16 @@ export const AppLightTheme: CustomTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primaryText: '#555555',
-    secondaryText: '#B3555555',
-    disabledText: '#80555555',
+    primary: '#9d80ff',
+    primaryText: '#2dc225',
+    accentText: '#59498c',
+    secondaryText: '#2dc225',
+    disabledText: '#802dc225',
 
-    statusBar: '#111111',
-    appBar: '#414141',
-    background: '#d320e3',
-    cards: '#595959',
+    statusBar: '#2dc225',
+    appBar: '#2dc225',
+    background: '#2dc225',
+    cards: '#2dc225',
+    google: '#4c8cf2',
   },
 };

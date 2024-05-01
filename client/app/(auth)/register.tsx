@@ -4,7 +4,7 @@ import { SafeAreaView, Text, View, StyleSheet } from 'react-native';
 
 export default function Register() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <Text>HELLO</Text>
         <Link style={{ color: 'red', fontSize: 24 }} href="/">
@@ -23,6 +23,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#171717',
   },
 });

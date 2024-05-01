@@ -1,10 +1,15 @@
+// WARNING: Expo handles the navigation properly because (auth) is shorter than (protected). If you add a shorter group name, it will not work
+
+import { useAuth } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import SignInWithApple from '~/components/SignInWithApple';
 import SignInWithEmailPassword from '~/components/SignInWithEmailPassword';
 import SignInWithOAuth from '~/components/SignInWithOAuth';
 
 export default function Login() {
+  const { isLoaded } = useAuth();
+
   return (
     <View style={styles.container}>
       <View style={styles.heroSection}>
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#171717',
   },
   heroSection: {
     flexGrow: 1,
@@ -51,8 +57,8 @@ const styles = StyleSheet.create({
   },
   heroImage: {
     resizeMode: 'cover',
-    height: 150,
-    width: 150,
+    height: 125,
+    width: 125,
   },
   onBoarding: {
     width: '100%',

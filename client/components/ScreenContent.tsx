@@ -21,8 +21,7 @@ const SignOut = () => {
       <Button
         title="Sign Out"
         onPress={() => {
-          // REVIEW: I'm not sure why router.replace is necessary. When user is logged out, navigation should happen automatically inside of root index.tsx I think
-          signOut(() => router.replace('/'));
+          signOut();
         }}
       />
     </View>

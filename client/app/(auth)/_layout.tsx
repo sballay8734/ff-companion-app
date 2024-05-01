@@ -15,7 +15,7 @@ const AuthLayout = () => {
   useEffect(() => {
     if (isLoaded) {
       if (isSignedIn && segments[0] !== '(protected)') {
-        router.replace('/(protected)');
+        router.replace('/(protected)/');
       } else if (!isSignedIn && segments[0] !== '(auth)') {
         router.replace('/(auth)/');
       }
@@ -31,7 +31,6 @@ const AuthLayout = () => {
   }
 
   if (!isSignedIn) {
-    // TODO: May need to use StackNavigator to remove headers
     return (
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />

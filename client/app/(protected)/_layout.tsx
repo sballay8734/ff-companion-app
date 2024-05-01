@@ -5,13 +5,14 @@ import { Drawer } from 'expo-router/drawer';
 import { HeaderButton } from '../../components/HeaderButton';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAuth } from '@clerk/clerk-expo';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
 // TODO: Why isn't HomeScreen default?
 
 const DrawerLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();
+  const [isReady, setIsReady] = useState<boolean>(false);
   const segments = useSegments();
   const router = useRouter();
 
@@ -21,13 +22,13 @@ const DrawerLayout = () => {
     if (isLoaded && !isSignedIn && inAuthGroup) {
       router.replace('/(auth)/');
     } else if (isLoaded && isSignedIn) {
-      router.replace('/(protected)');
+      router.replace('/(protected)/');
     }
   }, [isSignedIn, isLoaded]);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer>
+      <Drawer initialRouteName="index">
         <Drawer.Screen
           name="index"
           options={{
@@ -39,17 +40,12 @@ const DrawerLayout = () => {
           }}
         />
         <Drawer.Screen
-          name="(tabs)"
+          name="admin"
           options={{
-            headerTitle: 'Tabs',
-            drawerLabel: 'Tabs',
+            headerTitle: 'Admin',
+            drawerLabel: 'Admin',
             drawerIcon: ({ size, color }) => (
-              <MaterialIcons name="border-bottom" size={size} color={color} />
-            ),
-            headerRight: () => (
-              <Link href="/modal" asChild>
-                <HeaderButton />
-              </Link>
+              <Ionicons name="home-outline" size={size} color={color} />
             ),
           }}
         />

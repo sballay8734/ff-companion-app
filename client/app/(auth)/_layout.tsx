@@ -2,8 +2,8 @@ import { Stack, useRouter, useSegments } from 'expo-router';
 import { ActivityIndicator, Text, View } from 'react-native';
 
 import { useAuth } from '@clerk/clerk-expo';
-import Login from '.';
 import { useEffect } from 'react';
+import Login from '.';
 
 // test
 
@@ -31,7 +31,8 @@ const AuthLayout = () => {
   }
 
   if (!isSignedIn) {
-    return <Login />;
+    // NOTE: You could use Stack here but you don't want the tabs at the top
+    return <Stack />;
   }
 
   return null;

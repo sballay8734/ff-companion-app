@@ -26,8 +26,9 @@ export default function RootLayout() {
       tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
       <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
-          <Stack initialRouteName="(auth)">
+        {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop */}
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }} edges={['right', 'left']}>
+          <Stack>
             <Stack.Screen
               name="(auth)"
               options={{

@@ -1,113 +1,26 @@
+import { Link } from 'expo-router';
 import * as React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { useSignUp } from '@clerk/clerk-expo';
+import { SafeAreaView, Text, View, StyleSheet } from 'react-native';
 
-export default function SignUpScreen() {
-  const { isLoaded, signUp, setActive } = useSignUp();
-
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
-  const [emailAddress, setEmailAddress] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [pendingVerification, setPendingVerification] = React.useState(false);
-  const [code, setCode] = React.useState('');
-
-  // start the sign up process.
-  const onSignUpPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
-
-    try {
-      await signUp.create({
-        firstName,
-        lastName,
-        emailAddress,
-        password,
-      });
-
-      // send the email.
-      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' });
-
-      // change the UI to our pending section.
-      setPendingVerification(true);
-    } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
-    }
-  };
-
-  // This verifies the user using email code that is delivered.
-  const onPressVerify = async () => {
-    if (!isLoaded) {
-      return;
-    }
-
-    try {
-      const completeSignUp = await signUp.attemptEmailAddressVerification({
-        code,
-      });
-
-      await setActive({ session: completeSignUp.createdSessionId });
-    } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
-    }
-  };
-
+export default function Register() {
   return (
-    <View
-      style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      {!pendingVerification && (
-        <View>
-          <View>
-            <TextInput
-              autoCapitalize="none"
-              value={firstName}
-              placeholder="First Name..."
-              onChangeText={(firstName) => setFirstName(firstName)}
-            />
-          </View>
-          <View>
-            <TextInput
-              autoCapitalize="none"
-              value={lastName}
-              placeholder="Last Name..."
-              onChangeText={(lastName) => setLastName(lastName)}
-            />
-          </View>
-          <View>
-            <TextInput
-              autoCapitalize="none"
-              value={emailAddress}
-              placeholder="Email..."
-              onChangeText={(email) => setEmailAddress(email)}
-            />
-          </View>
-
-          <View>
-            <TextInput
-              value={password}
-              placeholder="Password..."
-              placeholderTextColor="#000"
-              secureTextEntry={true}
-              onChangeText={(password) => setPassword(password)}
-            />
-          </View>
-
-          <TouchableOpacity onPress={onSignUpPress}>
-            <Text>Sign up</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-      {pendingVerification && (
-        <View>
-          <View>
-            <TextInput value={code} placeholder="Code..." onChangeText={(code) => setCode(code)} />
-          </View>
-          <TouchableOpacity onPress={onPressVerify}>
-            <Text>Verify Email</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
+      <View style={styles.container}>
+        <Text>HELLO</Text>
+        <Link href="/">Login</Link>
+      </View>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    backgroundColor: '#171717',
+  },
+});

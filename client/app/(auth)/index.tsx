@@ -2,40 +2,40 @@
 
 import { useAuth } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
-import { View, Image, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Image, Text, StyleSheet, ActivityIndicator, SafeAreaView } from 'react-native';
 import SignInWithApple from '~/components/SignInWithApple';
 import SignInWithEmailPassword from '~/components/SignInWithEmailPassword';
 import SignInWithOAuth from '~/components/SignInWithOAuth';
 
 export default function Login() {
-  const { isLoaded } = useAuth();
-
   return (
-    <View style={styles.container}>
-      <View style={styles.heroSection}>
-        <Image style={styles.heroImage} source={require('../../assets/american-football.png')} />
-      </View>
-      <View style={styles.onBoarding}>
-        <Text style={styles.welcome}>Welcome Back</Text>
-        <Text style={styles.message}>Login to your account</Text>
-        <SignInWithOAuth />
-        <SignInWithApple />
-        <Text
-          style={{
-            marginBottom: 30,
-            width: '100%',
-            height: 1,
-            backgroundColor: '#303030',
-          }}></Text>
-        <SignInWithEmailPassword />
-        <View style={styles.noAccount}>
-          <Text style={{ color: '#929293' }}>Don't have an account?</Text>
-          <Link style={styles.link} href="/register">
-            Sign up
-          </Link>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
+      <View style={styles.container}>
+        <View style={styles.heroSection}>
+          <Image style={styles.heroImage} source={require('../../assets/american-football.png')} />
+        </View>
+        <View style={styles.onBoarding}>
+          <Text style={styles.welcome}>Welcome Back</Text>
+          <Text style={styles.message}>Login to your account</Text>
+          <SignInWithOAuth />
+          <SignInWithApple />
+          <Text
+            style={{
+              marginBottom: 30,
+              width: '100%',
+              height: 1,
+              backgroundColor: '#303030',
+            }}></Text>
+          <SignInWithEmailPassword />
+          <View style={styles.noAccount}>
+            <Text style={{ color: '#929293' }}>Don't have an account?</Text>
+            <Link style={styles.link} href="/register">
+              Sign up
+            </Link>
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

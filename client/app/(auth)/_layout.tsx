@@ -31,8 +31,13 @@ const AuthLayout = () => {
   }
 
   if (!isSignedIn) {
-    // NOTE: You could use Stack here but you don't want the tabs at the top
-    return <Stack />;
+    // TODO: May need to use StackNavigator to remove headers
+    return (
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="register" options={{ headerShown: false }} />
+      </Stack>
+    );
   }
 
   return null;

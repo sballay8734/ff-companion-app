@@ -8,7 +8,7 @@ import { useAuth } from '@clerk/clerk-expo';
 import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-// test
+// TODO: Why isn't HomeScreen default?
 
 const DrawerLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();

@@ -7,7 +7,9 @@ export default function Register() {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#171717' }}>
       <View style={styles.container}>
         <Text>HELLO</Text>
-        <Link href="/">Login</Link>
+        <Link style={{ color: 'red', fontSize: 24 }} href="/">
+          Login
+        </Link>
       </View>
     </SafeAreaView>
   );

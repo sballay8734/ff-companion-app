@@ -41,7 +41,7 @@ export default function RootLayout() {
         <SafeAreaProvider>
           {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop */}
           <SafeAreaView
-            style={{ flex: 1, backgroundColor: theme.colors.background }}
+            style={{ flex: 1, backgroundColor: theme.colors.appBar}}
             edges={['right', 'left']}>
             <Stack>
               <Stack.Screen

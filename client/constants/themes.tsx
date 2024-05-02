@@ -1,4 +1,6 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
+import { Text as DefaultText, TextProps } from 'react-native';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export type CustomTheme = Theme & {
   dark: boolean;
@@ -20,6 +22,7 @@ export type CustomTheme = Theme & {
     appBar: string;
     cards: string;
     google: string;
+    admin: string;
   };
 };
 
@@ -40,6 +43,7 @@ export const AppDarkTheme: CustomTheme = {
     background: '#15192d',
     cards: '#272842',
     google: '#4c8cf2',
+    admin: '#e04034',
   },
 };
 
@@ -60,5 +64,17 @@ export const AppLightTheme: CustomTheme = {
     background: '#2dc225',
     cards: '#2dc225',
     google: '#4c8cf2',
+    admin: '#e04034',
   },
 };
+
+// THEMED COMPONENTS
+export function Text(props: TextProps) {
+  const theme = useCustomTheme();
+  const { style, ...otherProps } = props;
+
+  const color = theme.colors.primaryText;
+  const fontFamily = 'RobotoBlack';
+
+  return <DefaultText style={[{ color, fontFamily }, style]} {...otherProps} />;
+}

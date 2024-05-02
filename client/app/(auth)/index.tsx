@@ -12,7 +12,7 @@ export default function Login() {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.heroSection}>
-          <Image style={styles.heroImage} source={require('../../assets/american-football.png')} />
+          <Image style={styles.heroImage} source={require('../../assets/football.png')} />
         </View>
         <View style={styles.onBoarding}>
           <Text

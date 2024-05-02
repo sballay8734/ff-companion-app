@@ -3,16 +3,16 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SignOutButton from '~/components/SignOutButton';
 
-export default function AdminTools() {
+export default function CommissionerTools() {
   return (
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen
         options={{
-          title: 'Admin',
+          title: 'Commissioner',
         }}
       />
       <View style={styles.container}>
-        <Text>Admin</Text>
+        <Text>Commissioner</Text>
         <SignOutButton />
       </View>
     </SafeAreaView>

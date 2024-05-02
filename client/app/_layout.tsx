@@ -93,4 +93,6 @@ export default function RootLayout() {
 
 // TODO: Add light theme colors
 
+// TODO: Add Sign Out button to drawer, below settings
+
 // !TODO: Loading states not working on Log in / Log out

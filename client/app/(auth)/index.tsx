@@ -1,9 +1,10 @@
 import { Link } from 'expo-router';
-import { View, Image, Text, StyleSheet, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
 import SignInWithApple from '~/components/SignInWithApple';
 import SignInWithEmailPassword from '~/components/SignInWithEmailPassword';
 import SignInWithOAuth from '~/components/SignInWithOAuth';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { Text } from '~/constants/themes';
 
 export default function Login() {
   const theme = useCustomTheme();

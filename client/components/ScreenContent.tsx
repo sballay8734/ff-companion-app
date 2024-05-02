@@ -1,9 +1,9 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import EditScreenInfo from './EditScreenInfo';
-import { useAuth } from '@clerk/clerk-expo';
-import { router } from 'expo-router';
 import SignOutButton from './SignOutButton';
+
+import { Text } from '~/constants/themes';
 
 type ScreenContentProps = {
   title: string;

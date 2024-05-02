@@ -1,8 +1,10 @@
 import { Stack } from 'expo-router';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import SignOutButton from '~/components/SignOutButton';
+
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { Text } from '~/constants/themes';
 
 export default function HomePage() {
   const theme = useCustomTheme();

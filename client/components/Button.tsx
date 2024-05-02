@@ -1,5 +1,7 @@
 import { forwardRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { StyleSheet, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+
+import { Text } from '~/constants/themes';
 
 type ButtonProps = {
   onPress?: TouchableOpacityProps['onPress'];

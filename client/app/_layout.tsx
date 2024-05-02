@@ -1,7 +1,3 @@
-// REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator
-// TODO: Declare a custom text component, inject the fonts, and re-import all Text from the custom file
-// TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
-
 import * as SecureStore from 'expo-secure-store';
 import { Stack } from 'expo-router/stack';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -34,8 +30,6 @@ const tokenCache = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-
-  // TODO: Eventually you need to add light theme (see constants/themes)
   const theme = colorScheme === 'light' ? AppLightTheme : AppDarkTheme;
 
   const [fontsLoaded, fontError] = useFonts({
@@ -86,3 +80,17 @@ export default function RootLayout() {
     </ClerkProvider>
   );
 }
+
+// GENERAL HELPFUL REMINDERS **************************************************
+
+// REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator
+
+// GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+
+// TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
+
+// TODO: Replace compare & proposals drawer icons
+
+// TODO: Add light theme colors
+
+// !TODO: Loading states not working on Log in / Log out

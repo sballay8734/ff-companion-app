@@ -80,6 +80,8 @@ export default function RootLayout() {
             </Stack>
           </SafeAreaView>
         </SafeAreaProvider>
+        {/* TODO: Style needs to be rendered conditionally */}
+        <StatusBar style={'light'} />
       </ThemeProvider>
     </ClerkProvider>
   );

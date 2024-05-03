@@ -1,4 +1,6 @@
 import { ClerkProvider } from '@clerk/clerk-expo';
+import { RootState, store } from '~/store/store';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
@@ -33,7 +35,6 @@ const tokenCache = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'light' ? AppLightTheme : AppDarkTheme;
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const [fontsLoaded, fontError] = useFonts({
     RobotoBlack: require('../assets/fonts/Roboto/Roboto-Black.ttf'),
@@ -50,50 +51,39 @@ export default function RootLayout() {
     return null;
   }
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const onModalClose = () => {
-    setIsModalVisible(false);
-  };
-
   return (
     <ClerkProvider
       tokenCache={tokenCache}
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
-      <ThemeProvider value={theme}>
-        <SafeAreaProvider style={{ flexGrow: 1 }}>
-          {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop or useSafeAreaInsets() hook  */}
-          <SafeAreaView
-            style={{ flexGrow: 1 }}
-            edges={['right', 'left']}
-            onLayout={onLayoutRootView}>
-            <Stack>
-              <Stack.Screen
-                name="(auth)"
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="(protected)"
-                options={{
-                  headerShown: false,
-                }}
-              />
-            </Stack>
-            {/* REMOVE: Below is just for testing. Eventually you will control modals globally with redux */}
-            <ModalLogout isVisible={isModalVisible} onClose={onModalClose}>
-              <Text>Close</Text>
-            </ModalLogout>
-            <Button title="Show LogoutModal" onPress={showModal} color="red" />
-            {/* REMOVE: Above is for testing ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
-          </SafeAreaView>
-        </SafeAreaProvider>
-        {/* TODO: Style needs to be rendered based on user preference */}
-        <StatusBar style={'light'} />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider value={theme}>
+          <SafeAreaProvider style={{ flexGrow: 1 }}>
+            {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop or useSafeAreaInsets() hook  */}
+            <SafeAreaView
+              style={{ flexGrow: 1 }}
+              edges={['right', 'left']}
+              onLayout={onLayoutRootView}>
+              <Stack>
+                <Stack.Screen
+                  name="(auth)"
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="(protected)"
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+              </Stack>
+              <ModalLogout />
+            </SafeAreaView>
+          </SafeAreaProvider>
+          {/* TODO: Style needs to be rendered based on user preference */}
+          <StatusBar style={'light'} />
+        </ThemeProvider>
+      </Provider>
     </ClerkProvider>
   );
 }

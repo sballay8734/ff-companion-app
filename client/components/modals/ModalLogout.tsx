@@ -1,5 +1,9 @@
 import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '~/store/store';
+import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
+import { useAuth } from '@clerk/clerk-expo';
 
 interface ModalLogoutProps {
   isVisible: boolean;
@@ -7,17 +11,28 @@ interface ModalLogoutProps {
   onClose: () => void;
 }
 
-export default function ModalLogout({ isVisible, children, onClose }: ModalLogoutProps) {
+export default function ModalLogout() {
+  const isVisible = useSelector((state: RootState) => state.modalLogout.isVisible);
+  const dispatch = useDispatch();
+  const { signOut } = useAuth();
+
+  function handleLogout() {
+    signOut();
+    dispatch(hideLogoutModal());
+  }
+
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Are you sure you want to logout?</Text>
-          <Pressable onPress={onClose}>
+          <Pressable onPress={() => dispatch(hideLogoutModal())}>
             <MaterialIcons name="close" color="#fff" size={22} />
           </Pressable>
         </View>
-        {children}
+        <Pressable onPress={handleLogout}>
+          <Text>YES</Text>
+        </Pressable>
       </View>
     </Modal>
   );

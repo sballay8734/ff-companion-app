@@ -1,15 +1,16 @@
 import { useAuth } from '@clerk/clerk-expo';
-import { Link, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 
-import SignOutButton from '~/components/SignOutButton';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { hideLogoutModal, showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 
 export default function Settings() {
-  const { signOut } = useAuth();
   const theme = useCustomTheme();
+  const dispatch = useDispatch();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -21,7 +22,7 @@ export default function Settings() {
       <View style={styles.container}>
         <TouchableOpacity
           style={{ backgroundColor: theme.colors.google }}
-          onPress={() => signOut()}>
+          onPress={() => dispatch(showLogoutModal())}>
           <Text>Log Out</Text>
           {/* <Link href={'/modal'}>Log Out</Link> */}
         </TouchableOpacity>

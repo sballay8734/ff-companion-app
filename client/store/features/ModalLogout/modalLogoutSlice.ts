@@ -1,0 +1,30 @@
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../../store';
+
+interface ModalState {
+  isVisible: boolean;
+}
+
+const initialState: ModalState = {
+  isVisible: false,
+};
+
+export const modalLogoutSlice = createSlice({
+  name: 'modalLogout',
+  initialState,
+  reducers: {
+    showLogoutModal: (state) => {
+      state.isVisible = true;
+    },
+    hideLogoutModal: (state) => {
+      state.isVisible = false;
+    },
+  },
+});
+
+export const { showLogoutModal, hideLogoutModal } = modalLogoutSlice.actions;
+
+export const modalState = (state: RootState) => state.modalLogout.isVisible;
+
+export default modalLogoutSlice.reducer;

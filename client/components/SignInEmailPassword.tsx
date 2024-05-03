@@ -80,7 +80,7 @@ const SignInWithEmailPassword = () => {
       <TouchableOpacity
         style={{ ...styles.btn, backgroundColor: theme.colors.primary }}
         onPress={onPress}>
-        <Text style={{ color: theme.colors.statusBar, fontSize: 16 }}>Login</Text>
+        <Text style={{ color: theme.colors.statusBar, fontSize: 16 }}>Login (Not configured)</Text>
       </TouchableOpacity>
       <TouchableOpacity>
         <Text style={{ color: theme.colors.disabledText, textAlign: 'center' }}>

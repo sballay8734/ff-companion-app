@@ -14,7 +14,6 @@ export default function HomePage() {
       <Stack.Screen options={{ title: 'Home' }} />
       <View style={styles.container}>
         <Text>Home</Text>
-        <SignOutButton />
         {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>

@@ -18,7 +18,6 @@ export default function Settings() {
       />
       <View style={styles.container}>
         <Text>Settings</Text>
-        <SignOutButton />
       </View>
     </SafeAreaView>
   );

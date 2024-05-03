@@ -5,11 +5,14 @@ import { SplashScreen } from 'expo-router';
 import { Stack } from 'expo-router/stack';
 import * as SecureStore from 'expo-secure-store';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback } from 'react';
-import { useColorScheme } from 'react-native';
+import { useCallback, useState } from 'react';
+import { Button, View, useColorScheme } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
+import { Text } from '~/constants/themes';
+import LogoutModal from './logoutModal';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const tokenCache = {
   async getToken(key: string) {
@@ -31,6 +34,7 @@ const tokenCache = {
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'light' ? AppLightTheme : AppDarkTheme;
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const [fontsLoaded, fontError] = useFonts({
     RobotoBlack: require('../assets/fonts/Roboto/Roboto-Black.ttf'),
@@ -46,6 +50,14 @@ export default function RootLayout() {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const onModalClose = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <ClerkProvider
@@ -72,6 +84,12 @@ export default function RootLayout() {
                 }}
               />
             </Stack>
+            {/* REMOVE: Below is just for testing. Eventually you will control modals globally with redux */}
+            <LogoutModal isVisible={isModalVisible} onClose={onModalClose}>
+              <Text>Close</Text>
+            </LogoutModal>
+            <Button title="Show LogoutModal" onPress={showModal} color="red" />
+            {/* REMOVE: Above is for testing ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
           </SafeAreaView>
         </SafeAreaProvider>
         {/* TODO: Style needs to be rendered based on user preference */}

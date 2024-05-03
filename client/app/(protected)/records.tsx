@@ -14,7 +14,6 @@ export default function RecordsPage() {
       <Stack.Screen options={{ title: 'Records' }} />
       <View style={styles.container}>
         <Text>Records</Text>
-        <SignOutButton />
         {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>

@@ -1,20 +1,30 @@
-import { Stack } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
+import { useAuth } from '@clerk/clerk-expo';
+import { Link, Stack } from 'expo-router';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import SignOutButton from '~/components/SignOutButton';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-export default function ProposalsPage() {
+export default function Settings() {
+  const { signOut } = useAuth();
   const theme = useCustomTheme();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Proposals' }} />
+      <Stack.Screen
+        options={{
+          title: 'Log out',
+        }}
+      />
       <View style={styles.container}>
-        <Text>Proposals</Text>
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
+        <TouchableOpacity
+          style={{ backgroundColor: theme.colors.google }}
+          onPress={() => signOut()}>
+          <Text>Log Out</Text>
+          {/* <Link href={'/modal'}>Log Out</Link> */}
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

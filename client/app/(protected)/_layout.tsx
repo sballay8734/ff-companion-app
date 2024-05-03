@@ -1,5 +1,6 @@
 import { useAuth } from '@clerk/clerk-expo';
 import { MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
+import { DrawerItem } from '@react-navigation/drawer';
 import { useRouter, useSegments } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { useEffect } from 'react';
@@ -11,7 +12,7 @@ import { useCustomTheme } from '~/hooks/useCustomTheme';
 // TODO: Role based access control  - Commissioner should only show if user is commissioner
 
 const DrawerLayout = () => {
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, isLoaded, signOut } = useAuth();
   const segments = useSegments();
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -119,6 +120,23 @@ const DrawerLayout = () => {
             drawerIcon: () => (
               <MaterialIcons name="admin-panel-settings" size={24} color={theme.colors.admin} />
             ),
+          }}
+        />
+        {/* TODO: Log out should be a button in the drawer and show a modal */}
+        <Drawer.Screen
+          name="logout"
+          options={{
+            headerTitle: 'Log Out',
+            drawerLabel: 'Log Out',
+            drawerLabelStyle: {
+              color: theme.colors.admin,
+            },
+            drawerItemStyle: {
+              // marginTop: 'auto',
+              marginHorizontal: 0,
+              borderRadius: 0,
+            },
+            drawerIcon: () => <MaterialIcons name="logout" size={24} color={theme.colors.admin} />,
           }}
         />
       </Drawer>

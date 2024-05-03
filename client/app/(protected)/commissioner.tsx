@@ -10,12 +10,11 @@ export default function CommissionerTools() {
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen
         options={{
-          title: 'Commissioner',
+          title: 'Commissioner Tools',
         }}
       />
       <View style={styles.container}>
-        <Text>Commissioner</Text>
-        <SignOutButton />
+        <Text>Commissioner Tools</Text>
       </View>
     </SafeAreaView>
   );

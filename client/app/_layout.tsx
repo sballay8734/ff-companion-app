@@ -53,7 +53,7 @@ export default function RootLayout() {
       publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
       <ThemeProvider value={theme}>
         <SafeAreaProvider style={{ flexGrow: 1 }}>
-          {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop */}
+          {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop or useSafeAreaInsets() hook  */}
           <SafeAreaView
             style={{ flexGrow: 1 }}
             edges={['right', 'left']}
@@ -74,7 +74,7 @@ export default function RootLayout() {
             </Stack>
           </SafeAreaView>
         </SafeAreaProvider>
-        {/* TODO: Style needs to be rendered conditionally */}
+        {/* TODO: Style needs to be rendered based on user preference */}
         <StatusBar style={'light'} />
       </ThemeProvider>
     </ClerkProvider>

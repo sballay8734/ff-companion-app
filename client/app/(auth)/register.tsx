@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// mTODO: You will have to provide option to add multiple emails to a single account as people (like Dom) may have left the league then joined again with a new email
+// mTODO: You will have to provide option to link multiple emails to a single account as people (like Dom) may have left the league then joined again with a new email

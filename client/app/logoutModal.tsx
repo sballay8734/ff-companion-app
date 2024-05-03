@@ -7,6 +7,8 @@ interface LogoutModalProps {
   onClose: () => void;
 }
 
+// NOTE: This modal cannot be linked with <Link>. This is a custom modal for quick actions like logging out
+
 export default function LogoutModal({ isVisible, children, onClose }: LogoutModalProps) {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>

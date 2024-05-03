@@ -8,12 +8,6 @@ An app to enhance your league's experience. Inspired by the "Legendary League of
 - Xcode (for iOS development)
 - Android Studio (for Android development)
 
-## Future Requirements (Planned)
-
-- ...all above requirements
-- Docker
-- Docker Compose
-
 ## Dependencies
 
 - Expo

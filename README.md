@@ -1,3 +1,15 @@
+# Development Setup
+
+**Note: Running the app requires macOS and Xcode.**
+
+```
+git clone <SSH>
+cd ff-companion-app
+cd client
+npm install
+npx expo start --ios
+```
+
 # Fantasy Football Companion App
 
 An app to enhance your league's experience. Inspired by the "Legendary League of Ex-Athletes".

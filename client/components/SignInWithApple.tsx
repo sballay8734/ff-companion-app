@@ -11,7 +11,7 @@ WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithApple = () => {
   const theme = useCustomTheme();
-  // Warm up the android browser to improve UX
+  // Warm up the android browser to improve UX //
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
 

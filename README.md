@@ -1,5 +1,7 @@
 # Development Setup
 
+**Note: Running the app requires macOS and Xcode.**
+
 ```
 git clone <SSH>
 cd ff-companion-app

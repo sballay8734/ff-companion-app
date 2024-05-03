@@ -6,13 +6,12 @@ import { Stack } from 'expo-router/stack';
 import * as SecureStore from 'expo-secure-store';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useState } from 'react';
-import { Button, View, useColorScheme } from 'react-native';
+import { Button, useColorScheme } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
 import { Text } from '~/constants/themes';
-import LogoutModal from './logoutModal';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import ModalLogout from '~/components/modals/ModalLogout';
 
 const tokenCache = {
   async getToken(key: string) {
@@ -85,9 +84,9 @@ export default function RootLayout() {
               />
             </Stack>
             {/* REMOVE: Below is just for testing. Eventually you will control modals globally with redux */}
-            <LogoutModal isVisible={isModalVisible} onClose={onModalClose}>
+            <ModalLogout isVisible={isModalVisible} onClose={onModalClose}>
               <Text>Close</Text>
-            </LogoutModal>
+            </ModalLogout>
             <Button title="Show LogoutModal" onPress={showModal} color="red" />
             {/* REMOVE: Above is for testing ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
           </SafeAreaView>
@@ -98,10 +97,6 @@ export default function RootLayout() {
     </ClerkProvider>
   );
 }
-
-// GENERAL HELPFUL REMINDERS **************************************************
-
-// REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
 
@@ -114,3 +109,27 @@ export default function RootLayout() {
 // TODO: Add Sign Out button to drawer, below settings
 
 // !TODO: Loading states not working on Log in / Log out
+
+/* mTODO:  - MODALS
+[
+  // NOTE: Full page (back button in top left) *********************************
+  modalFull,   - for forms and convenience features like the scoreboard in RorC
+
+  // NOTE: Popovers (clicking overlay cancels & closes) ************************
+  modalFloat,  - 
+  modalAlert,  - ("Hold on!", "Are you sure?", etc...)
+
+  // NOTE: Slide in from bottom (1/3 of screen) ********************************
+  modalBtm,    - for setting selection, filters, and other optional actions
+  modalAction, - when you want/need the user to do something
+
+  // NOTE: Slide in from bottom (1/3 of screen) ********************************
+  modalNotify  - for communicating api response (when desired)
+] 
+*/
+
+// REMINDERS TO AVOID POSSIBLE HEADACHES LATER *********************************
+
+// REMEMBER: If you want a modal to be part of the navigation stack, you need to inlcude in app folder so it can be linked with <Link>
+
+// REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator

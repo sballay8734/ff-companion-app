@@ -1,15 +1,13 @@
 import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-interface LogoutModalProps {
+interface ModalLogoutProps {
   isVisible: boolean;
   children: any;
   onClose: () => void;
 }
 
-// NOTE: This modal cannot be linked with <Link>. This is a custom modal for quick actions like logging out
-
-export default function LogoutModal({ isVisible, children, onClose }: LogoutModalProps) {
+export default function ModalLogout({ isVisible, children, onClose }: ModalLogoutProps) {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>

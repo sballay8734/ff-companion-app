@@ -1,14 +1,17 @@
-import React from 'react';
-import * as WebBrowser from 'expo-web-browser';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useOAuth } from '@clerk/clerk-expo';
-import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
-
 import { AntDesign } from '@expo/vector-icons';
+import * as WebBrowser from 'expo-web-browser';
+import React from 'react';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+
+import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
+import { Text } from '~/constants/themes';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithOAuth = () => {
+  const theme = useCustomTheme();
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
@@ -30,8 +33,12 @@ const SignInWithOAuth = () => {
   }, []);
 
   return (
-    <TouchableOpacity style={styles.btn} onPress={onPress}>
-      <Text style={{ color: '#ffffff', fontSize: 16 }}>Continue with Google</Text>
+    <TouchableOpacity
+      style={{ ...styles.btn, backgroundColor: theme.colors.google }}
+      onPress={onPress}>
+      <Text style={{ color: theme.colors.primaryText, fontSize: 16, fontFamily: 'RobotoBlack' }}>
+        Continue with Google
+      </Text>
       <AntDesign style={{ position: 'absolute', left: 20 }} name="google" size={16} color="white" />
     </TouchableOpacity>
   );
@@ -40,10 +47,9 @@ export default SignInWithOAuth;
 
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: '#0063bf',
     borderColor: '#0063bf',
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 10,
     paddingVertical: 18,
     paddingHorizontal: 6,
     width: '100%',

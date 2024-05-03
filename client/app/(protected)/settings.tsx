@@ -6,16 +6,19 @@ import SignOutButton from '~/components/SignOutButton';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-export default function HomePage() {
+export default function Settings() {
   const theme = useCustomTheme();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Home' }} />
+      <Stack.Screen
+        options={{
+          title: 'Settings',
+        }}
+      />
       <View style={styles.container}>
-        <Text>Home</Text>
+        <Text>Settings</Text>
         <SignOutButton />
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>
   );

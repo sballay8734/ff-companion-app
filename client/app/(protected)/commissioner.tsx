@@ -4,18 +4,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import SignOutButton from '~/components/SignOutButton';
 import { Text } from '~/constants/themes';
-import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-export default function HomePage() {
-  const theme = useCustomTheme();
-
+export default function CommissionerTools() {
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Home' }} />
+      <Stack.Screen
+        options={{
+          title: 'Commissioner',
+        }}
+      />
       <View style={styles.container}>
-        <Text>Home</Text>
+        <Text>Commissioner</Text>
         <SignOutButton />
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>
   );

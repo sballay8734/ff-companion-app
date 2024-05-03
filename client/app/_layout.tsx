@@ -1,29 +1,29 @@
-import * as SecureStore from 'expo-secure-store';
-import { Stack } from 'expo-router/stack';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { ClerkProvider } from '@clerk/clerk-expo';
-import { StatusBar } from 'expo-status-bar';
-import { useColorScheme, Platform } from 'react-native';
 import { ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+import { SplashScreen } from 'expo-router';
+import { Stack } from 'expo-router/stack';
+import * as SecureStore from 'expo-secure-store';
+import { StatusBar } from 'expo-status-bar';
+import { useCallback } from 'react';
+import { useColorScheme } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
-import { useCallback } from 'react';
-import { SplashScreen } from 'expo-router';
 
 const tokenCache = {
   async getToken(key: string) {
     try {
       return SecureStore.getItemAsync(key);
     } catch (err) {
-      return null;
+      console.error(err);
     }
   },
   async saveToken(key: string, value: string) {
     try {
       return SecureStore.setItemAsync(key, value);
     } catch (err) {
-      return;
+      console.error(err);
     }
   },
 };

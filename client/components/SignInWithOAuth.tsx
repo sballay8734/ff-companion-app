@@ -1,13 +1,12 @@
-import React from 'react';
-import * as WebBrowser from 'expo-web-browser';
-import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useOAuth } from '@clerk/clerk-expo';
+import { AntDesign } from '@expo/vector-icons';
+import * as WebBrowser from 'expo-web-browser';
+import React from 'react';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
-import { AntDesign } from '@expo/vector-icons';
-import { useCustomTheme } from '~/hooks/useCustomTheme';
-
 import { Text } from '~/constants/themes';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 WebBrowser.maybeCompleteAuthSession();
 

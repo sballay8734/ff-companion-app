@@ -1,11 +1,11 @@
-import React from 'react';
 import * as WebBrowser from 'expo-web-browser';
+
+import React from 'react';
 import { TouchableOpacity, StyleSheet, View, TextInput } from 'react-native';
 
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
-
-import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { Text } from '~/constants/themes';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 WebBrowser.maybeCompleteAuthSession();
 

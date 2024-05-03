@@ -1,18 +1,12 @@
+import { useAuth } from '@clerk/clerk-expo';
+import { MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { useRouter, useSegments } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
-
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StyleSheet, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useAuth } from '@clerk/clerk-expo';
-import { MaterialIcons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-
-import { Text } from '~/constants/themes';
 
 // TODO: Role based access control  - Commissioner should only show if user is commissioner
 
@@ -133,7 +127,3 @@ const DrawerLayout = () => {
 };
 
 export default DrawerLayout;
-
-const styles = StyleSheet.create({
-  drawerStyles: {},
-});

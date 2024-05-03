@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+
 import { CustomTheme } from '~/constants/themes';
 
 const ThemeContext = createContext<CustomTheme | undefined>(undefined);

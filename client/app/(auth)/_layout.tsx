@@ -1,8 +1,7 @@
-import { Stack, useRouter, useSegments } from 'expo-router';
-import { ActivityIndicator, View } from 'react-native';
-
 import { useAuth } from '@clerk/clerk-expo';
+import { Stack, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 
 // test
 

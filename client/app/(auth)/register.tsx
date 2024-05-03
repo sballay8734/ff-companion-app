@@ -1,9 +1,10 @@
 import { Link } from 'expo-router';
 import * as React from 'react';
 import { SafeAreaView, View, StyleSheet, Image } from 'react-native';
-import { Text } from '~/constants/themes';
+
 import SignInWithApple from '~/components/SignInWithApple';
 import SignInWithOAuth from '~/components/SignInWithOAuth';
+import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export default function Register() {

@@ -1,5 +1,6 @@
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
 import { Text as DefaultText, TextProps } from 'react-native';
+
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export type CustomTheme = Theme & {

@@ -1,9 +1,8 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
-import { Text } from '~/constants/themes';
 import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useCustomTheme } from '~/hooks/useCustomTheme';

@@ -1,16 +1,13 @@
 import { useAuth } from '@clerk/clerk-expo';
 import { MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
-import { DrawerItem } from '@react-navigation/drawer';
 import { useRouter, useSegments } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
 
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 
 // TODO: Role based access control  - Commissioner should only show if user is commissioner
 

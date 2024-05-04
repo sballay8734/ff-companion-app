@@ -1,18 +1,17 @@
 import { ClerkProvider } from '@clerk/clerk-expo';
-import { RootState, store } from '~/store/store';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { store } from '~/store/store';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
 import { Stack } from 'expo-router/stack';
 import * as SecureStore from 'expo-secure-store';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback, useState } from 'react';
-import { Button, useColorScheme } from 'react-native';
+import { useCallback } from 'react';
+import { useColorScheme } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
-import { Text } from '~/constants/themes';
 import ModalLogout from '~/components/modals/ModalLogout';
 
 const tokenCache = {
@@ -89,6 +88,8 @@ export default function RootLayout() {
 }
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+
+// TODO: Create custom Pressable that incorporates theme into pressed states
 
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 

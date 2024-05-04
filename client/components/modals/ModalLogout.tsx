@@ -4,22 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
 import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { useAuth } from '@clerk/clerk-expo';
-
-interface ModalLogoutProps {
-  isVisible: boolean;
-  children: any;
-  onClose: () => void;
-}
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export default function ModalLogout() {
   const isVisible = useSelector((state: RootState) => state.modalLogout.isVisible);
   const dispatch = useDispatch();
   const { signOut } = useAuth();
+  const theme = useCustomTheme();
 
   function handleLogout() {
     signOut();
     dispatch(hideLogoutModal());
   }
+
+  // TODO: Add focused/pressed states/animations to pressables
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
@@ -30,9 +28,18 @@ export default function ModalLogout() {
             <MaterialIcons name="close" color="#fff" size={22} />
           </Pressable>
         </View>
-        <Pressable onPress={handleLogout}>
-          <Text>YES</Text>
-        </Pressable>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Pressable
+            style={{
+              backgroundColor: theme.colors.admin,
+              paddingHorizontal: 20,
+              paddingVertical: 10,
+              borderRadius: 10,
+            }}
+            onPress={handleLogout}>
+            <Text style={{ fontSize: 24 }}>YES</Text>
+          </Pressable>
+        </View>
       </View>
     </Modal>
   );

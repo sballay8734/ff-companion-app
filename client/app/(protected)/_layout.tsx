@@ -6,17 +6,20 @@ import { Drawer } from 'expo-router/drawer';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
+import CustomDrawerContent from '~/components/CustomDrawerContent';
 
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 
 // TODO: Role based access control  - Commissioner should only show if user is commissioner
 
 const DrawerLayout = () => {
-  const { isSignedIn, isLoaded, signOut } = useAuth();
+  const { isSignedIn, isLoaded } = useAuth();
   const segments = useSegments();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const theme = useCustomTheme();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const inAuthGroup = segments[0] === '(protected)';
@@ -29,16 +32,16 @@ const DrawerLayout = () => {
   }, [isSignedIn, isLoaded]);
 
   return (
-    <GestureHandlerRootView style={{ flexGrow: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
         initialRouteName="index"
         screenOptions={{
           drawerContentContainerStyle: {
-            flexGrow: 1,
+            flex: 1,
             flexDirection: 'column',
-            paddingBottom: insets.bottom,
           },
-        }}>
+        }}
+        drawerContent={CustomDrawerContent}>
         <Drawer.Screen
           name="index"
           options={{
@@ -120,23 +123,6 @@ const DrawerLayout = () => {
             drawerIcon: () => (
               <MaterialIcons name="admin-panel-settings" size={24} color={theme.colors.admin} />
             ),
-          }}
-        />
-        {/* TODO: Log out should be a button in the drawer and show a modal */}
-        <Drawer.Screen
-          name="logout"
-          options={{
-            headerTitle: 'Log Out',
-            drawerLabel: 'Log Out',
-            drawerLabelStyle: {
-              color: theme.colors.admin,
-            },
-            drawerItemStyle: {
-              // marginTop: 'auto',
-              marginHorizontal: 0,
-              borderRadius: 0,
-            },
-            drawerIcon: () => <MaterialIcons name="logout" size={24} color={theme.colors.admin} />,
           }}
         />
       </Drawer>

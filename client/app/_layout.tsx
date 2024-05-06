@@ -89,17 +89,13 @@ export default function RootLayout() {
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
 
-// TODO: Create custom Pressable that incorporates theme into pressed states
-
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 
-// TODO: Replace compare & proposals drawer icons
-
-// TODO: Add light theme colors
-
-// TODO: Add Sign Out button to drawer, below settings
-
 // !TODO: Loading states not working on Log in / Log out
+
+// mTODO: Add light theme colors
+
+// mTODO: Replace compare & proposals drawer icons
 
 /* mTODO:  - MODALS
 [

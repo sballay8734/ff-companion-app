@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../store';
 
 interface ModalState {
@@ -24,7 +23,4 @@ export const modalLogoutSlice = createSlice({
 });
 
 export const { showLogoutModal, hideLogoutModal } = modalLogoutSlice.actions;
-
-export const modalState = (state: RootState) => state.modalLogout.isVisible;
-
 export default modalLogoutSlice.reducer;

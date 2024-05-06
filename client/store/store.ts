@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import modalLogoutReducer from './features/ModalLogout/modalLogoutSlice';
+import modalNotifyReducer from './features/ModalNotify/modalNotifySlice';
 
 export const store = configureStore({
   reducer: {
     modalLogout: modalLogoutReducer,
+    modalNotify: modalNotifyReducer,
   },
 });
 

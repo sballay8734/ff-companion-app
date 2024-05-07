@@ -3,27 +3,33 @@ import { ToastShowParams } from 'react-native-toast-message';
 // Errors should not auto-hide
 // Success SHOULD auto-hide
 
-export const success = {
-  login: (): ToastShowParams => ({
+export const success: {
+  login: ToastShowParams;
+  logout: ToastShowParams;
+} = {
+  login: {
     type: 'success',
     text1: 'Login Successful',
     text2: 'Welcome back!',
     visibilityTime: 2000,
     swipeable: true,
     position: 'bottom',
-  }),
-  logout: (): ToastShowParams => ({
+  },
+  logout: {
     type: 'success',
     text1: 'Logout Successful',
     text2: 'Cya later!',
     visibilityTime: 2000,
     swipeable: true,
     position: 'bottom',
-  }),
+  },
 };
 
-export const error = {
-  login: (): ToastShowParams => ({
+export const error: {
+  login: ToastShowParams;
+  logout: ToastShowParams;
+} = {
+  login: {
     type: 'error',
     text1: 'Login Error',
     text2: 'Invalid username or password',
@@ -31,8 +37,8 @@ export const error = {
     swipeable: true,
     position: 'bottom',
     autoHide: false,
-  }),
-  logout: (): ToastShowParams => ({
+  },
+  logout: {
     type: 'error',
     text1: 'Logout Error',
     text2: 'Could not log you out',
@@ -40,11 +46,13 @@ export const error = {
     swipeable: true,
     position: 'bottom',
     autoHide: false,
-  }),
+  },
 };
 
-export const info = {
-  updateAvailable: (): ToastShowParams => ({
+export const info: {
+  updateAvailable: ToastShowParams;
+} = {
+  updateAvailable: {
     type: 'info',
     text1: 'Update Available',
     text2: 'A new version of the app is available',
@@ -52,11 +60,13 @@ export const info = {
     swipeable: true,
     position: 'bottom',
     autoHide: false,
-  }),
+  },
 };
 
-export const warning = {
-  waitWarning: (): ToastShowParams => ({
+export const warning: {
+  waitWarning: ToastShowParams;
+} = {
+  waitWarning: {
     type: 'warning',
     text1: 'If you continue you will lose everything!',
     text2: 'Are you sure?',
@@ -64,16 +74,18 @@ export const warning = {
     swipeable: true,
     position: 'bottom',
     autoHide: false,
-  }),
+  },
 };
 
-export const custom = {
-  customExample: (): ToastShowParams => ({
+export const custom: {
+  customExample: ToastShowParams;
+} = {
+  customExample: {
     type: 'customToast',
     text1: 'This is custom',
     text2: 'I hope it works!',
     visibilityTime: 3000,
     swipeable: true,
     position: 'bottom',
-  }),
+  },
 };

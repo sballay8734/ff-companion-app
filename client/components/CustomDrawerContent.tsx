@@ -1,16 +1,16 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
 
 import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { useAppDispatch } from '~/hooks/reduxConfig';
 
 export default function CustomDrawerContent(props: any) {
   const insets = useSafeAreaInsets();
   const theme = useCustomTheme();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <View style={{ flex: 1, paddingBottom: insets.bottom }}>

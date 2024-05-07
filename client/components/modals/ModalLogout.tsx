@@ -1,28 +1,32 @@
 import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '~/store/store';
 import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { useAuth } from '@clerk/clerk-expo';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { showToast } from '~/store/features/ModalToast/modalToastSlice';
-import { success } from '~/store/features/ModalToast/toastContentConfig';
+import { error, success } from '~/store/features/ModalToast/toastContentConfig';
+import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
+import { setToastParams } from '~/store/features/ModalToast/modalToastSlice';
+import Toast from 'react-native-toast-message';
 
 export default function ModalLogout() {
-  const isVisible = useSelector((state: RootState) => state.modalLogout.isVisible);
-  const dispatch = useDispatch();
+  const isVisible = useAppSelector((state: RootState) => state.modalLogout.isVisible);
+  const dispatch = useAppDispatch();
   const { signOut } = useAuth();
   const theme = useCustomTheme();
 
-  // !TODO: Need to handle errors (promises from Clerk were not working)
-  // TODO: Logout toast should should AFTER navigate
-  function handleLogout() {
-    signOut();
-    dispatch(hideLogoutModal());
-    dispatch(showToast(success.logout()));
+  // TODO: Eventually move logic to ReduxAPI (waiting on decision for backend)
+  async function handleLogout() {
+    try {
+      await signOut();
+      dispatch(hideLogoutModal());
+      // !TODO: You may not call store.getState() while the reducer is executing
+      Toast.show(success.logout);
+    } catch (err) {
+      console.error(err);
+      Toast.show(error.logout);
+    }
   }
-
-  // TODO: Add focused/pressed states/animations to pressables
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>

@@ -4,19 +4,19 @@ import { useRouter, useSegments } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { useDispatch } from 'react-redux';
-import CustomDrawerContent from '~/components/CustomDrawerContent';
 
+import CustomDrawerContent from '~/components/CustomDrawerContent';
+import { useAppDispatch } from '~/hooks/reduxConfig';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-// TODO: Role based access control  - Commissioner should only show if user is commissioner
+// TODO: Role based access control  - Commissioner should only show if user is commissioner (Auth on Backend also)
 
 const DrawerLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();
   const segments = useSegments();
   const router = useRouter();
   const theme = useCustomTheme();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const inAuthGroup = segments[0] === '(protected)';

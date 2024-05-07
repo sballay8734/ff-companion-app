@@ -7,15 +7,15 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useDispatch } from 'react-redux';
-import { showToast } from '~/store/features/ModalToast/modalToastSlice';
-import { success } from '~/store/features/ModalToast/toastContentConfig';
+import { error, success } from '~/store/features/ModalToast/toastContentConfig';
+import { useAppDispatch } from '~/hooks/reduxConfig';
+import Toast from 'react-native-toast-message';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithOAuth = () => {
   const theme = useCustomTheme();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
@@ -25,15 +25,17 @@ const SignInWithOAuth = () => {
   const onPress = React.useCallback(async () => {
     try {
       const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow();
-      // REVIEW: This was a quick test - review Clerk docs for proper flow
-      dispatch(showToast(success.login()));
-      if (createdSessionId && signIn?.status === 'complete') {
+      // if a new session was created
+      if (createdSessionId) {
         setActive?.({ session: createdSessionId });
+        Toast.show(success.login);
+        // else a session already existed
       } else {
         // Use signIn or signUp for next steps such as MFA
       }
     } catch (err) {
       console.error('OAuth error', err);
+      Toast.show(error.login);
     }
   }, []);
 

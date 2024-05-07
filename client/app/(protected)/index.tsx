@@ -1,12 +1,11 @@
 import { Stack } from 'expo-router';
 import { View, StyleSheet, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ToastShowParams } from 'react-native-toast-message';
-import { useDispatch } from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 import { Text } from '~/constants/themes';
+import { useAppDispatch } from '~/hooks/reduxConfig';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { showToast } from '~/store/features/ModalToast/modalToastSlice';
 import {
   error,
   success,
@@ -17,7 +16,6 @@ import {
 
 export default function HomePage() {
   const theme = useCustomTheme();
-  const dispatch = useDispatch();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -25,21 +23,18 @@ export default function HomePage() {
       <View style={styles.container}>
         <Text>Home</Text>
 
-        <Button title="Show Login Success" onPress={() => dispatch(showToast(success.login()))} />
+        <Button title="Show Login Success" onPress={() => Toast.show(success.login)} />
 
-        <Button title="Show Login Fail" onPress={() => dispatch(showToast(error.login()))} />
+        <Button title="Show Login Fail" onPress={() => Toast.show(error.login)} />
 
         <Button
           title="Show updateAvailable Info"
-          onPress={() => dispatch(showToast(info.updateAvailable()))}
+          onPress={() => Toast.show(info.updateAvailable)}
         />
 
-        <Button title="Show Warning" onPress={() => dispatch(showToast(warning.waitWarning()))} />
+        <Button title="Show Warning" onPress={() => Toast.show(warning.waitWarning)} />
 
-        <Button
-          title="Show Custom Toast"
-          onPress={() => dispatch(showToast(custom.customExample()))}
-        />
+        <Button title="Show Custom Toast" onPress={() => Toast.show(custom.customExample)} />
       </View>
     </SafeAreaView>
   );

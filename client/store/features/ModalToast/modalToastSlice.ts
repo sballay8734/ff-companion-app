@@ -1,30 +1,28 @@
+// REMEMBER: Do not call toast functions directly in a reducer
+
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import Toast, { ToastProps, ToastShowParams } from 'react-native-toast-message';
 
 interface ToastState {
-  params?: ToastProps;
+  toastParams?: ToastProps;
 }
 
 const initialState: ToastState = {
-  params: undefined,
+  toastParams: undefined,
 };
 
 export const modalToastSlice = createSlice({
   name: 'modalToast',
   initialState,
   reducers: {
-    showToast: (state, action: PayloadAction<ToastShowParams>) => {
-      state.params = action.payload;
-      Toast.show(action.payload);
-    },
-    hideToast: () => {
-      Toast.hide();
+    setToastParams: (state, action: PayloadAction<ToastShowParams>) => {
+      state.toastParams = action.payload;
     },
   },
 });
 
-export const { showToast, hideToast } = modalToastSlice.actions;
+export const { setToastParams } = modalToastSlice.actions;
 export default modalToastSlice.reducer;
 
 // NOTE: For reference

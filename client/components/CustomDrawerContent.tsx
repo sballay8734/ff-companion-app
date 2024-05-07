@@ -32,6 +32,7 @@ export default function CustomDrawerContent(props: any) {
           style={{
             marginHorizontal: 0,
             borderRadius: 0,
+            marginLeft: 2,
           }}
         />
       </DrawerContentScrollView>

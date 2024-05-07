@@ -3,8 +3,7 @@ import { Stack, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
-// test
-
+// TODO: Need to clean this up. You shouldn't need a useEffect here And in (protected)/_layout.tsx
 const AuthLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();
   const router = useRouter();

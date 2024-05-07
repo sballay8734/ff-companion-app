@@ -1,4 +1,4 @@
-import { Modal, View, Text, Pressable, StyleSheet } from 'react-native';
+import { Modal, View, Text, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { RootState } from '~/store/store';
 import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
@@ -6,7 +6,6 @@ import { useAuth } from '@clerk/clerk-expo';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { error, success } from '~/store/features/ModalToast/toastContentConfig';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
-import { setToastParams } from '~/store/features/ModalToast/modalToastSlice';
 import Toast from 'react-native-toast-message';
 
 export default function ModalLogout() {
@@ -20,7 +19,6 @@ export default function ModalLogout() {
     try {
       await signOut();
       dispatch(hideLogoutModal());
-      // !TODO: You may not call store.getState() while the reducer is executing
       Toast.show(success.logout);
     } catch (err) {
       console.error(err);
@@ -33,12 +31,12 @@ export default function ModalLogout() {
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Are you sure you want to logout?</Text>
-          <Pressable onPress={handleLogout}>
+          <Pressable onPress={() => dispatch(hideLogoutModal())}>
             <MaterialIcons name="close" color="#fff" size={22} />
           </Pressable>
         </View>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Pressable
+          <TouchableOpacity
             style={{
               backgroundColor: theme.colors.admin,
               paddingHorizontal: 20,
@@ -47,7 +45,7 @@ export default function ModalLogout() {
             }}
             onPress={handleLogout}>
             <Text style={{ fontSize: 24 }}>YES</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>

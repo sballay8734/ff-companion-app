@@ -95,11 +95,11 @@ export default function RootLayout() {
 
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 
+// TODO: Login/Logout Toasts should ideally happen after navigate
+
 // !TODO: Loading states not working on Log in / Log out
 
 // mTODO: Add light theme colors
-
-// mTODO: Replace compare & proposals drawer icons
 
 /* mTODO:  - MODALS
 [

@@ -1,5 +1,5 @@
 import { useAuth } from '@clerk/clerk-expo';
-import { MaterialCommunityIcons, Entypo, MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, Entypo, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { useRouter, useSegments } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
 import { useEffect } from 'react';
@@ -60,7 +60,9 @@ const DrawerLayout = () => {
               marginHorizontal: 0,
               borderRadius: 0,
             },
-            drawerIcon: ({ color }) => <MaterialIcons name="compare" size={24} color={color} />,
+            drawerIcon: ({ color }) => (
+              <FontAwesome5 name="people-arrows" size={20} color={color} />
+            ),
           }}
         />
         <Drawer.Screen
@@ -87,7 +89,7 @@ const DrawerLayout = () => {
               borderRadius: 0,
             },
             drawerIcon: ({ color }) => (
-              <MaterialCommunityIcons name="pencil-remove" size={24} color={color} />
+              <MaterialIcons name="assignment-add" size={24} color={color} />
             ),
           }}
         />

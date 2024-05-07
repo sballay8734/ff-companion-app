@@ -19,14 +19,6 @@ export default function HomePage() {
   const theme = useCustomTheme();
   const dispatch = useDispatch();
 
-  const toastParams: ToastShowParams = {
-    type: 'success',
-    text1: 'Login successful',
-    text2: 'Testing text2',
-    visibilityTime: 2000,
-    swipeable: true,
-  };
-
   return (
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen options={{ title: 'Home' }} />

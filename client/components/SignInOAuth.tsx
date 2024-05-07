@@ -7,11 +7,15 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { useDispatch } from 'react-redux';
+import { showToast } from '~/store/features/ModalToast/modalToastSlice';
+import { success } from '~/store/features/ModalToast/toastContentConfig';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithOAuth = () => {
   const theme = useCustomTheme();
+  const dispatch = useDispatch();
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
@@ -21,8 +25,9 @@ const SignInWithOAuth = () => {
   const onPress = React.useCallback(async () => {
     try {
       const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow();
-
-      if (createdSessionId) {
+      // REVIEW: This was a quick test - review Clerk docs for proper flow
+      dispatch(showToast(success.login()));
+      if (createdSessionId && signIn?.status === 'complete') {
         setActive?.({ session: createdSessionId });
       } else {
         // Use signIn or signUp for next steps such as MFA

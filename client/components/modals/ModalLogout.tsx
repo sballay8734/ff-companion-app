@@ -5,6 +5,8 @@ import { RootState } from '~/store/store';
 import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { useAuth } from '@clerk/clerk-expo';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { showToast } from '~/store/features/ModalToast/modalToastSlice';
+import { success } from '~/store/features/ModalToast/toastContentConfig';
 
 export default function ModalLogout() {
   const isVisible = useSelector((state: RootState) => state.modalLogout.isVisible);
@@ -12,9 +14,12 @@ export default function ModalLogout() {
   const { signOut } = useAuth();
   const theme = useCustomTheme();
 
+  // !TODO: Need to handle errors (promises from Clerk were not working)
+  // TODO: Logout toast should should AFTER navigate
   function handleLogout() {
     signOut();
     dispatch(hideLogoutModal());
+    dispatch(showToast(success.logout()));
   }
 
   // TODO: Add focused/pressed states/animations to pressables
@@ -24,7 +29,7 @@ export default function ModalLogout() {
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Are you sure you want to logout?</Text>
-          <Pressable onPress={() => dispatch(hideLogoutModal())}>
+          <Pressable onPress={handleLogout}>
             <MaterialIcons name="close" color="#fff" size={22} />
           </Pressable>
         </View>

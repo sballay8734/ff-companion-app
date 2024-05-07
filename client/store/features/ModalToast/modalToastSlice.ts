@@ -2,6 +2,31 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import Toast, { ToastProps, ToastShowParams } from 'react-native-toast-message';
 
+interface ToastState {
+  params?: ToastProps;
+}
+
+const initialState: ToastState = {
+  params: undefined,
+};
+
+export const modalToastSlice = createSlice({
+  name: 'modalToast',
+  initialState,
+  reducers: {
+    showToast: (state, action: PayloadAction<ToastShowParams>) => {
+      state.params = action.payload;
+      Toast.show(action.payload);
+    },
+    hideToast: () => {
+      Toast.hide();
+    },
+  },
+});
+
+export const { showToast, hideToast } = modalToastSlice.actions;
+export default modalToastSlice.reducer;
+
 // NOTE: For reference
 // ToastProps = {
 //   config?: ToastConfig;
@@ -35,28 +60,3 @@ import Toast, { ToastProps, ToastShowParams } from 'react-native-toast-message';
 //   onPress?: () => void;
 //   props?: any;
 // };
-
-interface ToastState {
-  params?: ToastProps;
-}
-
-const initialState: ToastState = {
-  params: undefined,
-};
-
-export const modalToastSlice = createSlice({
-  name: 'modalToast',
-  initialState,
-  reducers: {
-    showToast: (state, action: PayloadAction<ToastShowParams>) => {
-      state.params = action.payload;
-      Toast.show(action.payload);
-    },
-    hideToast: () => {
-      Toast.hide();
-    },
-  },
-});
-
-export const { showToast, hideToast } = modalToastSlice.actions;
-export default modalToastSlice.reducer;

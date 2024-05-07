@@ -12,6 +12,14 @@ export const success = {
     swipeable: true,
     position: 'bottom',
   }),
+  logout: (): ToastShowParams => ({
+    type: 'success',
+    text1: 'Logout Successful',
+    text2: 'Cya later!',
+    visibilityTime: 2000,
+    swipeable: true,
+    position: 'bottom',
+  }),
 };
 
 export const error = {
@@ -19,6 +27,15 @@ export const error = {
     type: 'error',
     text1: 'Login Error',
     text2: 'Invalid username or password',
+    visibilityTime: 3000,
+    swipeable: true,
+    position: 'bottom',
+    autoHide: false,
+  }),
+  logout: (): ToastShowParams => ({
+    type: 'error',
+    text1: 'Logout Error',
+    text2: 'Could not log you out',
     visibilityTime: 3000,
     swipeable: true,
     position: 'bottom',

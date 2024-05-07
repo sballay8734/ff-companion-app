@@ -8,12 +8,12 @@ import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { showToast } from '~/store/features/ModalToast/modalToastSlice';
 import {
-  login,
-  logout,
-  fetch,
-  validation,
-  networkConnection,
-} from '~/store/features/ModalToast/toastConfig';
+  error,
+  success,
+  info,
+  custom,
+  warning,
+} from '~/store/features/ModalToast/toastContentConfig';
 
 export default function HomePage() {
   const theme = useCustomTheme();
@@ -32,19 +32,21 @@ export default function HomePage() {
       <Stack.Screen options={{ title: 'Home' }} />
       <View style={styles.container}>
         <Text>Home</Text>
-        <Button title="Show Login Success" onPress={() => dispatch(showToast(login.success()))} />
-        <Button title="Show Login Fail" onPress={() => dispatch(showToast(login.error()))} />
-        <Button title="Show Logout Success" onPress={() => dispatch(showToast(logout.success()))} />
-        <Button title="Show Logout Fail" onPress={() => dispatch(showToast(logout.error()))} />
-        <Button title="Show Fetch Success" onPress={() => dispatch(showToast(fetch.success()))} />
-        <Button title="Show Fetch Fail" onPress={() => dispatch(showToast(fetch.error()))} />
+
+        <Button title="Show Login Success" onPress={() => dispatch(showToast(success.login()))} />
+
+        <Button title="Show Login Fail" onPress={() => dispatch(showToast(error.login()))} />
+
         <Button
-          title="Show Validation Success"
-          onPress={() => dispatch(showToast(validation.error('Password')))}
+          title="Show updateAvailable Info"
+          onPress={() => dispatch(showToast(info.updateAvailable()))}
         />
+
+        <Button title="Show Warning" onPress={() => dispatch(showToast(warning.waitWarning()))} />
+
         <Button
-          title="Show Validation Fail"
-          onPress={() => dispatch(showToast(networkConnection.error()))}
+          title="Show Custom Toast"
+          onPress={() => dispatch(showToast(custom.customExample()))}
         />
       </View>
     </SafeAreaView>

@@ -14,6 +14,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
 import ModalLogout from '~/components/modals/ModalLogout';
 import Toast from 'react-native-toast-message';
+import { toastConfig } from '~/config/toastStyleConfig';
 
 const tokenCache = {
   async getToken(key: string) {
@@ -79,7 +80,7 @@ export default function RootLayout() {
               </Stack>
               <ModalLogout />
               {/* WARNING: Toast must be the last child in SafeAreaView s */}
-              <Toast />
+              <Toast config={toastConfig} />
             </SafeAreaView>
           </SafeAreaProvider>
           {/* TODO: Style needs to be rendered based on user preference */}

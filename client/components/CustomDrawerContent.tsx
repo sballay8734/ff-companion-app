@@ -1,5 +1,5 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
@@ -22,6 +22,7 @@ export default function CustomDrawerContent(props: any) {
         }}
         {...props}>
         <DrawerItemList {...props} />
+        <View style={{ ...styles.spacer, backgroundColor: 'red' }}></View>
         <DrawerItem
           labelStyle={{ color: theme.colors.admin }}
           label={'Logout'}
@@ -39,3 +40,10 @@ export default function CustomDrawerContent(props: any) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  spacer: {
+    width: '100%',
+    height: 2,
+  },
+});

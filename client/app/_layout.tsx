@@ -101,6 +101,10 @@ export default function RootLayout() {
 
 // mTODO: Add light theme colors
 
+// mTODO: Blur app content when drawer is open
+
+// mTODO: Add icon on each drawer label for "notifications" (see drawerInsp)
+
 /* mTODO:  - MODALS
 [
   // NOTE: Full page (back button in top left) *********************************

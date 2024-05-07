@@ -1,48 +1,51 @@
-import { FontAwesome } from '@expo/vector-icons';
 import { Stack } from 'expo-router';
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ToastShowParams } from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { setNotifyMsg, showNotifyModal } from '~/store/features/ModalNotify/modalNotifySlice';
+import { showToast } from '~/store/features/ModalToast/modalToastSlice';
+import {
+  login,
+  logout,
+  fetch,
+  validation,
+  networkConnection,
+} from '~/store/features/ModalToast/toastConfig';
 
 export default function HomePage() {
   const theme = useCustomTheme();
   const dispatch = useDispatch();
 
-  // !TODO: Not working, you had to go back to work and couldn't finish
-  function handleShowMessage() {
-    dispatch(setNotifyMsg('You are logged in!'));
-    dispatch(showNotifyModal());
-  }
+  const toastParams: ToastShowParams = {
+    type: 'success',
+    text1: 'Login successful',
+    text2: 'Testing text2',
+    visibilityTime: 2000,
+    swipeable: true,
+  };
 
   return (
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen options={{ title: 'Home' }} />
       <View style={styles.container}>
         <Text>Home</Text>
-        {/* TODO: Extract pressable to custom component */}
-        <Pressable
-          style={{ backgroundColor: 'red', flexDirection: 'row', alignItems: 'center' }}
-          onPress={handleShowMessage}>
-          {({ pressed }) => (
-            <>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color="gray"
-                style={[
-                  {
-                    opacity: pressed ? 0.5 : 1,
-                  },
-                ]}
-              />
-              <Text>Testing</Text>
-            </>
-          )}
-        </Pressable>
+        <Button title="Show Login Success" onPress={() => dispatch(showToast(login.success()))} />
+        <Button title="Show Login Fail" onPress={() => dispatch(showToast(login.error()))} />
+        <Button title="Show Logout Success" onPress={() => dispatch(showToast(logout.success()))} />
+        <Button title="Show Logout Fail" onPress={() => dispatch(showToast(logout.error()))} />
+        <Button title="Show Fetch Success" onPress={() => dispatch(showToast(fetch.success()))} />
+        <Button title="Show Fetch Fail" onPress={() => dispatch(showToast(fetch.error()))} />
+        <Button
+          title="Show Validation Success"
+          onPress={() => dispatch(showToast(validation.error('Password')))}
+        />
+        <Button
+          title="Show Validation Fail"
+          onPress={() => dispatch(showToast(networkConnection.error()))}
+        />
       </View>
     </SafeAreaView>
   );

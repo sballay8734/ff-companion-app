@@ -5,14 +5,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-export default function ComparePage() {
+export default function ChallengesPage() {
   const theme = useCustomTheme();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Compare' }} />
+      <Stack.Screen options={{ title: 'Challenges' }} />
       <View style={styles.container}>
-        <Text>Compare</Text>
+        <Text>Challenges</Text>
         {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>

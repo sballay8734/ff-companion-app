@@ -102,9 +102,15 @@ export default function RootLayout() {
 
 // mTODO: Add light theme colors
 
+// mTODO: Add special styling to custom modules
+
+// mTODO: Change Toast styling to fit dark mode
+
 // mTODO: Blur app content when drawer is open
 
 // mTODO: Add icon on each drawer label for "notifications" (see drawerInsp)
+
+// mTODO: Add "View available modules" button to drawer
 
 /* mTODO:  - MODALS
 [

@@ -84,33 +84,3 @@ export function Text(props: TextProps) {
 interface FullPressableProps extends PressableProps {
   text?: string;
 }
-
-// WARNING: Seems to cause loading bug. Need to investigate
-// export function Pressable(props: FullPressableProps) {
-//   const theme = useCustomTheme();
-//   const { style, onPress, ...otherProps } = props;
-
-//   const color = theme.colors.primaryText;
-//   const fontFamily = 'RobotoBlack';
-//   const text = otherProps.text;
-
-//   return (
-//     <Pressable onPress={onPress}>
-//       {({ pressed }) => (
-//         <>
-//           <FontAwesome
-//             name="info-circle"
-//             size={25}
-//             color="gray"
-//             style={[
-//               {
-//                 opacity: pressed ? 0.5 : 1,
-//               },
-//             ]}
-//           />
-//           {text && <Text>{text}</Text>}
-//         </>
-//       )}
-//     </Pressable>
-//   );
-// }

@@ -1,13 +1,19 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
-import { Entypo, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import {
+  Entypo,
+  FontAwesome5,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  FontAwesome6,
+} from '@expo/vector-icons';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch } from '~/hooks/reduxConfig';
 import { Text } from '~/constants/themes';
-import { useRoute } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
 // TODO: Add active state bg to DrawerItems (already have opacity done)
 
@@ -18,13 +24,35 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
 
   const currentRoute = state.routes[state.index].name;
 
+  // REMOVE: These customModules will be eventually be fetched by redux
+  // mTODO: logic for rendering icon will have to change
+  const customModules = [
+    // mTODO: replace name with id
+    {
+      name: 'picks',
+      label: 'Picks',
+      icon: <FontAwesome6 name="money-check-dollar" size={22} color="#a6a7a9" />,
+    },
+    {
+      name: 'challenges',
+      label: 'Challenges',
+      icon: <MaterialCommunityIcons name="sword-cross" size={24} color="#a6a7a9" />,
+    },
+    {
+      name: 'kingOfTheHill',
+      label: 'King of the Hill',
+      icon: <MaterialCommunityIcons name="crown" size={24} color="#a6a7a9" />,
+    },
+  ];
+
   return (
-    <View style={{ flex: 1, paddingBottom: insets.bottom }}>
+    <View style={{ flex: 1, paddingBottom: insets.bottom, backgroundColor: '#202429' }}>
       <DrawerContentScrollView
         contentContainerStyle={{
           flexDirection: 'column',
           justifyContent: 'space-between',
           flex: 1,
+          backgroundColor: '#202429',
         }}
         {...props}>
         {/* DEFAULT MODULES */}
@@ -76,56 +104,26 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
         <View style={styles.spacer}></View>
         {/* CUSTOM MODULES */}
         {/* TODO: Define routes for custom modules & map through */}
-        <View style={{ flexDirection: 'column' }}>
-          <DrawerItem
-            label={({ focused, color }) => <Text style={{ color }}>Custom 1</Text>}
-            onPress={() => console.error('Not configured - Custom 1')}
-            icon={({ focused, color, size }) => (
-              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
-            )}
-            focused={false}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-              // Other drawer item styles
-            }}
-          />
-          <DrawerItem
-            label={({ focused, color }) => <Text style={{ color }}>Custom 2</Text>}
-            onPress={() => console.error('Not configured - Custom 2')}
-            icon={({ color }) => (
-              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
-            )}
-            focused={false}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-            }}
-          />
-          <DrawerItem
-            label={({ focused, color }) => <Text style={{ color }}>Custom 3</Text>}
-            onPress={() => console.error('Not configured - Custom 3')}
-            icon={({ color }) => (
-              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
-            )}
-            focused={false}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-            }}
-          />
-          <DrawerItem
-            label={({ focused, color }) => <Text style={{ color }}>Custom 4</Text>}
-            onPress={() => console.error('Not configured - Custom 4')}
-            icon={({ color }) => (
-              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
-            )}
-            focused={false}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-            }}
-          />
+        <View style={{ flexDirection: 'column', flex: 1 }}>
+          <Text style={styles.customHeader}>Custom Modules</Text>
+          {customModules.map((module) => {
+            const path = `(custom)/${module.name}`;
+
+            return (
+              <DrawerItem
+                key={module.name}
+                label={({ focused, color }) => <Text style={{ color }}>{module.label}</Text>}
+                onPress={() => navigation.navigate(path)}
+                icon={({ focused, color, size }) => module.icon}
+                focused={false}
+                style={{
+                  marginHorizontal: 0,
+                  borderRadius: 0,
+                  // Other drawer item styles
+                }}
+              />
+            );
+          })}
         </View>
         <View style={styles.spacer}></View>
         {/* BOTTOM DRAWER */}
@@ -180,7 +178,15 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
 const styles = StyleSheet.create({
   spacer: {
     width: '100%',
-    height: 2,
-    backgroundColor: 'black',
+    height: 10,
+    backgroundColor: '#0a0a0a',
+  },
+  customHeader: {
+    width: '100%',
+    // mTODO: Eventually change this to secondary color
+    backgroundColor: '#1a1c1f',
+    paddingLeft: 10,
+    paddingVertical: 8,
+    color: '#38414f',
   },
 });

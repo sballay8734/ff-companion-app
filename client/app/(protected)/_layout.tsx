@@ -39,7 +39,7 @@ const DrawerLayout = () => {
           },
         }}
         drawerContent={CustomDrawerContent}>
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="index"
           options={{
             headerTitle: 'Home',
@@ -123,7 +123,7 @@ const DrawerLayout = () => {
               <MaterialIcons name="admin-panel-settings" size={24} color={theme.colors.admin} />
             ),
           }}
-        />
+        /> */}
       </Drawer>
     </GestureHandlerRootView>
   );

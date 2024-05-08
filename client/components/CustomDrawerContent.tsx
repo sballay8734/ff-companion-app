@@ -9,9 +9,7 @@ import { useAppDispatch } from '~/hooks/reduxConfig';
 import { Text } from '~/constants/themes';
 import { useRoute } from '@react-navigation/native';
 
-// interface CustomDrawerProps {
-//   navigation: NavigationProp
-// }
+// TODO: Add active state bg to DrawerItems (already have opacity done)
 
 export default function CustomDrawerContent({ navigation, state, props }: any) {
   const insets = useSafeAreaInsets();
@@ -19,8 +17,6 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
   const dispatch = useAppDispatch();
 
   const currentRoute = state.routes[state.index].name;
-
-  console.log(currentRoute);
 
   return (
     <View style={{ flex: 1, paddingBottom: insets.bottom }}>
@@ -41,7 +37,6 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             style={{
               marginHorizontal: 0,
               borderRadius: 0,
-              marginLeft: 2,
               // Other drawer item styles
             }}
           />
@@ -53,7 +48,6 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             style={{
               marginHorizontal: 0,
               borderRadius: 0,
-              marginLeft: 2,
             }}
           />
           <DrawerItem
@@ -66,7 +60,6 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             style={{
               marginHorizontal: 0,
               borderRadius: 0,
-              marginLeft: 2,
             }}
           />
           <DrawerItem
@@ -77,113 +70,108 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             style={{
               marginHorizontal: 0,
               borderRadius: 0,
+            }}
+          />
+        </View>
+        <View style={styles.spacer}></View>
+        {/* CUSTOM MODULES */}
+        {/* TODO: Define routes for custom modules & map through */}
+        <View style={{ flexDirection: 'column' }}>
+          <DrawerItem
+            label={({ focused, color }) => <Text style={{ color }}>Custom 1</Text>}
+            onPress={() => console.error('Not configured - Custom 1')}
+            icon={({ focused, color, size }) => (
+              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
+            )}
+            focused={false}
+            style={{
+              marginHorizontal: 0,
+              borderRadius: 0,
+              // Other drawer item styles
+            }}
+          />
+          <DrawerItem
+            label={({ focused, color }) => <Text style={{ color }}>Custom 2</Text>}
+            onPress={() => console.error('Not configured - Custom 2')}
+            icon={({ color }) => (
+              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
+            )}
+            focused={false}
+            style={{
+              marginHorizontal: 0,
+              borderRadius: 0,
+            }}
+          />
+          <DrawerItem
+            label={({ focused, color }) => <Text style={{ color }}>Custom 3</Text>}
+            onPress={() => console.error('Not configured - Custom 3')}
+            icon={({ color }) => (
+              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
+            )}
+            focused={false}
+            style={{
+              marginHorizontal: 0,
+              borderRadius: 0,
+            }}
+          />
+          <DrawerItem
+            label={({ focused, color }) => <Text style={{ color }}>Custom 4</Text>}
+            onPress={() => console.error('Not configured - Custom 4')}
+            icon={({ color }) => (
+              <MaterialIcons name="report-gmailerrorred" size={24} color={color} />
+            )}
+            focused={false}
+            style={{
+              marginHorizontal: 0,
+              borderRadius: 0,
+            }}
+          />
+        </View>
+        <View style={styles.spacer}></View>
+        {/* BOTTOM DRAWER */}
+        <View style={{ flexDirection: 'column' }}>
+          <DrawerItem
+            label={({ focused, color }) => <Text style={{ color }}>Settings</Text>}
+            onPress={() => navigation.navigate('settings')}
+            icon={({ focused, color, size }) => (
+              <MaterialIcons name="settings" size={24} color={color} />
+            )}
+            focused={currentRoute === 'settings'}
+            style={{
+              marginHorizontal: 0,
+              borderRadius: 0,
+              // Other drawer item styles
+            }}
+          />
+          <DrawerItem
+            label={({ focused, color }) => (
+              <Text style={{ color: theme.colors.admin }}>Commissioner Tools</Text>
+            )}
+            onPress={() => navigation.navigate('commissioner')}
+            icon={({ focused, color, size }) => (
+              <MaterialIcons name="admin-panel-settings" size={24} color={theme.colors.admin} />
+            )}
+            focused={currentRoute === 'commissioner'}
+            style={{
+              marginHorizontal: 0,
+              borderRadius: 0,
+              // Other drawer item styles
+            }}
+          />
+          <DrawerItem
+            labelStyle={{ color: theme.colors.admin }}
+            label={'Logout'}
+            onPress={() => dispatch(showLogoutModal())}
+            icon={({ focused, color, size }) => (
+              <MaterialIcons name="logout" size={24} color={theme.colors.admin} />
+            )}
+            style={{
+              marginHorizontal: 0,
+              borderRadius: 0,
               marginLeft: 2,
             }}
           />
         </View>
-        <View>
-          <Text>SPACER</Text>
-        </View>
-        {/* CUSTOM MODULES */}
-        {/* <Drawer.Screen
-          name="index"
-          options={{
-            headerTitle: 'Home',
-            drawerLabel: 'Home',
-            drawerItemStyle: {
-              marginHorizontal: 0,
-              borderRadius: 0,
-            },
-            drawerIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
-          }}
-        />
-        <Drawer.Screen
-          name="compare"
-          options={{
-            headerTitle: 'Compare',
-            drawerLabel: 'Compare',
-            drawerItemStyle: {
-              marginHorizontal: 0,
-              borderRadius: 0,
-            },
-            drawerIcon: ({ color }) => (
-              <FontAwesome5 name="people-arrows" size={20} color={color} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="records"
-          options={{
-            headerTitle: 'Records',
-            drawerLabel: 'Records',
-            drawerItemStyle: {
-              marginHorizontal: 0,
-              borderRadius: 0,
-            },
-            drawerIcon: ({ color }) => (
-              <MaterialCommunityIcons name="bookshelf" size={24} color={color} />
-            ),
-          }}
-        />
-        <Drawer.Screen
-          name="proposals"
-          options={{
-            headerTitle: 'Proposals',
-            drawerLabel: 'Proposals',
-            drawerItemStyle: {
-              marginHorizontal: 0,
-              borderRadius: 0,
-            },
-            drawerIcon: ({ color }) => (
-              <MaterialIcons name="assignment-add" size={24} color={color} />
-            ),
-          }}
-        />
-        <View style={{ ...styles.spacer, backgroundColor: 'red' }}></View>
-        <Drawer.Screen
-          name="settings"
-          options={{
-            headerTitle: 'Settings',
-            drawerLabel: 'Settings',
-            drawerItemStyle: {
-              marginHorizontal: 0,
-              borderRadius: 0,
-              marginTop: 'auto',
-            },
-            drawerIcon: ({ color }) => <MaterialIcons name="settings" size={24} color={color} />,
-          }}
-        />
-        <Drawer.Screen
-          name="commissioner"
-          options={{
-            headerTitle: 'Commissioner Tools',
-            drawerLabel: 'Commissioner Tools',
-            drawerLabelStyle: {
-              color: theme.colors.admin,
-            },
-            drawerItemStyle: {
-              // marginTop: 'auto',
-              marginHorizontal: 0,
-              borderRadius: 0,
-            },
-            drawerIcon: () => (
-              <MaterialIcons name="admin-panel-settings" size={24} color={theme.colors.admin} />
-            ),
-          }}
-        /> */}
-        <DrawerItem
-          labelStyle={{ color: theme.colors.admin }}
-          label={'Logout'}
-          onPress={() => dispatch(showLogoutModal())}
-          icon={({ focused, color, size }) => (
-            <MaterialIcons name="logout" size={24} color={theme.colors.admin} />
-          )}
-          style={{
-            marginHorizontal: 0,
-            borderRadius: 0,
-            marginLeft: 2,
-          }}
-        />
       </DrawerContentScrollView>
     </View>
   );
@@ -193,18 +181,6 @@ const styles = StyleSheet.create({
   spacer: {
     width: '100%',
     height: 2,
-  },
-  focusedLabel: {
-    backgroundColor: 'red',
+    backgroundColor: 'black',
   },
 });
-
-/* 
-{
-  "key": "(protected)-qXN5o3AfFR8sMnL9NkLHE", 
-  "name": "(protected)", 
-  "params": {
-    "params": {}, "screen": "index"
-  }
-}
-*/

@@ -92,6 +92,7 @@ export default function RootLayout() {
 }
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// TODO: Finish laying out drawer
 
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 

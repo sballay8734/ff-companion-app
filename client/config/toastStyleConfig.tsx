@@ -18,13 +18,22 @@ export const toastConfig = {
   success: (props: ToastProps) => (
     <BaseToast
       {...props}
-      style={{ borderLeftColor: 'green' }}
+      style={{
+        borderLeftColor: '#57ff47',
+        backgroundColor: '#242636',
+        borderColor: '#3b3e57',
+        borderWidth: 1,
+      }}
       renderLeadingIcon={() => (
         <AntDesign
           name="checkcircle"
           size={24}
-          color="green"
-          style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
+          color="#57ff47"
+          style={{
+            display: 'flex',
+            alignSelf: 'center',
+            paddingLeft: padding,
+          }}
         />
       )}
       contentContainerStyle={{
@@ -33,7 +42,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: 'green',
+        color: '#57ff47',
       }}
     />
   ),
@@ -44,12 +53,17 @@ export const toastConfig = {
   error: (props: ToastProps) => (
     <ErrorToast
       {...props}
-      style={{ borderLeftColor: 'red' }}
+      style={{
+        borderLeftColor: '#ff4255',
+        backgroundColor: '#242636',
+        borderColor: '#3b3e57',
+        borderWidth: 1,
+      }}
       renderLeadingIcon={() => (
         <AntDesign
           name="closecircle"
           size={24}
-          color="red"
+          color="#ff4255"
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
@@ -59,7 +73,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: 'red',
+        color: '#ff4255',
       }}
     />
   ),
@@ -70,12 +84,17 @@ export const toastConfig = {
   info: (props: ToastProps) => (
     <InfoToast
       {...props}
-      style={{ borderLeftColor: 'blue' }}
+      style={{
+        borderLeftColor: '#597dff',
+        backgroundColor: '#242636',
+        borderColor: '#3b3e57',
+        borderWidth: 1,
+      }}
       renderLeadingIcon={() => (
         <AntDesign
           name="infocirlce"
           size={24}
-          color="blue"
+          color="#597dff"
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
@@ -85,7 +104,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: 'blue',
+        color: '#597dff',
       }}
     />
   ),
@@ -94,12 +113,17 @@ export const toastConfig = {
   warning: (props: ToastProps) => (
     <InfoToast
       {...props}
-      style={{ borderLeftColor: '#fcba03' }}
+      style={{
+        borderLeftColor: '#fff945',
+        backgroundColor: '#242636',
+        borderColor: '#3b3e57',
+        borderWidth: 1,
+      }}
       renderLeadingIcon={() => (
         <AntDesign
           name="exclamationcircle"
           size={24}
-          color="#fcba03"
+          color="#fff945"
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
@@ -109,7 +133,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: '#fcba03',
+        color: '#fff945',
       }}
     />
   ),
@@ -118,12 +142,17 @@ export const toastConfig = {
   customToast: (props: ToastShowParams) => (
     <InfoToast
       {...props}
-      style={{ borderLeftColor: 'purple' }}
+      style={{
+        borderLeftColor: '#ed66ff',
+        backgroundColor: '#242636',
+        borderColor: '#3b3e57',
+        borderWidth: 1,
+      }}
       renderLeadingIcon={() => (
         <AntDesign
           name="exclamationcircle"
           size={24}
-          color="purple"
+          color="#ed66ff"
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
@@ -133,7 +162,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: 'purple',
+        color: '#ed66ff',
       }}
     />
   ),

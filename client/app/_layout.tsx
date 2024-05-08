@@ -59,7 +59,6 @@ export default function RootLayout() {
       <Provider store={store}>
         <ThemeProvider value={theme}>
           <SafeAreaProvider style={{ flexGrow: 1 }}>
-            {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop or useSafeAreaInsets() hook  */}
             <SafeAreaView
               style={{ flexGrow: 1 }}
               edges={['right', 'left']}
@@ -107,8 +106,6 @@ export default function RootLayout() {
 // mTODO: Change Toast styling to fit dark mode
 
 // mTODO: Blur app content when drawer is open
-
-// mTODO: Add icon on each drawer label for "notifications" (see drawerInsp)
 
 // mTODO: Add "View available modules" button to drawer
 

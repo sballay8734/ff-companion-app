@@ -1,5 +1,7 @@
 import { loadEnvironment } from "./config/environment"
 
+import testRouter from "./routes/testRoute"
+
 loadEnvironment()
 
 import { json, urlencoded } from "body-parser"
@@ -25,6 +27,8 @@ export const createServer = (): Express => {
     .use(urlencoded({ extended: true }))
     .use(json())
     .use(cookieParser())
+
+    .use("/api/test", testRouter)
 
   // Error handling
   app.use((err: ErrRes, req: Request, res: Response, next: NextFunction) => {

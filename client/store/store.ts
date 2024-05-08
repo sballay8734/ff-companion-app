@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import modalLogoutReducer from './features/ModalLogout/modalLogoutSlice';
-import modalToastReducer from './features/ModalToast/modalToastSlice';
 
 export const store = configureStore({
   reducer: {
     modalLogout: modalLogoutReducer,
-    modalToast: modalToastReducer,
+    // modalToast: modalToastReducer,
   },
 });
 

@@ -2,9 +2,10 @@ import { Stack } from 'expo-router';
 import { View, StyleSheet, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
+import { useGetTestEndpointQuery } from '~/store/api/appApi';
+import { appApi } from '~/store/api/appApi';
 
 import { Text } from '~/constants/themes';
-import { useAppDispatch } from '~/hooks/reduxConfig';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import {
   error,
@@ -16,6 +17,9 @@ import {
 
 export default function HomePage() {
   const theme = useCustomTheme();
+
+  // !TODO: Could not finish before going back to work. NOT DONE
+  const useGetTestEndpointQuery = appApi.endpoints.getTestEndpoint.useQuery;
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -35,6 +39,8 @@ export default function HomePage() {
         <Button title="Show Warning" onPress={() => Toast.show(warning.waitWarning)} />
 
         <Button title="Show Custom Toast" onPress={() => Toast.show(custom.customExample)} />
+
+        <Button title="Hit 'get' endpoint" onPress={() => useGetTestEndpointQuery} />
       </View>
     </SafeAreaView>
   );

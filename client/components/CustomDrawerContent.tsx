@@ -62,21 +62,14 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             onPress={() => navigation.navigate('index')}
             icon={({ focused, color, size }) => <Entypo name="home" size={24} color={color} />}
             focused={currentRoute === 'index'}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-              // Other drawer item styles
-            }}
+            style={styles.drawerItem}
           />
           <DrawerItem
             label={({ focused, color }) => <Text style={{ color }}>Compare</Text>}
             onPress={() => navigation.navigate('compare')}
             icon={({ color }) => <FontAwesome5 name="people-arrows" size={20} color={color} />}
             focused={currentRoute === 'compare'}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-            }}
+            style={styles.drawerItem}
           />
           <DrawerItem
             label={({ focused, color }) => <Text style={{ color }}>Records</Text>}
@@ -85,26 +78,27 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
               <MaterialCommunityIcons name="bookshelf" size={24} color={color} />
             )}
             focused={currentRoute === 'records'}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-            }}
+            style={styles.drawerItem}
           />
           <DrawerItem
-            label={({ focused, color }) => <Text style={{ color }}>Proposals</Text>}
+            label={({ focused, color }) => (
+              <View style={styles.drawerItemView}>
+                <Text style={{ color }}>Proposals</Text>
+                <View style={styles.drawerTextWrapper}>
+                  <Text style={styles.drawerText}>77</Text>
+                </View>
+              </View>
+            )}
             onPress={() => navigation.navigate('proposals')}
             icon={({ color }) => <MaterialIcons name="assignment-add" size={24} color={color} />}
             focused={currentRoute === 'proposals'}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-            }}
+            style={styles.drawerItem}
           />
         </View>
         <View style={styles.spacer}></View>
         {/* CUSTOM MODULES */}
         {/* TODO: Define routes for custom modules & map through */}
-        <View style={{ flexDirection: 'column', flex: 1 }}>
+        <View style={{ flexDirection: 'column', flex: 1, justifyContent: 'flex-start' }}>
           <Text style={styles.customHeader}>Custom Modules</Text>
           {customModules.map((module) => {
             const path = `(custom)/${module.name}`;
@@ -112,15 +106,18 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             return (
               <DrawerItem
                 key={module.name}
-                label={({ focused, color }) => <Text style={{ color }}>{module.label}</Text>}
+                label={({ focused, color }) => (
+                  <View style={styles.drawerItemView}>
+                    <Text style={{ color }}>{module.label}</Text>
+                    <View style={styles.drawerTextWrapper}>
+                      <Text style={styles.drawerText}>77</Text>
+                    </View>
+                  </View>
+                )}
                 onPress={() => navigation.navigate(path)}
                 icon={({ focused, color, size }) => module.icon}
-                focused={false}
-                style={{
-                  marginHorizontal: 0,
-                  borderRadius: 0,
-                  // Other drawer item styles
-                }}
+                focused={currentRoute === `${path}`}
+                style={styles.drawerItem}
               />
             );
           })}
@@ -135,11 +132,7 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
               <MaterialIcons name="settings" size={24} color={color} />
             )}
             focused={currentRoute === 'settings'}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-              // Other drawer item styles
-            }}
+            style={styles.drawerItem}
           />
           <DrawerItem
             label={({ focused, color }) => (
@@ -150,11 +143,7 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
               <MaterialIcons name="admin-panel-settings" size={24} color={theme.colors.admin} />
             )}
             focused={currentRoute === 'commissioner'}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-              // Other drawer item styles
-            }}
+            style={styles.drawerItem}
           />
           <DrawerItem
             labelStyle={{ color: theme.colors.admin }}
@@ -163,11 +152,7 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             icon={({ focused, color, size }) => (
               <MaterialIcons name="logout" size={24} color={theme.colors.admin} />
             )}
-            style={{
-              marginHorizontal: 0,
-              borderRadius: 0,
-              marginLeft: 2,
-            }}
+            style={styles.drawerItem}
           />
         </View>
       </DrawerContentScrollView>
@@ -186,7 +171,35 @@ const styles = StyleSheet.create({
     // mTODO: Eventually change this to secondary color
     backgroundColor: '#1a1c1f',
     paddingLeft: 10,
-    paddingVertical: 8,
-    color: '#38414f',
+    paddingVertical: 12,
+    color: '#5b6980',
+  },
+  drawerItemView: {
+    // display: 'flex',
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 0,
+    padding: 0,
+    flex: 0,
+  },
+  drawerText: {
+    backgroundColor: 'red',
+    color: 'black',
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    fontSize: 10,
+  },
+  drawerTextWrapper: {
+    borderRadius: 100,
+    overflow: 'hidden',
+    marginLeft: 'auto',
+  },
+  drawerItem: {
+    marginHorizontal: 0,
+    marginVertical: 0,
+    borderRadius: 0,
+    paddingVertical: 4,
+    paddingLeft: 4,
   },
 });

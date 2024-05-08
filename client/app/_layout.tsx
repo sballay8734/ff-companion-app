@@ -92,8 +92,6 @@ export default function RootLayout() {
 }
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
-// TODO: Finish laying out drawer
-
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 
 // TODO: Login/Logout Toasts should ideally happen after navigate
@@ -101,6 +99,8 @@ export default function RootLayout() {
 // !TODO: Loading states not working on Log in / Log out
 
 // mTODO: Add light theme colors
+
+// mTODO: There seems to be a bit of a gap between drawer items (not sure why)
 
 // mTODO: Add special styling to custom modules
 

@@ -11,19 +11,28 @@ import { appApi } from '~/store/api/appApi';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { error, success, info, custom, warning } from '~/config/toastContentConfig';
+import { useAppDispatch } from '~/hooks/reduxConfig';
 import {
-  error,
-  success,
-  info,
-  custom,
-  warning,
-} from '~/store/features/ModalToast/toastContentConfig';
+  hideLoadingSpinner,
+  showLoadingSpinner,
+} from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 
 export default function HomePage() {
   const theme = useCustomTheme();
+  const dispatch = useAppDispatch();
+
+  // REMOVE: Temporary - Just to make styling easier
+  function temporarySpin() {
+    dispatch(showLoadingSpinner());
+
+    setTimeout(() => {
+      dispatch(hideLoadingSpinner());
+    }, 2000);
+  }
 
   // !TODO: Could not finish before going back to work. NOT DONE
-  const [getTestEndpoint] = useLazyGetTestEndpointQuery();
+  const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
   const [postTest, { isLoading, isError }] = usePostTestMutation();
 
   return (
@@ -48,6 +57,8 @@ export default function HomePage() {
         <Button title="Hit 'get' endpoint" onPress={() => getTestEndpoint()} />
 
         <Button title="Hit 'post' endpoint" onPress={() => postTest('GOING!')} />
+
+        <Button title="Show Spinner" onPress={() => temporarySpin()} />
       </View>
     </SafeAreaView>
   );

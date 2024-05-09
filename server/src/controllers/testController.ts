@@ -5,7 +5,6 @@ export const getTest = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("HIT")
   res.status(200).json("'Get' endpoint hit!")
 }
 

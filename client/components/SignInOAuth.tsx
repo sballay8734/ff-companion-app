@@ -7,7 +7,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { error, success } from '~/store/features/ModalToast/toastContentConfig';
+import { error, success } from '~/config/toastContentConfig';
 import { useAppDispatch } from '~/hooks/reduxConfig';
 import Toast from 'react-native-toast-message';
 

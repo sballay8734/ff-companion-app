@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import modalLogoutReducer from './features/ModalLogout/modalLogoutSlice';
+import loadingSpinnerReducer from './features/LoadingSpinner/loadingSpinnerSlice';
 import { appApi } from './api/appApi';
 
 export const store = configureStore({
   reducer: {
     modalLogout: modalLogoutReducer,
+    loadingSpinner: loadingSpinnerReducer,
     [appApi.reducerPath]: appApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(appApi.middleware),

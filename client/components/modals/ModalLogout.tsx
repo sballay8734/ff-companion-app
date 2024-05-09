@@ -4,7 +4,7 @@ import { RootState } from '~/store/store';
 import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { useAuth } from '@clerk/clerk-expo';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { error, success } from '~/store/features/ModalToast/toastContentConfig';
+import { error, success } from '~/config/toastContentConfig';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import Toast from 'react-native-toast-message';
 

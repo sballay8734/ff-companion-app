@@ -1,5 +1,5 @@
 import { ClerkProvider } from '@clerk/clerk-expo';
-import { store } from '~/store/store';
+import { RootState, store } from '~/store/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -8,13 +8,14 @@ import { Stack } from 'expo-router/stack';
 import * as SecureStore from 'expo-secure-store';
 import { StatusBar } from 'expo-status-bar';
 import { useCallback } from 'react';
-import { useColorScheme } from 'react-native';
+import { ActivityIndicator, useColorScheme } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
 import ModalLogout from '~/components/modals/ModalLogout';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from '~/config/toastStyleConfig';
+import LoadingSpinner from '~/components/modals/LoadingSpinner';
 
 const tokenCache = {
   async getToken(key: string) {
@@ -78,6 +79,7 @@ export default function RootLayout() {
                 />
               </Stack>
               <ModalLogout />
+              <LoadingSpinner />
               {/* WARNING: Toast must be the last child in SafeAreaView s */}
               <Toast config={toastConfig} />
             </SafeAreaView>
@@ -93,17 +95,13 @@ export default function RootLayout() {
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 
-// TODO: Login/Logout Toasts should ideally happen after navigate
+// TODO: Login/Logout Toasts should ideally happen after navigate (possible a Clerk limitation)
 
 // !TODO: Loading states not working on Log in / Log out
 
 // mTODO: Add light theme colors
 
-// mTODO: There seems to be a bit of a gap between drawer items (not sure why)
-
-// mTODO: Add special styling to custom modules
-
-// mTODO: Change Toast styling to fit dark mode
+// mTODO: Add special styling to custom module tabs in drawer
 
 // mTODO: Blur app content when drawer is open
 

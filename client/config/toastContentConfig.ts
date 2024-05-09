@@ -6,6 +6,8 @@ import { ToastShowParams } from 'react-native-toast-message';
 export const success: {
   login: ToastShowParams;
   logout: ToastShowParams;
+  hitGetEndpoint: ToastShowParams;
+  hitPostEndpoint: ToastShowParams;
 } = {
   login: {
     type: 'success',
@@ -23,11 +25,29 @@ export const success: {
     swipeable: true,
     position: 'bottom',
   },
+  hitGetEndpoint: {
+    type: 'success',
+    text1: 'Get Endpoint Hit',
+    text2: 'You got the data!',
+    visibilityTime: 2000,
+    swipeable: true,
+    position: 'bottom',
+  },
+  hitPostEndpoint: {
+    type: 'success',
+    text1: 'Post Endpoint Hit',
+    text2: 'You posted!',
+    visibilityTime: 2000,
+    swipeable: true,
+    position: 'bottom',
+  },
 };
 
 export const error: {
   login: ToastShowParams;
   logout: ToastShowParams;
+  hitGetEndpoint: ToastShowParams;
+  hitPostEndpoint: ToastShowParams;
 } = {
   login: {
     type: 'error',
@@ -43,6 +63,24 @@ export const error: {
     text1: 'Logout Error',
     text2: 'Could not log you out',
     visibilityTime: 3000,
+    swipeable: true,
+    position: 'bottom',
+    autoHide: false,
+  },
+  hitGetEndpoint: {
+    type: 'error',
+    text1: 'Api Error',
+    text2: "You're not connected to the server",
+    visibilityTime: 2000,
+    swipeable: true,
+    position: 'bottom',
+    autoHide: false,
+  },
+  hitPostEndpoint: {
+    type: 'error',
+    text1: 'Api Error',
+    text2: "You're not connected to the server",
+    visibilityTime: 2000,
     swipeable: true,
     position: 'bottom',
     autoHide: false,

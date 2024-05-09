@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import Toast from 'react-native-toast-message';
+import { error, success } from '~/config/toastContentConfig';
 
 export const appApi = createApi({
   reducerPath: 'appApi',
@@ -9,10 +11,10 @@ export const appApi = createApi({
       query: () => 'test/get',
       async onQueryStarted(_, { queryFulfilled }) {
         try {
-          const res = await queryFulfilled;
-          console.log(res.data);
+          await queryFulfilled;
+          Toast.show(success.hitGetEndpoint);
         } catch (err) {
-          console.error(err);
+          Toast.show(error.hitGetEndpoint);
         }
       },
     }),
@@ -24,10 +26,10 @@ export const appApi = createApi({
       }),
       async onQueryStarted(_, { queryFulfilled }) {
         try {
-          const res = await queryFulfilled;
-          console.log(res.data);
+          await queryFulfilled;
+          Toast.show(success.hitPostEndpoint);
         } catch (err) {
-          console.error(err);
+          Toast.show(error.hitPostEndpoint);
         }
       },
     }),
@@ -37,3 +39,5 @@ export const appApi = createApi({
 export const { useGetTestEndpointQuery, useLazyGetTestEndpointQuery, usePostTestMutation } = appApi;
 
 // REMEMBER: First arg is res shape, second is req shape
+
+// WARNING: See these docs for using dispatch (cmd + f "dispatch") - There are some things you have to be aware of

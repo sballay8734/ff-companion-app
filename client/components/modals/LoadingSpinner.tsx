@@ -12,7 +12,7 @@ import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useEffect } from 'react';
 
-// BUG: Making ANY change to this file and saving seems to break the animation (not sure if this is an expo bug or if it's your code)
+// BUG: Making ANY change to this file and saving seems to break the animation (not sure if this is an expo bug or if it's your code) - Otherwise, the animation toggles without issues
 
 export default function LoadingSpinner() {
   const isVisible = useAppSelector((state: RootState) => state.loadingSpinner.isVisible);

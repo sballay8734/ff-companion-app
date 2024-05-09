@@ -23,12 +23,17 @@ export const createServer = (): Express => {
   // Middleware
   app
     .disable("x-powered-by")
-    .use(cors({ credentials: true }))
     .use(urlencoded({ extended: true }))
     .use(json())
     .use(cookieParser())
+    .use(
+      cors({
+        credentials: true,
+        origin: ["http://localhost:8081"]
+      })
+    )
 
-    .use("/api/test", testRouter)
+  app.use("/api/test", testRouter)
 
   // Error handling
   app.use((err: ErrRes, req: Request, res: Response, next: NextFunction) => {

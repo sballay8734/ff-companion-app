@@ -5,7 +5,8 @@ export const getTest = async (
   res: Response,
   next: NextFunction
 ) => {
-  res.status(200).json("Get endpoint hit!")
+  console.log("HIT")
+  res.status(200).json("'Get' endpoint hit!")
 }
 
 export const postTest = async (

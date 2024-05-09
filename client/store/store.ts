@@ -1,12 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import modalLogoutReducer from './features/ModalLogout/modalLogoutSlice';
+import { appApi } from './api/appApi';
 
 export const store = configureStore({
   reducer: {
     modalLogout: modalLogoutReducer,
-    // modalToast: modalToastReducer,
+    [appApi.reducerPath]: appApi.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(appApi.middleware),
+
+  // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
+  // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
+  // setupListeners(store.dispatch)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

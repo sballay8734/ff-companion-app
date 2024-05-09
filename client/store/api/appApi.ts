@@ -3,10 +3,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const appApi = createApi({
   reducerPath: 'appApi',
   // !TODO: Configure dev and production baseUrls AND proxy
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5001/api' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5001/api/' }),
   endpoints: (builder) => ({
-    getTestEndpoint: builder.query<void, string>({
-      query: () => '/test',
+    getTestEndpoint: builder.query<void, void>({
+      query: () => 'test/get',
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
@@ -16,8 +16,12 @@ export const appApi = createApi({
         }
       },
     }),
-    postTest: builder.mutation<string, void>({
-      query: (body) => ({ url: '/test', method: 'POST', body }),
+    postTest: builder.mutation<{ data: string }, string>({
+      query: (body) => ({
+        url: '/test/post',
+        method: 'POST',
+        body: { test: body },
+      }),
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
@@ -30,4 +34,6 @@ export const appApi = createApi({
   }),
 });
 
-export const { useGetTestEndpointQuery, usePostTestMutation } = appApi;
+export const { useGetTestEndpointQuery, useLazyGetTestEndpointQuery, usePostTestMutation } = appApi;
+
+// REMEMBER: First arg is res shape, second is req shape

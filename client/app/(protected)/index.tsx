@@ -2,7 +2,11 @@ import { Stack } from 'expo-router';
 import { View, StyleSheet, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-import { useGetTestEndpointQuery } from '~/store/api/appApi';
+import {
+  useGetTestEndpointQuery,
+  useLazyGetTestEndpointQuery,
+  usePostTestMutation,
+} from '~/store/api/appApi';
 import { appApi } from '~/store/api/appApi';
 
 import { Text } from '~/constants/themes';
@@ -19,7 +23,8 @@ export default function HomePage() {
   const theme = useCustomTheme();
 
   // !TODO: Could not finish before going back to work. NOT DONE
-  const useGetTestEndpointQuery = appApi.endpoints.getTestEndpoint.useQuery;
+  const [getTestEndpoint] = useLazyGetTestEndpointQuery();
+  const [postTest, { isLoading, isError }] = usePostTestMutation();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -40,7 +45,9 @@ export default function HomePage() {
 
         <Button title="Show Custom Toast" onPress={() => Toast.show(custom.customExample)} />
 
-        <Button title="Hit 'get' endpoint" onPress={() => useGetTestEndpointQuery} />
+        <Button title="Hit 'get' endpoint" onPress={() => getTestEndpoint()} />
+
+        <Button title="Hit 'post' endpoint" onPress={() => postTest('GOING!')} />
       </View>
     </SafeAreaView>
   );

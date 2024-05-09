@@ -3,7 +3,7 @@ import { getTest, postTest } from "../controllers/testController"
 
 const router = express.Router()
 
-router.get("/test", getTest)
-router.post("/test", postTest)
+router.get("/get", getTest)
+router.post("/post", postTest)
 
 export default router

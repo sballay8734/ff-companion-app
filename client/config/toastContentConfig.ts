@@ -125,5 +125,7 @@ export const custom: {
     visibilityTime: 3000,
     swipeable: true,
     position: 'bottom',
+
+    autoHide: false,
   },
 };

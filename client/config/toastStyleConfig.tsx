@@ -1,6 +1,6 @@
-import { View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import {
+import Toast, {
   BaseToast,
   ErrorToast,
   InfoToast,
@@ -15,6 +15,8 @@ export const toastConfig = {
     Overwrite 'success' type,
     by modifying the existing `BaseToast` component
   */
+  //  REVIEW: You intentionally did not add trailing close button to success messages since they go away automatically. Go decision or no?
+
   success: (props: ToastProps) => (
     <BaseToast
       {...props}
@@ -67,6 +69,13 @@ export const toastConfig = {
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
+      renderTrailingIcon={() => (
+        <View style={styles.trailingIconContainer}>
+          <TouchableOpacity onPress={() => Toast.hide()}>
+            <AntDesign name="close" size={20} color="#3b3e57" style={styles.trailingIcon} />
+          </TouchableOpacity>
+        </View>
+      )}
       contentContainerStyle={{
         paddingHorizontal: padding,
       }}
@@ -98,6 +107,13 @@ export const toastConfig = {
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
+      renderTrailingIcon={() => (
+        <View style={styles.trailingIconContainer}>
+          <TouchableOpacity onPress={() => Toast.hide()}>
+            <AntDesign name="close" size={20} color="#3b3e57" style={styles.trailingIcon} />
+          </TouchableOpacity>
+        </View>
+      )}
       contentContainerStyle={{
         paddingHorizontal: padding,
       }}
@@ -126,6 +142,13 @@ export const toastConfig = {
           color="#fff945"
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
+      )}
+      renderTrailingIcon={() => (
+        <View style={styles.trailingIconContainer}>
+          <TouchableOpacity onPress={() => Toast.hide()}>
+            <AntDesign name="close" size={20} color="#3b3e57" style={styles.trailingIcon} />
+          </TouchableOpacity>
+        </View>
       )}
       contentContainerStyle={{
         paddingHorizontal: padding,
@@ -156,6 +179,13 @@ export const toastConfig = {
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
+      renderTrailingIcon={() => (
+        <View style={styles.trailingIconContainer}>
+          <TouchableOpacity onPress={() => Toast.hide()}>
+            <AntDesign name="close" size={20} color="#3b3e57" style={styles.trailingIcon} />
+          </TouchableOpacity>
+        </View>
+      )}
       contentContainerStyle={{
         paddingHorizontal: padding,
       }}
@@ -167,3 +197,18 @@ export const toastConfig = {
     />
   ),
 };
+
+const styles = StyleSheet.create({
+  trailingIconContainer: {
+    // backgroundColor: 'red',
+    height: '80%',
+    alignSelf: 'center',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    borderLeftWidth: 1,
+    borderLeftColor: '#2b2c40',
+  },
+  trailingIcon: {},
+});

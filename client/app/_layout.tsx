@@ -99,6 +99,8 @@ export default function RootLayout() {
 
 // !TODO: Loading states not working on Log in / Log out
 
+// mTODO: Change loading spinner icon (doesn't match)
+
 // mTODO: Add light theme colors
 
 // mTODO: Add special styling to custom module tabs in drawer

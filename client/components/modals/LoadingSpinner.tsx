@@ -11,6 +11,7 @@ import { RootState } from '~/store/store';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useEffect } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 
 // BUG: Making ANY change to this file and saving seems to break the animation (not sure if this is an expo bug or if it's your code) - Otherwise, the animation toggles without issues
 
@@ -38,7 +39,7 @@ export default function LoadingSpinner() {
       <View style={styles.modalBg}>
         {/* <ActivityIndicator size="small" color={theme.colors.primary} /> */}
         <Animated.View style={[styles.modalContent, animatedStyle]}>
-          <Image style={{ height: 40, width: 40 }} source={require('../../assets/loading.png')} />
+          <AntDesign name="loading2" size={30} color="#b0b0b0" />
         </Animated.View>
       </View>
     </Modal>

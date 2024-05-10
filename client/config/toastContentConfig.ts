@@ -106,8 +106,8 @@ export const warning: {
 } = {
   waitWarning: {
     type: 'warning',
-    text1: 'If you continue you will lose everything!',
-    text2: 'Are you sure?',
+    text1: "You're internet appears to be very slow!",
+    text2: 'You may experience issues',
     visibilityTime: 4000,
     swipeable: true,
     position: 'bottom',

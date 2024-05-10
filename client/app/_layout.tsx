@@ -99,6 +99,8 @@ export default function RootLayout() {
 
 // !TODO: Loading states not working on Log in / Log out
 
+// mTODO: Dynasty league support? Do you need it and how would you implement it?
+
 // mTODO: Change loading spinner icon (doesn't match)
 
 // mTODO: Add light theme colors
@@ -108,6 +110,8 @@ export default function RootLayout() {
 // mTODO: Blur app content when drawer is open
 
 // mTODO: Add "View available modules" button to drawer
+
+// mTODO: ESPN & others, only keep data for so long. You will need to add ability to manually enter matchups
 
 /* mTODO:  - MODALS
 [

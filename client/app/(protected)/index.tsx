@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Toast from 'react-native-toast-message';
+import Toast, { ToastShowParams } from 'react-native-toast-message';
 import {
   useGetTestEndpointQuery,
   useLazyGetLeagueDataQuery,
@@ -26,6 +26,8 @@ export default function HomePage() {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
   const [fetchLeague, { isLoading, isError, isSuccess }] = useLazyGetLeagueDataQuery();
+  const [postTest] = usePostTestMutation();
+  const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {
@@ -36,13 +38,12 @@ export default function HomePage() {
     }, 2000);
   }
 
-  // !TODO: Could not finish before going back to work. NOT DONE
-  const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
-
-  const [postTest] = usePostTestMutation();
-
   async function getLeagueData(provider: LeagueProvider) {
     await fetchLeague(provider);
+  }
+
+  function showTestToast(obj: ToastShowParams) {
+    Toast.show(obj);
   }
 
   useLoadingSpinner(isLoading);
@@ -51,20 +52,36 @@ export default function HomePage() {
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen options={{ title: 'Home' }} />
       <View style={styles.container}>
-        <Text>Home</Text>
+        <Text style={{ fontSize: 30 }}>Home</Text>
 
-        <Button title="Show Login Success" onPress={() => Toast.show(success.login)} />
-
-        <Button title="Show Login Fail" onPress={() => Toast.show(error.login)} />
-
-        <Button
-          title="Show updateAvailable Info"
-          onPress={() => Toast.show(info.updateAvailable)}
-        />
-
-        <Button title="Show Warning" onPress={() => Toast.show(warning.waitWarning)} />
-
-        <Button title="Show Custom Toast" onPress={() => Toast.show(custom.customExample)} />
+        <View style={styles.btnWrapper}>
+          {/* TODO: Make custom pressable to opacity fades smoothly */}
+          <Pressable
+            style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.5 : 1 }]}
+            onPress={() => showTestToast(success.login)}>
+            <Text>Login Success</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.5 : 1 }]}
+            onPress={() => showTestToast(error.login)}>
+            <Text>Login Fail</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.5 : 1 }]}
+            onPress={() => showTestToast(info.updateAvailable)}>
+            <Text>Update Available</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.5 : 1 }]}
+            onPress={() => showTestToast(warning.waitWarning)}>
+            <Text>Warning</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.5 : 1 }]}
+            onPress={() => showTestToast(custom.customExample)}>
+            <Text>Custom</Text>
+          </Pressable>
+        </View>
 
         <Button title="Hit 'get' endpoint" onPress={() => getTestEndpoint()} />
 
@@ -86,5 +103,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     height: '100%',
+  },
+  btnWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2c3051',
+    marginHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 4,
+    marginVertical: 10,
+    gap: 10,
+  },
+  btn: {
+    borderColor: '#a6a7a9',
+    borderWidth: 1,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    borderRadius: 2,
   },
 });

@@ -29,7 +29,7 @@ export const appApi = createApi({
           throw new Error('API URL not found');
         }
       },
-      async onQueryStarted(_, { queryFulfilled, dispatch }) {
+      async onQueryStarted(_, { queryFulfilled }) {
         try {
           const res = await queryFulfilled;
           Toast.show(success.hitGetEndpoint);

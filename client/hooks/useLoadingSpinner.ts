@@ -5,6 +5,7 @@ import {
   showLoadingSpinner,
 } from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 
+// mTODO: May need to add isFetching as well
 export const useLoadingSpinner = (isLoading: boolean) => {
   const dispatch = useAppDispatch();
 

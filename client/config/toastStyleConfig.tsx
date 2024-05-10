@@ -15,7 +15,7 @@ export const toastConfig = {
     Overwrite 'success' type,
     by modifying the existing `BaseToast` component
   */
-  //  REVIEW: You intentionally did not add trailing close button to success messages since they go away automatically. Go decision or no?
+  // TODO: Screen shouldn't be clickable while toast is shown (Maybe)
 
   success: (props: ToastProps) => (
     <BaseToast

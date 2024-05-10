@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import {
   useGetTestEndpointQuery,
+  useLazyGetLeagueDataQuery,
   useLazyGetTestEndpointQuery,
   usePostTestMutation,
 } from '~/store/api/appApi';
@@ -17,10 +18,14 @@ import {
   hideLoadingSpinner,
   showLoadingSpinner,
 } from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
+import { LeagueProvider } from '~/store/api/apiConfig';
+import { useEffect } from 'react';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function HomePage() {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
+  const [fetchLeague, { isLoading, isError, isSuccess }] = useLazyGetLeagueDataQuery();
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {
@@ -33,7 +38,14 @@ export default function HomePage() {
 
   // !TODO: Could not finish before going back to work. NOT DONE
   const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
-  const [postTest, { isLoading, isError }] = usePostTestMutation();
+
+  const [postTest] = usePostTestMutation();
+
+  async function getLeagueData(provider: LeagueProvider) {
+    await fetchLeague(provider);
+  }
+
+  useLoadingSpinner(isLoading);
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -59,6 +71,8 @@ export default function HomePage() {
         <Button title="Hit 'post' endpoint" onPress={() => postTest('GOING!')} />
 
         <Button title="Show Spinner" onPress={() => temporarySpin()} />
+
+        <Button title="Fetch League Data" onPress={() => getLeagueData('ESPN')} />
       </View>
     </SafeAreaView>
   );

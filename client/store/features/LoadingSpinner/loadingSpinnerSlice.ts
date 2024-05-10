@@ -13,9 +13,11 @@ export const loadingSpinnerSlice = createSlice({
   initialState,
   reducers: {
     showLoadingSpinner: (state) => {
+      console.log('SHOWING!');
       state.isVisible = true;
     },
     hideLoadingSpinner: (state) => {
+      console.log('HIDING!');
       state.isVisible = false;
     },
   },

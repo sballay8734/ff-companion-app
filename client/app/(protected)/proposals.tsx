@@ -14,7 +14,6 @@ export default function ProposalsPage() {
       <Stack.Screen options={{ title: 'Proposals' }} />
       <View style={styles.container}>
         <Text>Proposals</Text>
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>
   );

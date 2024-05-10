@@ -97,11 +97,11 @@ export default function RootLayout() {
 
 // TODO: Login/Logout Toasts should ideally happen after navigate (possible a Clerk limitation)
 
-// !TODO: Loading states not working on Log in / Log out
+// !TODO: Replace all Touchable Opacity with Pressables (Docs recommend this)
+
+// !TODO: Clerk Loading states not working on Log in / Log out
 
 // mTODO: Dynasty league support? Do you need it and how would you implement it?
-
-// mTODO: Change loading spinner icon (doesn't match)
 
 // mTODO: Add light theme colors
 
@@ -111,7 +111,7 @@ export default function RootLayout() {
 
 // mTODO: Add "View available modules" button to drawer
 
-// mTODO: ESPN & others, only keep data for so long. You will need to add ability to manually enter matchups
+// mTODO: ESPN & others, only keep data for so long. You will need to add ability to manually enter matchups and make sure to check for matchups already entered (teams, year, and week should be selected via dropdown NOT input manually. Only the scores should be input manually and even those should have extensive validation)
 
 /* mTODO:  - MODALS
 [

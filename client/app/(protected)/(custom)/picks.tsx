@@ -13,7 +13,6 @@ export default function PicksPage() {
       <Stack.Screen options={{ title: 'Picks' }} />
       <View style={styles.container}>
         <Text>Picks</Text>
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>
   );

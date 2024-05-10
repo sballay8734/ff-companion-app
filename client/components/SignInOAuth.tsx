@@ -10,6 +10,10 @@ import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { error, success } from '~/config/toastContentConfig';
 import { useAppDispatch } from '~/hooks/reduxConfig';
 import Toast from 'react-native-toast-message';
+import {
+  hideLoadingSpinner,
+  showLoadingSpinner,
+} from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -22,18 +26,23 @@ const SignInWithOAuth = () => {
 
   const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' });
 
+  // REMOVE: Dispatches should not be necessary here. Just testing
   const onPress = React.useCallback(async () => {
     try {
+      dispatch(showLoadingSpinner());
       const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow();
       // if a new session was created
       if (createdSessionId) {
         setActive?.({ session: createdSessionId });
         Toast.show(success.login);
+        dispatch(hideLoadingSpinner());
         // else a session already existed
       } else {
+        dispatch(hideLoadingSpinner());
         // Use signIn or signUp for next steps such as MFA
       }
     } catch (err) {
+      dispatch(hideLoadingSpinner());
       console.error('OAuth error', err);
       Toast.show(error.login);
     }

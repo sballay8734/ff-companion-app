@@ -13,7 +13,6 @@ export default function ChallengesPage() {
       <Stack.Screen options={{ title: 'Challenges' }} />
       <View style={styles.container}>
         <Text>Challenges</Text>
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>
   );

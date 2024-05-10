@@ -13,7 +13,6 @@ export default function KingOfTheHillPage() {
       <Stack.Screen options={{ title: 'King of the Hill' }} />
       <View style={styles.container}>
         <Text>King of the Hill</Text>
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>
   );

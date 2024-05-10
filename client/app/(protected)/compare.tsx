@@ -13,7 +13,6 @@ export default function ComparePage() {
       <Stack.Screen options={{ title: 'Compare' }} />
       <View style={styles.container}>
         <Text>Compare</Text>
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
       </View>
     </SafeAreaView>
   );

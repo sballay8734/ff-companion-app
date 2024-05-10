@@ -3,6 +3,8 @@ import { Stack, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 
+import { Text } from '~/constants/themes';
+
 // TODO: Need to clean this up. You shouldn't need a useEffect here And in (protected)/_layout.tsx
 const AuthLayout = () => {
   const { isSignedIn, isLoaded } = useAuth();
@@ -22,7 +24,7 @@ const AuthLayout = () => {
   if (!isLoaded) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />
+        <Text style={{ color: 'white' }}>LOADING...</Text>
       </View>
     );
   }

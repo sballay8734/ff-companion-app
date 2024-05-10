@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2c3051',
     marginHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 4,
@@ -123,5 +122,6 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 8,
     borderRadius: 2,
+    backgroundColor: '#2c3051',
   },
 });

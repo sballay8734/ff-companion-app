@@ -24,7 +24,11 @@ const AuthLayout = () => {
   if (!isLoaded) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ color: 'white' }}>LOADING...</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM AUTH</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM AUTH</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM AUTH</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM AUTH</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM AUTH</Text>
       </View>
     );
   }

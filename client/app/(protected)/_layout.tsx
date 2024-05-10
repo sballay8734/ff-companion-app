@@ -10,6 +10,8 @@ import CustomDrawerContent from '~/components/CustomDrawerContent';
 import { useAppDispatch } from '~/hooks/reduxConfig';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
+import { View } from 'react-native';
+
 // TODO: Role based access control  - Commissioner should only show if user is commissioner (Auth on Backend also)
 
 const DrawerLayout = () => {
@@ -22,12 +24,24 @@ const DrawerLayout = () => {
   useEffect(() => {
     const inAuthGroup = segments[0] === '(protected)';
 
-    if (isLoaded && !isSignedIn && inAuthGroup) {
+    if (!isSignedIn && inAuthGroup) {
       router.replace('/(auth)/');
-    } else if (isLoaded && isSignedIn) {
+    } else if (isSignedIn) {
       router.replace('/(protected)/');
     }
-  }, [isSignedIn, isLoaded]);
+  }, [isSignedIn]);
+
+  if (!isLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ color: 'white' }}>LOADING FROM PROTECTED</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM PROTECTED</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM PROTECTED</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM PROTECTED</Text>
+        <Text style={{ color: 'white' }}>LOADING FROM PROTECTED</Text>
+      </View>
+    );
+  }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

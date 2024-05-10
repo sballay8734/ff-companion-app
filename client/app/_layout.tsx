@@ -93,6 +93,10 @@ export default function RootLayout() {
 }
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// !TODO: FIX ROUTING (Should not have to check in two places to handle nav. You need to reorganize project structure slightly)
+
+// TODO: Bot signup protection
+
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 
 // TODO: Login/Logout Toasts should ideally happen after navigate (possible a Clerk limitation)

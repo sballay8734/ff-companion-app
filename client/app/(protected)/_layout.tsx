@@ -1,5 +1,4 @@
 import { useAuth } from '@clerk/clerk-expo';
-import { MaterialCommunityIcons, Entypo, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { DrawerToggleButton } from '@react-navigation/drawer';
 import { useRouter, useSegments } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';

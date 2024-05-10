@@ -3,12 +3,10 @@ import { View, StyleSheet, Button, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast, { ToastShowParams } from 'react-native-toast-message';
 import {
-  useGetTestEndpointQuery,
   useLazyGetLeagueDataQuery,
   useLazyGetTestEndpointQuery,
   usePostTestMutation,
 } from '~/store/api/appApi';
-import { appApi } from '~/store/api/appApi';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';

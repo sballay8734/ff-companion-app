@@ -6,16 +6,18 @@ import SignOutButton from '~/components/SignOutButton';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-export default function RecordsPage() {
+export default function Settings() {
   const theme = useCustomTheme();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Records' }} />
+      <Stack.Screen
+        options={{
+          title: 'Settings',
+        }}
+      />
       <View style={styles.container}>
-        <Text>Records</Text>
-        <SignOutButton />
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
+        <Text>Settings</Text>
       </View>
     </SafeAreaView>
   );

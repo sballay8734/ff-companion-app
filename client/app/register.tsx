@@ -1,20 +1,20 @@
 import { Link } from 'expo-router';
-import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
+import * as React from 'react';
+import { SafeAreaView, View, StyleSheet, Image } from 'react-native';
 
-import SignInWithApple from '~/components/SignInWithApple';
-import SignInWithEmailPassword from '~/components/SignInWithEmailPassword';
-import SignInWithOAuth from '~/components/SignInWithOAuth';
+import SignInWithApple from '~/components/SignInApple';
+import SignInWithOAuth from '~/components/SignInOAuth';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-export default function Login() {
+export default function Register() {
   const theme = useCustomTheme();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.heroSection}>
-          <Image style={styles.heroImage} source={require('../../assets/football.png')} />
+          <Image style={styles.heroImage} source={require('../assets/football.png')} />
         </View>
         <View style={styles.onBoarding}>
           <Text
@@ -23,7 +23,7 @@ export default function Login() {
               fontFamily: 'RobotoBlack',
               color: theme.colors.primaryText,
             }}>
-            Welcome Back
+            Hi there!
           </Text>
           <Text
             style={{
@@ -31,7 +31,7 @@ export default function Login() {
               fontFamily: 'RobotoMono',
               color: theme.colors.secondaryText,
             }}>
-            Log in to your account
+            Let's set up your account
           </Text>
           <View
             style={{
@@ -40,14 +40,30 @@ export default function Login() {
               width: '100%',
               flexGrow: 1,
             }}>
-            <SignInWithEmailPassword />
             <View style={{ width: '100%' }}>
+              {/* REMOVE: These are just temporary notes */}
+              <View
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderWidth: 1,
+                  borderColor: 'red',
+                  marginBottom: 10,
+                  paddingVertical: 10,
+                }}>
+                <Text style={{ textAlign: 'center', marginBottom: 10 }}>
+                  EMAIL MUST MATCH EMAIL USED ON FANTASY PLATFORM
+                </Text>
+                <Text>ACCOUNT ID ALSO NEEDS TO BE ENTERED</Text>
+              </View>
+              {/* REMOVE: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
               <SignInWithOAuth />
               <SignInWithApple />
               <View style={styles.noAccount}>
-                <Text style={{ color: theme.colors.disabledText }}>Don't have an account?</Text>
-                <Link style={{ ...styles.link, color: theme.colors.primary }} href="/register">
-                  Sign up
+                <Text style={{ color: theme.colors.disabledText }}>Already have an account?</Text>
+                <Link style={{ ...styles.link, color: theme.colors.primary }} href="/">
+                  Log in
                 </Link>
               </View>
             </View>
@@ -113,3 +129,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+// mTODO: You will have to provide option to link multiple emails to a single account as people (like Dom) may have left the league then joined again with a new email

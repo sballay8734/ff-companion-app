@@ -1,34 +1,17 @@
-import { ClerkProvider } from '@clerk/clerk-expo';
+import { store } from '~/store/store';
+import { Slot } from 'expo-router';
+import { SessionProvider } from '~/components/AuthContext';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { SplashScreen } from 'expo-router';
-import { Stack } from 'expo-router/stack';
-import * as SecureStore from 'expo-secure-store';
-import { StatusBar } from 'expo-status-bar';
-import { useCallback } from 'react';
-import { useColorScheme } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback } from 'react';
+import { StyleSheet, useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
-const tokenCache = {
-  async getToken(key: string) {
-    try {
-      return SecureStore.getItemAsync(key);
-    } catch (err) {
-      console.error(err);
-    }
-  },
-  async saveToken(key: string, value: string) {
-    try {
-      return SecureStore.setItemAsync(key, value);
-    } catch (err) {
-      console.error(err);
-    }
-  },
-};
-
-export default function RootLayout() {
+export default function Root() {
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'light' ? AppLightTheme : AppDarkTheme;
 
@@ -48,51 +31,73 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider
-      tokenCache={tokenCache}
-      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
-      <ThemeProvider value={theme}>
-        <SafeAreaProvider style={{ flexGrow: 1 }}>
-          {/* NOTE: Pages may have different requirements. Set the insets on a per-page basis by using "edges" prop or useSafeAreaInsets() hook  */}
-          <SafeAreaView
-            style={{ flexGrow: 1 }}
-            edges={['right', 'left']}
-            onLayout={onLayoutRootView}>
-            <Stack>
-              <Stack.Screen
-                name="(auth)"
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
-                name="(protected)"
-                options={{
-                  headerShown: false,
-                }}
-              />
-            </Stack>
-          </SafeAreaView>
-        </SafeAreaProvider>
-        {/* TODO: Style needs to be rendered based on user preference */}
-        <StatusBar style={'light'} />
-      </ThemeProvider>
-    </ClerkProvider>
+    <SessionProvider>
+      <Provider store={store}>
+        <ThemeProvider value={theme}>
+          <SafeAreaProvider style={{ ...styles.root, backgroundColor: theme.colors.background }}>
+            <SafeAreaView style={{ flex: 1 }} edges={['right', 'left']} onLayout={onLayoutRootView}>
+              <Slot />
+            </SafeAreaView>
+          </SafeAreaProvider>
+          <StatusBar style={'light'} />
+        </ThemeProvider>
+      </Provider>
+    </SessionProvider>
   );
 }
 
-// GENERAL HELPFUL REMINDERS **************************************************
-
-// REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+});
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// !TODO: FIX ROUTING (Should not have to check in two places to handle nav. You need to reorganize project structure slightly)
+
+// TODO: Bot signup protection
 
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 
-// TODO: Replace compare & proposals drawer icons
+// TODO: Login/Logout Toasts should ideally happen after navigate (possible a Clerk limitation)
 
-// TODO: Add light theme colors
+// !TODO: Replace all Touchable Opacity with Pressables (Docs recommend this)
 
-// TODO: Add Sign Out button to drawer, below settings
+// !TODO: Clerk Loading states not working on Log in / Log out
 
-// !TODO: Loading states not working on Log in / Log out
+// mTODO: Dynasty league support? Do you need it and how would you implement it?
+
+// mTODO: Add light theme colors
+
+// mTODO: Add special styling to custom module tabs in drawer
+
+// mTODO: Blur app content when drawer is open
+
+// mTODO: Add "View available modules" button to drawer
+
+// mTODO: ESPN & others, only keep data for so long. You will need to add ability to manually enter matchups and make sure to check for matchups already entered (teams, year, and week should be selected via dropdown NOT input manually. Only the scores should be input manually and even those should have extensive validation)
+
+/* mTODO:  - MODALS
+[
+  // NOTE: Full page (back button in top left) *********************************
+  modalFull,   - for forms and convenience features like the scoreboard in RorC
+
+  // NOTE: Popovers (clicking overlay cancels & closes) ************************
+  modalFloat,  - 
+  modalAlert,  - ("Hold on!", "Are you sure?", etc...)
+
+  // NOTE: Slide in from bottom (1/3 of screen) ********************************
+  modalBtm,    - for setting selection, filters, and other optional actions
+  modalAction, - when you want/need the user to do something
+
+  // NOTE: Slide in from bottom (1/3 of screen) ********************************
+  modalNotify  - for communicating api response (when desired)
+] 
+*/
+
+// REMINDERS TO AVOID POSSIBLE HEADACHES LATER *********************************
+
+// REMEMBER: If you want a modal to be part of the navigation stack, you need to inlcude in app folder so it can be linked with <Link>
+
+// REMEMBER: Press shift + cmd + a to toggle dark/light mode on simulator

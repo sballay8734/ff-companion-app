@@ -1,5 +1,6 @@
+import { FontAwesome } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, Theme } from '@react-navigation/native';
-import { Text as DefaultText, TextProps } from 'react-native';
+import { Text as DefaultText, PressableProps, TextProps } from 'react-native';
 
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
@@ -78,4 +79,8 @@ export function Text(props: TextProps) {
   const fontFamily = 'RobotoBlack';
 
   return <DefaultText style={[{ color, fontFamily }, style]} {...otherProps} />;
+}
+
+interface FullPressableProps extends PressableProps {
+  text?: string;
 }

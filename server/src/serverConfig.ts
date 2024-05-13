@@ -1,5 +1,7 @@
 import { loadEnvironment } from "./config/environment"
 
+import testRouter from "./routes/testRoute"
+
 loadEnvironment()
 
 import { json, urlencoded } from "body-parser"
@@ -21,10 +23,17 @@ export const createServer = (): Express => {
   // Middleware
   app
     .disable("x-powered-by")
-    .use(cors({ credentials: true }))
     .use(urlencoded({ extended: true }))
     .use(json())
     .use(cookieParser())
+    .use(
+      cors({
+        credentials: true,
+        origin: ["http://localhost:8081"]
+      })
+    )
+
+  app.use("/api/test", testRouter)
 
   // Error handling
   app.use((err: ErrRes, req: Request, res: Response, next: NextFunction) => {

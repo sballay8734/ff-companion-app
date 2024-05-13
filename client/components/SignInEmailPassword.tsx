@@ -6,18 +6,17 @@ import { TouchableOpacity, StyleSheet, View, TextInput } from 'react-native';
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { useSession } from './AuthContext';
+import { router } from 'expo-router';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithEmailPassword = () => {
+  const { signIn } = useSession();
   const theme = useCustomTheme();
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
-
-  const onPress = React.useCallback(async () => {
-    console.log('Need to setup Email/Password login');
-  }, []);
 
   return (
     <View style={{ width: '100%', flexDirection: 'column', gap: 10 }}>
@@ -79,10 +78,14 @@ const SignInWithEmailPassword = () => {
       </View>
       <TouchableOpacity
         style={{ ...styles.btn, backgroundColor: theme.colors.primary }}
-        onPress={onPress}>
-        <Text style={{ color: theme.colors.statusBar, fontSize: 16 }}>Login</Text>
+        onPress={() => {
+          signIn();
+
+          router.replace('/(app)');
+        }}>
+        <Text>Sign In</Text>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => console.error('Need to configure...')}>
         <Text style={{ color: theme.colors.disabledText, textAlign: 'center' }}>
           Forgot password?
         </Text>
@@ -94,9 +97,9 @@ export default SignInWithEmailPassword;
 
 const styles = StyleSheet.create({
   btn: {
-    color: 'black',
-    borderRadius: 10,
+    borderColor: '#b7a1ff',
     borderWidth: 1,
+    borderRadius: 10,
     paddingVertical: 18,
     paddingHorizontal: 6,
     width: '100%',

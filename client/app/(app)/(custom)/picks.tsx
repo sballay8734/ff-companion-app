@@ -2,20 +2,17 @@ import { Stack } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import SignOutButton from '~/components/SignOutButton';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
-export default function HomePage() {
+export default function PicksPage() {
   const theme = useCustomTheme();
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Home' }} />
+      <Stack.Screen options={{ title: 'Picks' }} />
       <View style={styles.container}>
-        <Text>Home</Text>
-        <SignOutButton />
-        {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
+        <Text>Picks</Text>
       </View>
     </SafeAreaView>
   );

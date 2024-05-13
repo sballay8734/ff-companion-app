@@ -1,22 +1,22 @@
 import { useAuth } from '@clerk/clerk-expo';
+import { useRouter } from 'expo-router';
 import { Button, View } from 'react-native';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function SignOutButton() {
-  const { isLoaded, signOut } = useAuth();
+  const router = useRouter();
 
-  if (!isLoaded) {
-    return null;
+  function handleSignOut() {
+    console.log('Signing out...');
+    router.replace('/(auth)');
   }
-
-  useLoadingSpinner(isLoaded);
 
   return (
     <View>
       <Button
         title="Sign Out"
         onPress={() => {
-          signOut();
+          handleSignOut();
         }}
       />
     </View>

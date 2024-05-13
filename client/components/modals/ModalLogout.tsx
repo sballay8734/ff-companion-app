@@ -2,28 +2,20 @@ import { Modal, View, Text, Pressable, StyleSheet, TouchableOpacity } from 'reac
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { RootState } from '~/store/store';
 import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
-import { useAuth } from '@clerk/clerk-expo';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { error, success } from '~/config/toastContentConfig';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
-import Toast from 'react-native-toast-message';
+import { useRouter } from 'expo-router';
 
 export default function ModalLogout() {
   const isVisible = useAppSelector((state: RootState) => state.modalLogout.isVisible);
+  const router = useRouter();
   const dispatch = useAppDispatch();
-  const { signOut } = useAuth();
   const theme = useCustomTheme();
 
   // TODO: Eventually move logic to ReduxAPI (waiting on decision for backend)
   async function handleLogout() {
-    try {
-      await signOut();
-      dispatch(hideLogoutModal());
-      Toast.show(success.logout);
-    } catch (err) {
-      console.error(err);
-      Toast.show(error.logout);
-    }
+    console.log('LOGOUT');
+    router.replace('/(app)');
   }
 
   return (

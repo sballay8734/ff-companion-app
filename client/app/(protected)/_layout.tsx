@@ -11,6 +11,8 @@ import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 import { View } from 'react-native';
 
+import { Text } from '~/constants/themes';
+
 // TODO: Role based access control  - Commissioner should only show if user is commissioner (Auth on Backend also)
 
 const DrawerLayout = () => {

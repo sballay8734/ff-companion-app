@@ -23,10 +23,10 @@ import { useSession } from '~/components/AuthContext';
 export default function HomePage() {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
-  const [fetchLeague, { isLoading, isError, isSuccess }] = useLazyGetLeagueDataQuery();
+  const [fetchLeague, { isError, isSuccess }] = useLazyGetLeagueDataQuery();
   const [postTest] = usePostTestMutation();
   const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
-  const { signOut } = useSession();
+  const { signOut, isLoading } = useSession();
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {

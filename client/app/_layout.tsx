@@ -10,6 +10,10 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
 import { StyleSheet, useColorScheme } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import ModalLogout from '~/components/modals/ModalLogout';
+import LoadingSpinner from '~/components/modals/LoadingSpinner';
+import Toast from 'react-native-toast-message';
+import { toastConfig } from '~/config/toastStyleConfig';
 
 export default function Root() {
   const colorScheme = useColorScheme();
@@ -37,6 +41,9 @@ export default function Root() {
           <SafeAreaProvider style={{ ...styles.root, backgroundColor: theme.colors.background }}>
             <SafeAreaView style={{ flex: 1 }} edges={['right', 'left']} onLayout={onLayoutRootView}>
               <Slot />
+              <ModalLogout />
+              <LoadingSpinner />
+              <Toast config={toastConfig} />
             </SafeAreaView>
           </SafeAreaProvider>
           <StatusBar style={'light'} />

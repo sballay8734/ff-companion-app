@@ -17,8 +17,8 @@ import {
   showLoadingSpinner,
 } from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 import { LeagueProvider } from '~/store/api/apiConfig';
-import { useEffect } from 'react';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import { useSession } from '~/components/AuthContext';
 
 export default function HomePage() {
   const theme = useCustomTheme();
@@ -26,6 +26,7 @@ export default function HomePage() {
   const [fetchLeague, { isLoading, isError, isSuccess }] = useLazyGetLeagueDataQuery();
   const [postTest] = usePostTestMutation();
   const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
+  const { signOut } = useSession();
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {
@@ -79,6 +80,14 @@ export default function HomePage() {
             onPress={() => showTestToast(custom.customExample)}>
             <Text>Custom</Text>
           </Pressable>
+          <Text
+            style={{ color: 'red' }}
+            onPress={() => {
+              // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
+              signOut();
+            }}>
+            Sign Out
+          </Text>
         </View>
 
         <Button title="Hit 'get' endpoint" onPress={() => getTestEndpoint()} />

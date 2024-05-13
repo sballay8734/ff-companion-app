@@ -1,40 +1,17 @@
-import { ClerkProvider } from '@clerk/clerk-expo';
-import { RootState, store } from '~/store/store';
+import { store } from '~/store/store';
+import { Slot } from 'expo-router';
+import { SessionProvider } from '~/components/AuthContext';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { SplashScreen } from 'expo-router';
-import { Stack } from 'expo-router/stack';
-import * as SecureStore from 'expo-secure-store';
-import { StatusBar } from 'expo-status-bar';
-import { useCallback } from 'react';
-import { ActivityIndicator, useColorScheme } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
-import ModalLogout from '~/components/modals/ModalLogout';
-import Toast from 'react-native-toast-message';
-import { toastConfig } from '~/config/toastStyleConfig';
-import LoadingSpinner from '~/components/modals/LoadingSpinner';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback } from 'react';
+import { StyleSheet, useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
-const tokenCache = {
-  async getToken(key: string) {
-    try {
-      return SecureStore.getItemAsync(key);
-    } catch (err) {
-      console.error(err);
-    }
-  },
-  async saveToken(key: string, value: string) {
-    try {
-      return SecureStore.setItemAsync(key, value);
-    } catch (err) {
-      console.error(err);
-    }
-  },
-};
-
-export default function RootLayout() {
+export default function Root() {
   const colorScheme = useColorScheme();
   const theme = colorScheme === 'light' ? AppLightTheme : AppDarkTheme;
 
@@ -54,43 +31,27 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider
-      tokenCache={tokenCache}
-      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
+    <SessionProvider>
       <Provider store={store}>
         <ThemeProvider value={theme}>
-          <SafeAreaProvider style={{ flexGrow: 1 }}>
-            <SafeAreaView
-              style={{ flexGrow: 1 }}
-              edges={['right', 'left']}
-              onLayout={onLayoutRootView}>
-              <Stack>
-                <Stack.Screen
-                  name="(auth)"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
-                <Stack.Screen
-                  name="(protected)"
-                  options={{
-                    headerShown: false,
-                  }}
-                />
-              </Stack>
-              <ModalLogout />
-              <LoadingSpinner />
-              {/* WARNING: Toast must be the last child in SafeAreaView s */}
-              <Toast config={toastConfig} />
+          <SafeAreaProvider style={{ ...styles.root, backgroundColor: theme.colors.background }}>
+            <SafeAreaView style={{ flex: 1 }} edges={['right', 'left']} onLayout={onLayoutRootView}>
+              <Slot />
             </SafeAreaView>
           </SafeAreaProvider>
-          {/* TODO: Style needs to be rendered based on user preference */}
           <StatusBar style={'light'} />
         </ThemeProvider>
       </Provider>
-    </ClerkProvider>
+    </SessionProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+});
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
 // !TODO: FIX ROUTING (Should not have to check in two places to handle nav. You need to reorganize project structure slightly)

@@ -1,4 +1,3 @@
-import { useOAuth } from '@clerk/clerk-expo';
 import { AntDesign } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
@@ -24,36 +23,17 @@ const SignInWithOAuth = () => {
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
 
-  const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' });
-
   // REMOVE: Dispatches should not be necessary here. Just testing
-  const onPress = React.useCallback(async () => {
-    try {
-      dispatch(showLoadingSpinner());
-      const { createdSessionId, signIn, signUp, setActive } = await startOAuthFlow();
-      // if a new session was created
-      if (createdSessionId) {
-        setActive?.({ session: createdSessionId });
-        Toast.show(success.login);
-        dispatch(hideLoadingSpinner());
-        // else a session already existed
-      } else {
-        dispatch(hideLoadingSpinner());
-        // Use signIn or signUp for next steps such as MFA
-      }
-    } catch (err) {
-      dispatch(hideLoadingSpinner());
-      console.error('OAuth error', err);
-      Toast.show(error.login);
-    }
-  }, []);
+  const onPress = () => {
+    console.error('Need to setup Google login...');
+  };
 
   return (
     <TouchableOpacity
       style={{ ...styles.btn, backgroundColor: theme.colors.google }}
       onPress={onPress}>
       <Text style={{ color: theme.colors.primaryText, fontSize: 16, fontFamily: 'RobotoBlack' }}>
-        Continue with Google
+        Continue with Google (Needs setup)
       </Text>
       <AntDesign style={{ position: 'absolute', left: 20 }} name="google" size={16} color="white" />
     </TouchableOpacity>

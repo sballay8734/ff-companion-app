@@ -16,7 +16,7 @@ const SignInWithApple = () => {
   useWarmUpBrowser();
 
   const onPress = React.useCallback(async () => {
-    console.log('Need to setup Apple login');
+    console.error('Need to setup Apple login...');
   }, []);
 
   return (
@@ -24,7 +24,7 @@ const SignInWithApple = () => {
       style={{ ...styles.btn, backgroundColor: theme.colors.statusBar }}
       onPress={onPress}>
       <Text style={{ color: theme.colors.primaryText, fontSize: 16, fontFamily: 'RobotoBlack' }}>
-        Continue with Apple (Not configured)
+        Continue with Apple (Needs setup)
       </Text>
       <AntDesign style={{ position: 'absolute', left: 20 }} name="apple1" size={16} color="white" />
     </TouchableOpacity>

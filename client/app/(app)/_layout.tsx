@@ -6,14 +6,16 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSession } from '~/components/AuthContext';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
 import { Text } from '~/constants/themes';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
 
   // You can keep the splash screen open, or render a loading screen
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
+  // if (isLoading) {
+  //   return <Text>Loading...</Text>;
+  // }
+  useLoadingSpinner(isLoading);
 
   // Only require authentication within the (app) group's layout as users
   // need to be able to access the (auth) group and sign in again.

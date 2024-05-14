@@ -19,6 +19,7 @@ import {
 import { LeagueProvider } from '~/store/api/apiConfig';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 import { useSession } from '~/components/AuthContext';
+import SignOutButton from '~/components/SignOutButton';
 
 export default function HomePage() {
   const theme = useCustomTheme();
@@ -80,14 +81,7 @@ export default function HomePage() {
             onPress={() => showTestToast(custom.customExample)}>
             <Text>Custom</Text>
           </Pressable>
-          <Text
-            style={{ color: 'red' }}
-            onPress={() => {
-              // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
-              signOut();
-            }}>
-            Sign Out
-          </Text>
+          <SignOutButton />
         </View>
 
         <Button title="Hit 'get' endpoint" onPress={() => getTestEndpoint()} />

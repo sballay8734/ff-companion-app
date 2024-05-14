@@ -3,12 +3,12 @@ import { useStorageState } from '~/hooks/useStorageState';
 
 const AuthContext = React.createContext<{
   signIn: () => Promise<void>;
-  signOut: () => void;
+  signOut: () => Promise<void>;
   session?: string | null;
   isLoading: boolean;
 }>({
   signIn: async () => Promise.resolve(), // Update the signIn mock implementation
-  signOut: () => null,
+  signOut: async () => Promise.resolve(),
   session: null,
   isLoading: false,
 });
@@ -40,19 +40,25 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
             // setTimeout to test loading states
             setTimeout(() => {
-              console.log('Running...');
+              console.log('Signing in...');
               setSession('xxx');
               resolve();
               setIsLoading(false);
-            }, 1500);
+            }, 1000);
           });
         },
         // TODO: Add loading state
-        signOut: () => {
-          // setTimeout to test loading states
-          setTimeout(() => {
-            setSession(null);
-          }, 1500);
+        signOut: async () => {
+          setIsLoading(true);
+
+          return new Promise<void>((resolve) => {
+            setTimeout(() => {
+              console.log('Signing out...');
+              setSession(null);
+              resolve();
+              setIsLoading(false);
+            }, 1000);
+          });
         },
         session,
         isLoading,

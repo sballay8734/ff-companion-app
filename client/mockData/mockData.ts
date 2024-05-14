@@ -16,7 +16,17 @@ interface Owner {
   name: string;
 }
 
-const mockMatchups: Matchup[] = [
+interface OwnerStats {
+  pointDifferential: number;
+  averagePointsScored: number;
+  winLossRecord: { wins: number; losses: number };
+  winningPercentage: number;
+  highestPointTotal: number;
+  lowestPointTotal: number;
+  totalPointsScored: number;
+}
+
+export const mockMatchups: Matchup[] = [
   // same year
   {
     homeOwner: '11111',
@@ -410,4 +420,97 @@ const mockMatchups: Matchup[] = [
   },
 ];
 
-const mockOwners: Owner[] = [{ name: '11111' }, { name: '11112' }];
+export const mockOwners: Owner[] = [{ name: '11111' }, { name: '11112' }];
+
+export function calculateOwnerStats(
+  owner1: string,
+  owner2: string,
+  year: string | null = null,
+  filter: 'playoff' | 'regSzn' | null = null
+): { owner1Stats: OwnerStats; owner2Stats: OwnerStats } {
+  const owner1Stats: OwnerStats = {
+    pointDifferential: 0,
+    averagePointsScored: 0,
+    winLossRecord: { wins: 0, losses: 0 },
+    winningPercentage: 0,
+    highestPointTotal: -Infinity,
+    lowestPointTotal: Infinity,
+    totalPointsScored: 0,
+  };
+
+  const owner2Stats: OwnerStats = {
+    pointDifferential: 0,
+    averagePointsScored: 0,
+    winLossRecord: { wins: 0, losses: 0 },
+    winningPercentage: 0,
+    highestPointTotal: -Infinity,
+    lowestPointTotal: Infinity,
+    totalPointsScored: 0,
+  };
+
+  const filteredMatchups = mockMatchups.filter((matchup) => {
+    if (year === null) {
+      return (
+        filter === null ||
+        (filter === 'playoff' && matchup.playoffMatchup) ||
+        (filter === 'regSzn' && !matchup.playoffMatchup)
+      );
+    } else {
+      return (
+        matchup.nflYear === year &&
+        (filter === null ||
+          (filter === 'playoff' && matchup.playoffMatchup) ||
+          (filter === 'regSzn' && !matchup.playoffMatchup))
+      );
+    }
+  });
+
+  filteredMatchups.forEach((matchup) => {
+    const owner1Score = matchup.homeOwner === owner1 ? matchup.homeScore : matchup.awayScore;
+    const owner2Score = matchup.homeOwner === owner2 ? matchup.homeScore : matchup.awayScore;
+
+    owner1Stats.totalPointsScored += owner1Score;
+    owner2Stats.totalPointsScored += owner2Score;
+
+    owner1Stats.highestPointTotal = Math.max(owner1Stats.highestPointTotal, owner1Score);
+    owner2Stats.highestPointTotal = Math.max(owner2Stats.highestPointTotal, owner2Score);
+
+    owner1Stats.lowestPointTotal = Math.min(owner1Stats.lowestPointTotal, owner1Score);
+    owner2Stats.lowestPointTotal = Math.min(owner2Stats.lowestPointTotal, owner2Score);
+
+    if (owner1Score > owner2Score) {
+      owner1Stats.winLossRecord.wins++;
+      owner2Stats.winLossRecord.losses++;
+      owner1Stats.pointDifferential += owner1Score - owner2Score;
+      owner2Stats.pointDifferential -= owner1Score - owner2Score;
+    } else {
+      owner1Stats.winLossRecord.losses++;
+      owner2Stats.winLossRecord.wins++;
+      owner1Stats.pointDifferential -= owner2Score - owner1Score;
+      owner2Stats.pointDifferential += owner2Score - owner1Score;
+    }
+  });
+
+  const totalMatchups = owner1Stats.winLossRecord.wins + owner1Stats.winLossRecord.losses;
+  owner1Stats.winningPercentage =
+    totalMatchups > 0 ? parseFloat((owner1Stats.winLossRecord.wins / totalMatchups).toFixed(2)) : 0;
+  owner2Stats.winningPercentage =
+    totalMatchups > 0 ? parseFloat((owner2Stats.winLossRecord.wins / totalMatchups).toFixed(2)) : 0;
+
+  owner1Stats.averagePointsScored =
+    filteredMatchups.length > 0
+      ? parseFloat((owner1Stats.totalPointsScored / filteredMatchups.length).toFixed(2))
+      : 0;
+  owner2Stats.averagePointsScored =
+    filteredMatchups.length > 0
+      ? parseFloat((owner2Stats.totalPointsScored / filteredMatchups.length).toFixed(2))
+      : 0;
+
+  owner1Stats.pointDifferential = parseFloat(owner1Stats.pointDifferential.toFixed(2));
+  owner2Stats.pointDifferential = parseFloat(owner2Stats.pointDifferential.toFixed(2));
+
+  owner1Stats.totalPointsScored = parseFloat(owner1Stats.totalPointsScored.toFixed(2));
+  owner2Stats.totalPointsScored = parseFloat(owner2Stats.totalPointsScored.toFixed(2));
+
+  return { owner1Stats, owner2Stats };
+}

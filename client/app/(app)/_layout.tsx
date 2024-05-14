@@ -5,11 +5,12 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useSession } from '~/components/AuthContext';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
-import { Text } from '~/constants/themes';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
+  const theme = useCustomTheme();
 
   // You can keep the splash screen open, or render a loading screen
   // if (isLoading) {
@@ -34,7 +35,7 @@ export default function AppLayout() {
           },
           drawerPosition: 'right',
           headerLeft: () => false,
-          headerRight: () => <DrawerToggleButton />,
+          headerRight: () => <DrawerToggleButton tintColor="#221b38" />,
         }}
         drawerContent={CustomDrawerContent}></Drawer>
       {/* NOTE: Moving below to ROOT */}

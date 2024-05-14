@@ -4,7 +4,7 @@ import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
 import SignInWithApple from '~/components/SignInApple';
 import SignInWithEmailPassword from '~/components/SignInEmailPassword';
 import SignInWithOAuth from '~/components/SignInOAuth';
-import { Text } from '~/constants/themes';
+import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export default function Login() {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: pageContainerPadding,
   },
   heroSection: {
     flexGrow: 3,

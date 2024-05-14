@@ -25,7 +25,7 @@ export default function SignOutButton() {
 
   return (
     <TouchableOpacity
-      style={{ ...styles.btn, backgroundColor: theme.colors.primary }}
+      style={{ ...styles.btn, backgroundColor: theme.colors.admin }}
       onPress={handleLogout}>
       <Text>Logout</Text>
     </TouchableOpacity>
@@ -34,7 +34,7 @@ export default function SignOutButton() {
 
 const styles = StyleSheet.create({
   btn: {
-    borderColor: '#b7a1ff',
+    borderColor: 'red',
     borderWidth: 1,
     borderRadius: 10,
     paddingVertical: 18,

@@ -6,6 +6,7 @@ import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useRouter } from 'expo-router';
 import { useSession } from '../AuthContext';
+import { pageContainerPadding } from '~/constants/themes';
 
 export default function ModalLogout() {
   const isVisible = useAppSelector((state: RootState) => state.modalLogout.isVisible);
@@ -33,7 +34,7 @@ export default function ModalLogout() {
           <TouchableOpacity
             style={{
               backgroundColor: theme.colors.admin,
-              paddingHorizontal: 20,
+              paddingHorizontal: pageContainerPadding,
               paddingVertical: 10,
               borderRadius: 10,
             }}
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#464C55',
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: pageContainerPadding,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

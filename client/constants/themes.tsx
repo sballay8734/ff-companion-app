@@ -4,6 +4,8 @@ import { Text as DefaultText, PressableProps, TextProps } from 'react-native';
 
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
+export const pageContainerPadding = 10;
+
 export type CustomTheme = Theme & {
   dark: boolean;
   colors: {

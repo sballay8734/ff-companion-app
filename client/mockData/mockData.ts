@@ -514,3 +514,66 @@ export function calculateOwnerStats(
 
   return { owner1Stats, owner2Stats };
 }
+
+export interface TestOwnerData {
+  totalPoints: {
+    [key: string]: number;
+  };
+  totalWins: {
+    [key: string]: number;
+  };
+}
+
+export const testOwner1Data: TestOwnerData = {
+  totalPoints: {
+    '2014': 2358,
+    '2015': 2589,
+    '2016': 2711,
+    '2017': 2456,
+    '2018': 2632,
+    '2019': 2785,
+    '2020': 2911,
+    '2021': 2679,
+    '2022': 2514,
+    '2023': 2811,
+  },
+  totalWins: {
+    '2014': 8,
+    '2015': 10,
+    '2016': 9,
+    '2017': 7,
+    '2018': 11,
+    '2019': 9,
+    '2020': 12,
+    '2021': 8,
+    '2022': 6,
+    '2023': 10,
+  },
+};
+
+export const testOwner2Data: TestOwnerData = {
+  totalPoints: {
+    '2014': 2478,
+    '2015': 2456,
+    '2016': 2625,
+    '2017': 2698,
+    '2018': 2514,
+    '2019': 2671,
+    '2020': 2589,
+    '2021': 2785,
+    '2022': 2911,
+    '2023': 2679,
+  },
+  totalWins: {
+    '2014': 7,
+    '2015': 6,
+    '2016': 8,
+    '2017': 9,
+    '2018': 5,
+    '2019': 7,
+    '2020': 6,
+    '2021': 10,
+    '2022': 12,
+    '2023': 8,
+  },
+};

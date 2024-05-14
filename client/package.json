@@ -11,7 +11,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@clerk/clerk-expo": "^1.0.2",
     "@expo/vector-icons": "^14.0.0",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/drawer": "^6.6.6",

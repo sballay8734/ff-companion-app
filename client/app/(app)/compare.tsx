@@ -15,10 +15,15 @@ import {
   testOwner1Data,
   testOwner2Data,
 } from '~/mockData/mockData';
+import { useAppDispatch } from '~/hooks/reduxConfig';
+import { showFilterSelectModal } from '~/store/features/ModalCompareFiltersSlice/ModalCompareFiltersSlice';
+import ModalCompareFilters from '~/components/modals/ModalCompareFilters';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function ComparePage() {
   const theme = useCustomTheme();
   const font = useFont(require('../../assets/fonts/Roboto_Mono/RobotoMono-Regular.ttf'), 8);
+  const dispatch = useAppDispatch();
 
   const [owner1, setOwner1] = useState('11111');
   const [owner2, setOwner2] = useState('11112');
@@ -59,7 +64,7 @@ export default function ComparePage() {
 
   function TestChart() {
     return (
-      <View style={{ width: '100%', flexGrow: 1 }}>
+      <View style={{ width: '100%', flexGrow: 1, position: 'relative' }}>
         <CartesianChart
           data={DATA}
           xKey="year"
@@ -79,16 +84,45 @@ export default function ComparePage() {
               <Line
                 points={points.owner1TotalPoints}
                 color={theme.colors.primary}
-                strokeWidth={2}
+                strokeWidth={1}
               />
               <Line
                 points={points.owner2TotalPoints}
                 color={theme.colors.disabledText}
-                strokeWidth={2}
+                strokeWidth={1}
               />
             </>
           )}
         </CartesianChart>
+        {/* TODO: GOOD IDEA but needs to be styled */}
+        <View
+          style={{
+            position: 'absolute',
+            top: 6,
+            left: 30,
+            borderWidth: 1,
+            borderColor: '#1f2440',
+            paddingHorizontal: 6,
+            paddingVertical: 4,
+            borderRadius: 2,
+            backgroundColor: '#2c3051',
+          }}>
+          <Text style={{ fontSize: 8 }}>All Time</Text>
+        </View>
+        <View
+          style={{
+            position: 'absolute',
+            top: 6,
+            left: 80,
+            borderWidth: 1,
+            borderColor: '#1f2440',
+            paddingHorizontal: 6,
+            paddingVertical: 4,
+            borderRadius: 2,
+            backgroundColor: '#9e80ff',
+          }}>
+          <Text style={{ fontSize: 8, color: 'black' }}>Points For</Text>
+        </View>
       </View>
     );
   }
@@ -124,17 +158,14 @@ export default function ComparePage() {
         </View>
         {/* Bottom Nav */}
         <View style={styles.bottomNav}>
-          <TouchableOpacity style={styles.navButton} onPress={() => handleFilterChange(null)}>
-            <Text>All</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton} onPress={() => handleFilterChange('regSzn')}>
-            <Text>Reg Szn</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.navButton} onPress={() => handleFilterChange('playoff')}>
-            <Text>Playoffs</Text>
+          <TouchableOpacity
+            style={styles.navButton}
+            onPress={() => dispatch(showFilterSelectModal())}>
+            <FontAwesome6 name="filter" size={24} color="white" />
           </TouchableOpacity>
         </View>
       </View>
+      <ModalCompareFilters />
     </SafeAreaView>
   );
 }
@@ -153,7 +184,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: pageContainerPadding,
   },
   ownerCard: {
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#2e365e',
     backgroundColor: '#1f2440',
     width: '100%',
@@ -169,15 +200,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#7660bf',
     backgroundColor: '#121212',
     borderRadius: 5,
   },
   bottomNav: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 20,
+    justifyContent: 'flex-end',
+    paddingRight: 20,
     alignItems: 'center',
     width: Dimensions.get('window').width,
     backgroundColor: '#121212',
@@ -187,3 +218,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+// TODO: Need to add tooltips and gestures

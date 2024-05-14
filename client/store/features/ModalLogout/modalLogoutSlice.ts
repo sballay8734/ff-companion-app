@@ -13,6 +13,7 @@ export const modalLogoutSlice = createSlice({
   initialState,
   reducers: {
     showLogoutModal: (state) => {
+      console.info('showing...');
       state.isVisible = true;
     },
     hideLogoutModal: (state) => {

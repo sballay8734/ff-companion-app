@@ -61,13 +61,17 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
-// TODO: Style new email/password login
-
 // TODO: Set up DB
+
+// TODO: Add apple, google, authentication methods
+
+// TODO: Style new email/password login
 
 // !TODO: You disabled email confirmation because of free account rate limiting on SupaBase. You need to re-enable it in production.
 
-// TODO: Bot signup protection
+// TODO: Chart touch functionality (see library docs)
+
+// TODO: Bot signup protection (Within supabase)
 
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
 

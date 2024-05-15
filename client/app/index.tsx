@@ -4,6 +4,7 @@ import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
 import SignInWithApple from '~/components/SignInApple';
 import SignInWithEmailPassword from '~/components/SignInEmailPassword';
 import SignInWithOAuth from '~/components/SignInOAuth';
+import SupaBaseLogin from '~/components/SupaBaseLogin';
 import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
@@ -40,7 +41,8 @@ export default function Login() {
               width: '100%',
               flexGrow: 1,
             }}>
-            <SignInWithEmailPassword />
+            {/* <SignInWithEmailPassword /> */}
+            <SupaBaseLogin />
             <View style={{ width: '100%' }}>
               <SignInWithOAuth />
               <SignInWithApple />

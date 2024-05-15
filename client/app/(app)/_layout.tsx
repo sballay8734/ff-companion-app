@@ -7,19 +7,24 @@ import { useSession } from '~/components/AuthContext';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import { Session } from '@supabase/supabase-js';
+import { useEffect, useState } from 'react';
+import { supabase } from '~/lib/supabase';
 
 export default function AppLayout() {
-  const { session, isLoading } = useSession();
+  const [session, setSession] = useState<Session | null>(null);
   const theme = useCustomTheme();
 
-  // You can keep the splash screen open, or render a loading screen
-  // if (isLoading) {
-  //   return <Text>Loading...</Text>;
-  // }
-  useLoadingSpinner(isLoading);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-  // Only require authentication within the (app) group's layout as users
-  // need to be able to access the (auth) group and sign in again.
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
   if (!session) {
     return <Redirect href="/" />;
   }

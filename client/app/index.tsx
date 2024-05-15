@@ -3,7 +3,6 @@ import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { useSession } from '~/components/AuthContext';
 
 import SignInWithApple from '~/components/SignInApple';
-import SignInWithEmailPassword from '~/components/SignInEmailPassword';
 import SignInWithOAuth from '~/components/SignInOAuth';
 import SupaBaseLogin from '~/components/SupaBaseLogin';
 import { Text, pageContainerPadding } from '~/constants/themes';

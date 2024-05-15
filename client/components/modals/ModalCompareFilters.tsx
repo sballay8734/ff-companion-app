@@ -1,7 +1,6 @@
-import { Modal, View, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
+import { Modal, View, Pressable, StyleSheet } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { RootState } from '~/store/store';
-import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useRouter } from 'expo-router';

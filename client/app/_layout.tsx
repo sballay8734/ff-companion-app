@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// TODO: Style new email/password login
+
+// TODO: Set up DB
+
 // !TODO: You disabled email confirmation because of free account rate limiting on SupaBase. You need to re-enable it in production.
 
 // TODO: Bot signup protection

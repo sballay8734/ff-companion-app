@@ -2,11 +2,7 @@ import { Stack } from 'expo-router';
 import { View, StyleSheet, Button, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast, { ToastShowParams } from 'react-native-toast-message';
-import {
-  useLazyGetLeagueDataQuery,
-  useLazyGetTestEndpointQuery,
-  usePostTestMutation,
-} from '~/store/api/appApi';
+import { useLazyGetLeagueDataQuery, usePostTestMutation } from '~/store/api/appApi';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';

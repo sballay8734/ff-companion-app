@@ -13,7 +13,6 @@ import {
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch } from '~/hooks/reduxConfig';
 import { Text } from '~/constants/themes';
-import { useRouter } from 'expo-router';
 
 // TODO: Add active state bg to DrawerItems (already have opacity done)
 

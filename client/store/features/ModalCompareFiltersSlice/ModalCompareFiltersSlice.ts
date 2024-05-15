@@ -13,7 +13,6 @@ export const modalCompareFiltersSlice = createSlice({
   initialState,
   reducers: {
     showFilterSelectModal: (state) => {
-      console.info('showing...');
       state.isVisible = true;
     },
     hideFilterSelectModal: (state) => {

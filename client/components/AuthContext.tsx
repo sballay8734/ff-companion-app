@@ -4,7 +4,6 @@ import { supabase } from '~/lib/supabase';
 import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import { success, toastError } from '~/config/toastContentConfig';
-import { Alert } from 'react-native';
 
 const AuthContext = React.createContext<{
   signInWithEmail: (email: string, password: string) => Promise<void>;
@@ -55,6 +54,9 @@ export function SessionProvider(props: React.PropsWithChildren) {
       if (session) {
         setIsLoading(false);
         router.replace('/(app)');
+      } else {
+        setIsLoading(false);
+        router.replace('/');
       }
     });
 
@@ -70,13 +72,12 @@ export function SessionProvider(props: React.PropsWithChildren) {
       error,
     } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      // Alert.alert(error.message);
       Toast.show(toastError.login);
       setIsLoading(false);
     } else {
       Toast.show(success.login);
       setSession(session);
-      router.replace('/(app)');
+      // router.replace('/(app)');
     }
     setIsLoading(false);
   };
@@ -98,7 +99,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
       if (session) {
         setSession(session);
         Toast.show(success.signUp);
-        router.replace('/(app)');
+        // router.replace('/(app)');
       } else {
         if (!session) console.error('Something went wrong');
       }
@@ -112,7 +113,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
       await supabase.auth.signOut();
       setSession(null);
       Toast.show(success.logout);
-      router.replace('/');
+      // router.replace('/');
     } catch (error) {
       Toast.show(toastError.logout);
     }

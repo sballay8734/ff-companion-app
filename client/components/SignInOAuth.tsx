@@ -6,13 +6,7 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { error, success } from '~/config/toastContentConfig';
 import { useAppDispatch } from '~/hooks/reduxConfig';
-import Toast from 'react-native-toast-message';
-import {
-  hideLoadingSpinner,
-  showLoadingSpinner,
-} from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 
 WebBrowser.maybeCompleteAuthSession();
 

@@ -6,12 +6,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSession } from '~/components/AuthContext';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { Text } from '~/constants/themes';
-import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
-import { useEffect } from 'react';
 
 export default function AppLayout() {
-  const { session, isLoading } = useSession();
+  const { session } = useSession();
   const theme = useCustomTheme();
 
   if (!session) {

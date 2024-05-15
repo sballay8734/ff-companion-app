@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
-// !TODO: FIX ROUTING (Should not have to check in two places to handle nav. You need to reorganize project structure slightly)
+// !TODO: You disabled email confirmation because of free account rate limiting on SupaBase. You need to re-enable it in production.
 
 // TODO: Bot signup protection
 

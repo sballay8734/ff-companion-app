@@ -1,13 +1,17 @@
 import React from 'react';
-import { useStorageState } from '~/hooks/useStorageState';
+import { Session } from '@supabase/supabase-js';
+import { supabase } from '~/lib/supabase';
+import { useRouter } from 'expo-router';
 
 const AuthContext = React.createContext<{
-  signIn: () => Promise<void>;
+  signInWithEmail: (email: string, password: string) => Promise<void>;
+  signUpWithEmail: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
-  session?: string | null;
+  session: Session | null;
   isLoading: boolean;
 }>({
-  signIn: async () => Promise.resolve(), // Update the signIn mock implementation
+  signInWithEmail: async () => Promise.resolve(),
+  signUpWithEmail: async () => Promise.resolve(),
   signOut: async () => Promise.resolve(),
   session: null,
   isLoading: false,
@@ -26,40 +30,85 @@ export function useSession() {
 }
 
 export function SessionProvider(props: React.PropsWithChildren) {
-  const [[, session], setSession] = useStorageState('session');
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [session, setSession] = React.useState<Session | null>(null);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const getExistingSession = async () => {
+      setIsLoading(true);
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+      setIsLoading(false);
+    };
+
+    getExistingSession();
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (session) {
+        router.replace('/(app)');
+      }
+    });
+
+    return () => {
+      listener?.subscription.unsubscribe();
+    };
+  }, []);
+
+  const signInWithEmail = async (email: string, password: string) => {
+    setIsLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      console.error('Error signing in:', error.message);
+    }
+    setSession(session);
+    setIsLoading(false);
+    router.replace('/(app)');
+  };
+
+  const signUpWithEmail = async (email: string, password: string) => {
+    setIsLoading(true);
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.error(error.message);
+    } else {
+      if (session) {
+        setSession(session);
+        router.replace('/(app)');
+      } else {
+        if (!session) console.error('Something went wrong');
+      }
+    }
+    setIsLoading(false);
+  };
+
+  const signOut = async () => {
+    setIsLoading(true);
+    await supabase.auth.signOut();
+    setSession(null);
+    router.replace('/');
+    setIsLoading(false);
+  };
 
   return (
     <AuthContext.Provider
       value={{
-        // !TODO: REVIEW THIS. You did this real quick to test loading states
-        signIn: async () => {
-          setIsLoading(true);
-          return new Promise<void>((resolve) => {
-            // TODO: Perform sign-in logic here if not using 3rd party
-
-            // setTimeout to test loading states
-            setTimeout(() => {
-              console.log('Signing in...');
-              setSession('xxx');
-              resolve();
-              setIsLoading(false);
-            }, 1000);
-          });
-        },
-        // TODO: Add loading state
-        signOut: async () => {
-          setIsLoading(true);
-
-          return new Promise<void>((resolve) => {
-            setTimeout(() => {
-              console.log('Signing out...');
-              setSession(null);
-              resolve();
-              setIsLoading(false);
-            }, 1000);
-          });
-        },
+        signInWithEmail,
+        signUpWithEmail,
+        signOut,
         session,
         isLoading,
       }}>

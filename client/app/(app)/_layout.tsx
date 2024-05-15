@@ -6,28 +6,38 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSession } from '~/components/AuthContext';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
-import { Session } from '@supabase/supabase-js';
-import { useEffect, useState } from 'react';
-import { supabase } from '~/lib/supabase';
+import { Text } from '~/constants/themes';
 
 export default function AppLayout() {
-  const [session, setSession] = useState<Session | null>(null);
+  const { session, isLoading } = useSession();
   const theme = useCustomTheme();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-  }, []);
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
 
   if (!session) {
+    // Redirect to the login screen if there is no active session
     return <Redirect href="/" />;
   }
+
+  // useLoadingSpinner(isLoading);
+  // const [session, setSession] = useState<Session | null>(null);
+  // const theme = useCustomTheme();
+
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session } }) => {
+  //     setSession(session);
+  //   });
+
+  //   supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
+  // }, []);
+
+  // if (!session) {
+  //   return <Redirect href="/" />;
+  // }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

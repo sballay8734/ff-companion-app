@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, StyleSheet, View, AppState } from 'react-native';
+import { StyleSheet, View, AppState } from 'react-native';
 import { supabase } from '../lib/supabase';
 import { Button, Input } from 'react-native-elements';
+import { useSession } from './AuthContext';
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -18,33 +19,7 @@ AppState.addEventListener('change', (state) => {
 export default function SupaBaseLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  async function signInWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    setLoading(false);
-  }
-
-  async function signUpWithEmail() {
-    setLoading(true);
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    if (!session) Alert.alert('Please check your inbox for email verification!');
-    setLoading(false);
-  }
+  const { signInWithEmail, signUpWithEmail, isLoading } = useSession();
 
   return (
     <View style={styles.container}>
@@ -70,10 +45,18 @@ export default function SupaBaseLogin() {
         />
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+        <Button
+          title="Sign in"
+          disabled={isLoading}
+          onPress={() => signInWithEmail(email, password)}
+        />
       </View>
       <View style={styles.verticallySpaced}>
-        <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+        <Button
+          title="Sign up"
+          disabled={isLoading}
+          onPress={() => signUpWithEmail(email, password)}
+        />
       </View>
     </View>
   );

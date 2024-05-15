@@ -6,32 +6,14 @@ import { TouchableOpacity, StyleSheet, View, TextInput } from 'react-native';
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useSession } from './AuthContext';
-import { router } from 'expo-router';
-import { useAppDispatch } from '~/hooks/reduxConfig';
-import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithEmailPassword = () => {
-  const { signIn, isLoading } = useSession();
   const theme = useCustomTheme();
-  const dispatch = useAppDispatch();
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
-
-  useLoadingSpinner(isLoading);
-
-  // !TODO: LOADING SPINNER NOT SHOWING
-  async function handleLogin() {
-    try {
-      await signIn();
-      router.replace('/(app)');
-    } catch (error) {
-      console.error('Something went wrong');
-    }
-  }
 
   return (
     <View style={{ width: '100%', flexDirection: 'column', gap: 10 }}>
@@ -93,7 +75,7 @@ const SignInWithEmailPassword = () => {
       </View>
       <TouchableOpacity
         style={{ ...styles.btn, backgroundColor: theme.colors.primary }}
-        onPress={handleLogin}>
+        onPress={() => console.error('Disabled')}>
         <Text>Sign In</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => console.error('Need to configure...')}>

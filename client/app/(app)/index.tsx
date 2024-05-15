@@ -17,8 +17,6 @@ import {
   showLoadingSpinner,
 } from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 import { LeagueProvider } from '~/store/api/apiConfig';
-import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
-import { useSession } from '~/components/AuthContext';
 import SignOutButton from '~/components/SignOutButton';
 
 export default function HomePage() {
@@ -27,7 +25,6 @@ export default function HomePage() {
   const [fetchLeague, { isError, isSuccess }] = useLazyGetLeagueDataQuery();
   const [postTest] = usePostTestMutation();
   const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
-  const { signOut, isLoading } = useSession();
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {
@@ -45,8 +42,6 @@ export default function HomePage() {
   function showTestToast(obj: ToastShowParams) {
     Toast.show(obj);
   }
-
-  useLoadingSpinner(isLoading);
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -81,6 +76,7 @@ export default function HomePage() {
             onPress={() => showTestToast(custom.customExample)}>
             <Text>Custom</Text>
           </Pressable>
+          {/* SIGN OUT */}
           <SignOutButton />
         </View>
 

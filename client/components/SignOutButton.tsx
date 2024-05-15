@@ -4,19 +4,19 @@ import { StyleSheet } from 'react-native';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useSession } from './AuthContext';
-import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import { supabase } from '~/lib/supabase';
 
 export default function SignOutButton() {
   const router = useRouter();
   const theme = useCustomTheme();
-  const { signOut, isLoading } = useSession();
-
-  useLoadingSpinner(isLoading);
 
   async function handleLogout() {
     try {
-      await signOut();
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error('Error signing out:', error.message);
+      }
+      // TODO: Realistically you shouldn't need these router replacements. It should happen automatically
       router.replace('/');
     } catch (error) {
       console.error('Something went wrong');

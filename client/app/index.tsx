@@ -1,5 +1,6 @@
 import { Link } from 'expo-router';
 import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
+import { useSession } from '~/components/AuthContext';
 
 import SignInWithApple from '~/components/SignInApple';
 import SignInWithEmailPassword from '~/components/SignInEmailPassword';
@@ -7,9 +8,13 @@ import SignInWithOAuth from '~/components/SignInOAuth';
 import SupaBaseLogin from '~/components/SupaBaseLogin';
 import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function Login() {
   const theme = useCustomTheme();
+  const { isLoading } = useSession();
+
+  useLoadingSpinner(isLoading);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

@@ -10,7 +10,7 @@ import {
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { error, success, info, custom, warning } from '~/config/toastContentConfig';
+import { toastError, success, info, custom, warning } from '~/config/toastContentConfig';
 import { useAppDispatch } from '~/hooks/reduxConfig';
 import {
   hideLoadingSpinner,
@@ -24,7 +24,6 @@ export default function HomePage() {
   const dispatch = useAppDispatch();
   const [fetchLeague, { isError, isSuccess }] = useLazyGetLeagueDataQuery();
   const [postTest] = usePostTestMutation();
-  const [getTestEndpoint, { isLoading: getIsLoading }] = useLazyGetTestEndpointQuery();
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {
@@ -58,7 +57,7 @@ export default function HomePage() {
           </Pressable>
           <Pressable
             style={({ pressed }) => [styles.btn, { opacity: pressed ? 0.5 : 1 }]}
-            onPress={() => showTestToast(error.login)}>
+            onPress={() => showTestToast(toastError.login)}>
             <Text>Login Fail</Text>
           </Pressable>
           <Pressable
@@ -80,7 +79,7 @@ export default function HomePage() {
           <SignOutButton />
         </View>
 
-        <Button title="Hit 'get' endpoint" onPress={() => getTestEndpoint()} />
+        <Button title="Hit 'get' endpoint" onPress={() => console.error('Disabled')} />
 
         <Button title="Hit 'post' endpoint" onPress={() => postTest('GOING!')} />
 

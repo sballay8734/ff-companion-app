@@ -6,6 +6,7 @@ import { ToastShowParams } from 'react-native-toast-message';
 export const success: {
   login: ToastShowParams;
   logout: ToastShowParams;
+  signUp: ToastShowParams;
   hitGetEndpoint: ToastShowParams;
   hitPostEndpoint: ToastShowParams;
 } = {
@@ -21,6 +22,14 @@ export const success: {
     type: 'success',
     text1: 'Logout Successful',
     text2: 'Cya later!',
+    visibilityTime: 2000,
+    swipeable: true,
+    position: 'bottom',
+  },
+  signUp: {
+    type: 'success',
+    text1: 'Account Created',
+    text2: 'Thanks for joining!',
     visibilityTime: 2000,
     swipeable: true,
     position: 'bottom',
@@ -43,9 +52,10 @@ export const success: {
   },
 };
 
-export const error: {
+export const toastError: {
   login: ToastShowParams;
   logout: ToastShowParams;
+  signUp: ToastShowParams;
   hitGetEndpoint: ToastShowParams;
   hitPostEndpoint: ToastShowParams;
 } = {
@@ -66,6 +76,14 @@ export const error: {
     swipeable: true,
     position: 'bottom',
     autoHide: false,
+  },
+  signUp: {
+    type: 'error',
+    text1: 'Account Creation Failed',
+    text2: 'We want you to join. But something went wrong',
+    visibilityTime: 2000,
+    swipeable: true,
+    position: 'bottom',
   },
   hitGetEndpoint: {
     type: 'error',

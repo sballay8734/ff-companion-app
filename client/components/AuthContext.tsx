@@ -2,6 +2,9 @@ import React from 'react';
 import { Session } from '@supabase/supabase-js';
 import { supabase } from '~/lib/supabase';
 import { useRouter } from 'expo-router';
+import Toast from 'react-native-toast-message';
+import { success, toastError } from '~/config/toastContentConfig';
+import { Alert } from 'react-native';
 
 const AuthContext = React.createContext<{
   signInWithEmail: (email: string, password: string) => Promise<void>;
@@ -28,12 +31,13 @@ export function useSession() {
 
   return value;
 }
-
+// TODO: Add try/catch to all async functions
 export function SessionProvider(props: React.PropsWithChildren) {
   const [session, setSession] = React.useState<Session | null>(null);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
+  // REVIEW: This was causing a weird loading bug that you fixed but something about this is not optimal
   React.useEffect(() => {
     const getExistingSession = async () => {
       setIsLoading(true);
@@ -49,6 +53,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       if (session) {
+        setIsLoading(false);
         router.replace('/(app)');
       }
     });
@@ -65,11 +70,15 @@ export function SessionProvider(props: React.PropsWithChildren) {
       error,
     } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
-      console.error('Error signing in:', error.message);
+      // Alert.alert(error.message);
+      Toast.show(toastError.login);
+      setIsLoading(false);
+    } else {
+      Toast.show(success.login);
+      setSession(session);
+      router.replace('/(app)');
     }
-    setSession(session);
     setIsLoading(false);
-    router.replace('/(app)');
   };
 
   const signUpWithEmail = async (email: string, password: string) => {
@@ -84,9 +93,11 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
     if (error) {
       console.error(error.message);
+      Toast.show(toastError.signUp);
     } else {
       if (session) {
         setSession(session);
+        Toast.show(success.signUp);
         router.replace('/(app)');
       } else {
         if (!session) console.error('Something went wrong');
@@ -97,9 +108,14 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
   const signOut = async () => {
     setIsLoading(true);
-    await supabase.auth.signOut();
-    setSession(null);
-    router.replace('/');
+    try {
+      await supabase.auth.signOut();
+      setSession(null);
+      Toast.show(success.logout);
+      router.replace('/');
+    } catch (error) {
+      Toast.show(toastError.logout);
+    }
     setIsLoading(false);
   };
 

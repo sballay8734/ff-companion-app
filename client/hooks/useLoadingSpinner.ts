@@ -10,13 +10,11 @@ export const useLoadingSpinner = (isLoading: boolean) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // console.log('isLoading', isLoading);
     if (isLoading) {
       dispatch(showLoadingSpinner());
     } else {
-      // HACK: This shouldn't cause any issues but it shouldn't be necessary
-      setTimeout(() => {
-        dispatch(hideLoadingSpinner());
-      }, 500);
+      dispatch(hideLoadingSpinner());
     }
   }, [isLoading, dispatch]);
 };

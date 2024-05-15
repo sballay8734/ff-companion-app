@@ -17,6 +17,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default function LoadingSpinner() {
   const isVisible = useAppSelector((state: RootState) => state.loadingSpinner.isVisible);
+
   const dispatch = useAppDispatch();
   const theme = useCustomTheme();
 
@@ -37,10 +38,10 @@ export default function LoadingSpinner() {
       visible={isVisible}
       presentationStyle="overFullScreen">
       <View style={styles.modalBg}>
-        {/* <ActivityIndicator size="small" color={theme.colors.primary} /> */}
-        <Animated.View style={[styles.modalContent, animatedStyle]}>
+        <ActivityIndicator size="small" color={theme.colors.primary} />
+        {/* <Animated.View style={[styles.modalContent, animatedStyle]}>
           <AntDesign name="loading2" size={30} color="#b0b0b0" />
-        </Animated.View>
+        </Animated.View> */}
       </View>
     </Modal>
   );

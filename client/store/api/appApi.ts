@@ -1,11 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Toast from 'react-native-toast-message';
-import { error, success } from '~/config/toastContentConfig';
+import { toastError, success } from '~/config/toastContentConfig';
 import { getApiUrl } from './apiConfig';
-import {
-  hideLoadingSpinner,
-  showLoadingSpinner,
-} from '../features/LoadingSpinner/loadingSpinnerSlice';
 
 interface TestData {
   userId: number;
@@ -25,7 +21,7 @@ export const appApi = createApi({
         if (url) {
           return { url: url };
         } else {
-          console.error(error);
+          console.error(toastError.hitGetEndpoint);
           throw new Error('API URL not found');
         }
       },
@@ -35,7 +31,7 @@ export const appApi = createApi({
           Toast.show(success.hitGetEndpoint);
           console.log(res.data);
         } catch (err) {
-          Toast.show(error.hitGetEndpoint);
+          Toast.show(toastError.hitGetEndpoint);
         }
       },
     }),
@@ -46,7 +42,7 @@ export const appApi = createApi({
           await queryFulfilled;
           Toast.show(success.hitGetEndpoint);
         } catch (err) {
-          Toast.show(error.hitGetEndpoint);
+          Toast.show(toastError.hitGetEndpoint);
         }
       },
     }),
@@ -61,7 +57,7 @@ export const appApi = createApi({
           await queryFulfilled;
           Toast.show(success.hitPostEndpoint);
         } catch (err) {
-          Toast.show(error.hitPostEndpoint);
+          Toast.show(toastError.hitPostEndpoint);
         }
       },
     }),

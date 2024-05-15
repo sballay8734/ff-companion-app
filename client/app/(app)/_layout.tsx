@@ -7,14 +7,12 @@ import { useSession } from '~/components/AuthContext';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { Text } from '~/constants/themes';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import { useEffect } from 'react';
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
   const theme = useCustomTheme();
-
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
 
   if (!session) {
     // Redirect to the login screen if there is no active session

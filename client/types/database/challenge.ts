@@ -38,7 +38,7 @@ interface Challenge {
   winner: string;
 }
 
-// ""I [user], wager [$amount] that [challengedUser] [description]"
+// ""I [user], wager [$amount] that [description]" -> They must also select a user to challenge (They can select themselves if the wager is about themselves)
 
 // Challenged person can "deny" (sets status to "rejected"), "accept", or "broadcast" (user does not accept but will participate)
 

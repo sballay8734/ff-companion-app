@@ -1,1 +1,3 @@
 // General posts like smack talk, announcements, etc...
+// REVIEW: Not sure you really need this
+interface Post {}

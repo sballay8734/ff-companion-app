@@ -1,3 +1,5 @@
+// NOTE: Picks and challenges being separate is correct. If users want to "turn a pick into a challenge", they should be able to do so easily from the picks page
+
 import { Stack } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

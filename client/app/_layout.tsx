@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
 
 // !TODO: Replace all Touchable Opacity with Pressables (Docs recommend this)
 
-// !TODO: Clerk Loading states not working on Log in / Log out
+// TODO: Double check "Is Nullable" values for db
 
 // mTODO: Dynasty league support? Do you need it and how would you implement it?
 

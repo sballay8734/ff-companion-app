@@ -1,6 +1,6 @@
 interface Matchup {
-  homeOwner: string;
-  awayOwner: string;
+  homeOwnerId: string;
+  awayOwnerId: string;
 
   nflSeasonStartYear: number;
   nflWeek: number;

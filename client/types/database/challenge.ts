@@ -1,4 +1,5 @@
 // Challenges ******************************************************
+// TODO: Need to add challenges also. You only added custom challenges
 interface Challenge {
   proposerId: string; // userId
   acceptorId: string; // userId
@@ -53,15 +54,18 @@ interface CustomChallenge {
 
   // NOTE: This is correct because a challenged member can still participate in the challenge without accepting it. If they do accept it, then the "challenged" name/id will match the "acceptor" name/id. Additionally, it's also possible a proposer selects themselves as the challenged which is totally fine. It will still be auto marked as "broadcasted"
 
-  proposerName: string;
-  challengedName: string;
-  acceptorName: string;
+  // THESE ARE LINKED
+  // proposerName: string;
+  // challengedName: string;
+  // acceptorName: string;
+  // dateProposed: Date; created_at exists
 
+  // TODO: Type this in supabase
   challengedResponse: string; // accepted, rejected, broadcasted
   isBroadcasted: boolean;
 
   description: string;
-  dateProposed: Date;
+  // user sets expiration, can be null. Can also be removed by commish or user
   expiration: Date;
   wagerAmount: number;
   odds: number;
@@ -69,14 +73,15 @@ interface CustomChallenge {
   proposerPayout: number;
   acceptorPayout: number;
 
+  // TODO: Type this in supabase
   status: string; // proposed, accepted, rejected, expired, settled, voided
   acceptedAt?: Date;
   settledAt?: Date;
 
   // Media attachments
   // NOTE: ACTUALLY A VERY GOOD IDEA!!!
-  images?: string[]; // URLs of attached images
-  videos?: string[]; // URLs of attached videos
+  imageUrl?: string; // URLs of attached images
+  videoUrl?: string; // URLs of attached videos
 
   // Outcome
   winner?: string; // userId of the winner

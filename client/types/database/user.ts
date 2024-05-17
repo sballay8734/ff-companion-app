@@ -1,20 +1,18 @@
 // TODO: Just modify Supabase's user type to include what you need
 
 // mTODO: Settings should be handled on per league basis.
+// Don't need email or password since it exists in linked auth table
 interface User {
-  id: string;
-  username: string;
-  email: string;
-  password: string;
-  avatar?: string;
-  name?: string;
-  linkedLeagues: LinkedLeague[];
-  createdAt: Date;
+  id: string; // matches id in auth table
+
   updatedAt?: Date;
-  lastLoginAt?: Date;
-  isVerified?: boolean;
-  isActive?: boolean;
-  roles?: string[]; // global user roles (you would have admin, no one else would - not really that applicable to your app honestly)
+  username: string;
+
+  fullName?: string;
+  avatarUrl?: string;
+  linkedLeagues: LinkedLeague[];
+
+  roles?: string[];
   globalSettings?: UserSettings;
   leagueSettings?: LeagueSettings;
 }

@@ -83,14 +83,16 @@ export default function HomePage() {
 
   console.log(data);
 
+  // !TODO: The issue is you should be using the isLoading state to halt rendering untill the profile is fetched
+
   return (
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen options={{ title: 'Home' }} />
       <View style={styles.container}>
         <Text style={{ fontSize: 30 }}>
-          Hello {fullName}! Or should we call you {username}?
+          Hello {data?.full_name}! Or should we call you {data?.username}?
         </Text>
-        <Image style={{ backgroundColor: 'red', height: 20, width: 20 }} src={avatarUrl} />
+        {/* <Image style={{ backgroundColor: 'red', height: 20, width: 20 }} src={data?.avatar_url} /> */}
 
         <View style={styles.btnWrapper}>
           {/* TODO: Make custom pressable to opacity fades smoothly */}

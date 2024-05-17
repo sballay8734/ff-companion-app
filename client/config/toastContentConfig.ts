@@ -3,6 +3,8 @@ import { ToastShowParams } from 'react-native-toast-message';
 // Errors should not auto-hide
 // Success SHOULD auto-hide
 
+// TODO: Add custom toast that accepts message to handle Supabase errors
+
 export const success: {
   login: ToastShowParams;
   logout: ToastShowParams;

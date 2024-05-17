@@ -9,7 +9,6 @@ type UserProfile = Database['public']['Tables']['profiles']['Row'];
 
 export const appApi = createApi({
   reducerPath: 'appApi',
-  // !TODO: You SHOULD be passing a custom error type here but needs review because your types aren't right and TS is throwing errors
 
   // TODO: Make sure to also transform response so you don't need to destructure in componets. See RTK docs
   baseQuery: fakeBaseQuery<QueryError>(),
@@ -24,10 +23,10 @@ export const appApi = createApi({
             .single();
 
           if (error) {
-            return { error: error as QueryError };
+            return { error };
           }
 
-          return { data: data as UserProfile };
+          return { data };
         } catch (error) {
           Toast.show(toastError.login);
           throw new Error("We're sorry. We couldn't get your profile.");

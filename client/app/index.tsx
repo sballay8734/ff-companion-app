@@ -1,13 +1,13 @@
 import { Link } from 'expo-router';
 import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
-import { useSession } from '~/components/AuthContext';
+import { useSession } from '~/auth/AuthContext';
 
-import SignInWithApple from '~/components/SignInApple';
-import SignInWithOAuth from '~/components/SignInOAuth';
-import SupaBaseLogin from '~/components/SupaBaseLogin';
+import SignInWithApple from '~/auth/SignInApple';
+import SignInWithOAuth from '~/auth/SignInOAuth';
 import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import EmailPassword from '~/auth/EmailPassword';
 
 export default function Login() {
   const theme = useCustomTheme();
@@ -46,7 +46,7 @@ export default function Login() {
               flexGrow: 1,
             }}>
             {/* <SignInWithEmailPassword /> */}
-            <SupaBaseLogin />
+            <EmailPassword />
             <View style={{ width: '100%' }}>
               <SignInWithOAuth />
               <SignInWithApple />

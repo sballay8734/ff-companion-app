@@ -16,7 +16,7 @@ AppState.addEventListener('change', (state) => {
   }
 });
 
-export default function SupaBaseLogin() {
+export default function EmailPassword() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { signInWithEmail, signUpWithEmail, isLoading } = useSession();

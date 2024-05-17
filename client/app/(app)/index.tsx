@@ -12,8 +12,8 @@ import {
   showLoadingSpinner,
 } from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 import { LeagueProvider } from '~/store/api/apiConfig';
-import SignOutButton from '~/components/SignOutButton';
-import { useSession } from '~/components/AuthContext';
+import SignOutButton from '~/auth/SignOutButton';
+import { useSession } from '~/auth/AuthContext';
 import { useEffect, useState } from 'react';
 import { supabase } from '~/lib/supabase';
 import { useGetUserProfileQuery } from '~/store/api/appApi';
@@ -23,14 +23,11 @@ export default function HomePage() {
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
 
+  // CHECK FOR SESSION, if no session, navigate
+
   // REMOVE: Testing
   const userId = '3f9a6890-2f64-4315-9c3c-a5f2799356b0';
   const { data, error, isLoading } = useGetUserProfileQuery(userId);
-
-  const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [avatarUrl, setAvatarUrl] = useState('');
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {
@@ -44,44 +41,6 @@ export default function HomePage() {
   function showTestToast(obj: ToastShowParams) {
     Toast.show(obj);
   }
-
-  // !TODO: Move this to AuthContext and use RTK eventually to handle loading
-  // async function getProfile() {
-  //   try {
-  //     setLoading(true);
-  //     if (!session?.user) throw new Error('No user on the session!');
-
-  //     const { data, error, status } = await supabase
-  //       .from('profiles')
-  //       .select(`username, full_name, avatar_url`)
-  //       .eq('id', session?.user.id)
-  //       .single();
-  //     if (error && status !== 406) {
-  //       throw error;
-  //     }
-
-  //     if (data) {
-  //       console.log(data);
-  //       setUsername(data.username);
-  //       setFullName(data.full_name);
-  //       setAvatarUrl(data.avatar_url);
-  //     }
-  //   } catch (error) {
-  //     if (error instanceof Error) {
-  //       Alert.alert(error.message);
-  //     }
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (session) {
-  //     getProfile();
-  //   }
-  // }, []);
-
-  console.log(data);
 
   // !TODO: The issue is you should be using the isLoading state to halt rendering untill the profile is fetched
 

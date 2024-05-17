@@ -37,6 +37,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const router = useRouter();
 
   // REVIEW: This was causing a weird loading bug that you fixed but something about this is not optimal
+  // First, check for existing session
   React.useEffect(() => {
     const getExistingSession = async () => {
       setIsLoading(true);
@@ -49,6 +50,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
     getExistingSession();
 
+    // listen for auth state changes
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       if (session) {

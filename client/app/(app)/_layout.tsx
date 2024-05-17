@@ -3,7 +3,7 @@ import { Redirect } from 'expo-router';
 import Drawer from 'expo-router/drawer';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { useSession } from '~/components/AuthContext';
+import { useSession } from '~/auth/AuthContext';
 import CustomDrawerContent from '~/components/CustomDrawerContent';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
@@ -15,24 +15,6 @@ export default function AppLayout() {
     // Redirect to the login screen if there is no active session
     return <Redirect href="/" />;
   }
-
-  // useLoadingSpinner(isLoading);
-  // const [session, setSession] = useState<Session | null>(null);
-  // const theme = useCustomTheme();
-
-  // useEffect(() => {
-  //   supabase.auth.getSession().then(({ data: { session } }) => {
-  //     setSession(session);
-  //   });
-
-  //   supabase.auth.onAuthStateChange((_event, session) => {
-  //     setSession(session);
-  //   });
-  // }, []);
-
-  // if (!session) {
-  //   return <Redirect href="/" />;
-  // }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>

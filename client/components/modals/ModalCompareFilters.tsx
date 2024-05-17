@@ -4,7 +4,7 @@ import { RootState } from '~/store/store';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useRouter } from 'expo-router';
-import { useSession } from '../AuthContext';
+import { useSession } from '../../auth/AuthContext';
 import { pageContainerPadding } from '~/constants/themes';
 import { hideFilterSelectModal } from '~/store/features/ModalCompareFiltersSlice/ModalCompareFiltersSlice';
 

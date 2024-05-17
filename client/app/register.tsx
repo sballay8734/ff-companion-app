@@ -2,8 +2,8 @@ import { Link } from 'expo-router';
 import * as React from 'react';
 import { SafeAreaView, View, StyleSheet, Image } from 'react-native';
 
-import SignInWithApple from '~/components/SignInApple';
-import SignInWithOAuth from '~/components/SignInOAuth';
+import SignInWithApple from '~/auth/SignInApple';
+import SignInWithOAuth from '~/auth/SignInOAuth';
 import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 

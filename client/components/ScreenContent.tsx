@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import EditScreenInfo from './EditScreenInfo';
-import SignOutButton from './SignOutButton';
+import SignOutButton from '../auth/SignOutButton';
 
 import { Text } from '~/constants/themes';
 

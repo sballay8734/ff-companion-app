@@ -1,6 +1,6 @@
 import { store } from '~/store/store';
 import { Slot } from 'expo-router';
-import { SessionProvider } from '~/components/AuthContext';
+import { SessionProvider } from '~/auth/AuthContext';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';

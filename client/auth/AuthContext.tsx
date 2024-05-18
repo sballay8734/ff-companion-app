@@ -30,21 +30,25 @@ export function useSession() {
 
   return value;
 }
-// TODO: Add try/catch to all async functions
+// TODO: Make sure errors are handled with toasts where needed
 export function SessionProvider(props: React.PropsWithChildren) {
   const [session, setSession] = React.useState<Session | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const router = useRouter();
 
-  // REVIEW: This was causing a weird loading bug that you fixed but something about this is not optimal
   // First, check for existing session
   React.useEffect(() => {
     const getExistingSession = async () => {
       setIsLoading(true);
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setSession(session);
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        setSession(session);
+      } catch (error) {
+        console.error('Error getting existing session:', error);
+        setSession(null);
+      }
       setIsLoading(false);
     };
 
@@ -52,12 +56,10 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
     // listen for auth state changes
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
       if (session) {
-        setIsLoading(false);
+        setSession(session);
         router.replace('/(app)');
       } else {
-        setIsLoading(false);
         router.replace('/');
       }
     });
@@ -76,10 +78,10 @@ export function SessionProvider(props: React.PropsWithChildren) {
     if (error) {
       Toast.show(toastError.login);
       setIsLoading(false);
-    } else {
+    } else if (session) {
       Toast.show(success.login);
+      setIsLoading(false);
       setSession(session);
-      // router.replace('/(app)');
     }
     setIsLoading(false);
   };
@@ -101,7 +103,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
       if (session) {
         setSession(session);
         Toast.show(success.signUp);
-        // router.replace('/(app)');
       } else {
         if (!session) console.error('Something went wrong');
       }

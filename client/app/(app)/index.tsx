@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { View, StyleSheet, Button, Pressable, Alert, Image } from 'react-native';
+import { View, StyleSheet, Button, Pressable, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast, { ToastShowParams } from 'react-native-toast-message';
 
@@ -11,23 +11,18 @@ import {
   hideLoadingSpinner,
   showLoadingSpinner,
 } from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
-import { LeagueProvider } from '~/store/api/apiConfig';
 import SignOutButton from '~/auth/SignOutButton';
 import { useSession } from '~/auth/AuthContext';
-import { useEffect, useState } from 'react';
-import { supabase } from '~/lib/supabase';
 import { useGetUserProfileQuery } from '~/store/api/appApi';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function HomePage() {
   const { session } = useSession();
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
 
-  // CHECK FOR SESSION, if no session, navigate
-
-  // REMOVE: Testing
-  const userId = '3f9a6890-2f64-4315-9c3c-a5f2799356b0';
-  const { data, error, isLoading } = useGetUserProfileQuery(userId);
+  const userId = session?.user.id;
+  const { data, isLoading, isError } = useGetUserProfileQuery(userId || '');
 
   // REMOVE: Temporary - Just to make styling easier
   function temporarySpin() {
@@ -38,11 +33,24 @@ export default function HomePage() {
     }, 2000);
   }
 
+  // REMOVE: Testing
   function showTestToast(obj: ToastShowParams) {
     Toast.show(obj);
   }
 
-  // !TODO: The issue is you should be using the isLoading state to halt rendering untill the profile is fetched
+  // !TODO: Error and loading handling needs to be improved.
+
+  // !TODO: This screen should not be popping up briefly for loading. This was just for testing
+  if (isError || !data) {
+    // Handle error case
+    return (
+      <View>
+        <Text>ERROR</Text>
+      </View>
+    );
+  }
+
+  // useLoadingSpinner(isLoading);
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -51,7 +59,10 @@ export default function HomePage() {
         <Text style={{ fontSize: 30 }}>
           Hello {data?.full_name}! Or should we call you {data?.username}?
         </Text>
-        {/* <Image style={{ backgroundColor: 'red', height: 20, width: 20 }} src={data?.avatar_url} /> */}
+        <Image
+          style={{ backgroundColor: 'red', height: 20, width: 20 }}
+          src={data?.avatar_url || 'https://ik.imagekit.io/demo/medium_cafe_B1iTdD0C.jpg'}
+        />
 
         <View style={styles.btnWrapper}>
           {/* TODO: Make custom pressable to opacity fades smoothly */}

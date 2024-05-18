@@ -5,7 +5,7 @@ import { supabase } from '~/lib/supabase';
 import { QueryError } from '@supabase/supabase-js';
 import { Database } from '~/types/supabase';
 
-type UserProfile = Database['public']['Tables']['profiles']['Row'];
+export type UserProfile = Database['public']['Tables']['profiles']['Row'];
 
 export const appApi = createApi({
   reducerPath: 'appApi',

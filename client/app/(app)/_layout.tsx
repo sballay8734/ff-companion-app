@@ -30,10 +30,6 @@ export default function AppLayout() {
           headerRight: () => <DrawerToggleButton tintColor="#221b38" />,
         }}
         drawerContent={CustomDrawerContent}></Drawer>
-      {/* NOTE: Moving below to ROOT */}
-      {/* <ModalLogout />
-      <LoadingSpinner />
-      <Toast config={toastConfig} /> */}
     </GestureHandlerRootView>
   );
 }

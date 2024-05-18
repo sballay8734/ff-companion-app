@@ -11,9 +11,11 @@ import EmailPassword from '~/auth/EmailPassword';
 
 export default function Login() {
   const theme = useCustomTheme();
-  const { isLoading } = useSession();
 
-  useLoadingSpinner(isLoading);
+  // !TODO: These were causing the infinite load bug. You need to review this as you don't currently have a loading spinner
+  // const { isLoading } = useSession();
+
+  // useLoadingSpinner(isLoading);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

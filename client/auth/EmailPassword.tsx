@@ -1,27 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, AppState } from 'react-native';
-import { supabase } from '../lib/supabase';
+import { StyleSheet, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
-import { useSignInWithEmailMutation, useSignUpWithEmailMutation } from '~/store/api/appApi';
-// import { useSession } from './AuthContext';
-
-// Tells Supabase Auth to continuously refresh the session automatically if
-// the app is in the foreground. When this is added, you will continue to receive
-// `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event
-// if the user's session is terminated. This should only be registered once.
-AppState.addEventListener('change', (state) => {
-  if (state === 'active') {
-    supabase.auth.startAutoRefresh();
-  } else {
-    supabase.auth.stopAutoRefresh();
-  }
-});
+import { useSession } from './AuthContext';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function EmailPassword() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [signInWithEmail, { isLoading: signInLoading }] = useSignInWithEmailMutation();
-  const [signUpWithEmail, { isLoading: signUpLoading }] = useSignUpWithEmailMutation();
+  const { signInWithEmail, signUpWithEmail, signOut, isLoading } = useSession();
+
+  useLoadingSpinner(isLoading);
 
   return (
     <View style={styles.container}>
@@ -33,6 +21,7 @@ export default function EmailPassword() {
           value={email}
           placeholder="email@address.com"
           autoCapitalize={'none'}
+          style={{ color: 'white' }}
         />
       </View>
       <View style={styles.verticallySpaced}>
@@ -44,20 +33,21 @@ export default function EmailPassword() {
           secureTextEntry={true}
           placeholder="Password"
           autoCapitalize={'none'}
+          style={{ color: 'white' }}
         />
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
           title="Sign in"
-          disabled={signInLoading || signUpLoading}
-          onPress={() => signInWithEmail({ email, password })}
+          disabled={isLoading}
+          onPress={() => signInWithEmail(email, password)}
         />
       </View>
       <View style={styles.verticallySpaced}>
         <Button
           title="Sign up"
-          disabled={signInLoading || signUpLoading}
-          onPress={() => signUpWithEmail({ email, password })}
+          disabled={isLoading}
+          onPress={() => signUpWithEmail(email, password)}
         />
       </View>
     </View>

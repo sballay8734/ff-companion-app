@@ -6,13 +6,15 @@ import { StyleSheet } from 'react-native';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { supabase } from '~/lib/supabase';
-import { useGetExistingSessionQuery, useSignOutMutation } from '~/store/api/appApi';
-// import { useSession } from './AuthContext';
+import { useSession } from './AuthContext';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function SignOutButton() {
   const theme = useCustomTheme();
   const router = useRouter();
-  const [signOut, { isLoading, isError }] = useSignOutMutation();
+  const { signOut, isLoading } = useSession();
+
+  useLoadingSpinner(isLoading);
 
   return (
     <TouchableOpacity

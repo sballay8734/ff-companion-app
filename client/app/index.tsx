@@ -1,6 +1,6 @@
 import { Link, Redirect, useRouter } from 'expo-router';
-import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
-// import { useSession } from '~/auth/AuthContext';
+import { View, Image, StyleSheet, SafeAreaView, AppState } from 'react-native';
+import { useSession } from '~/auth/AuthContext';
 
 import SignInWithApple from '~/auth/SignInApple';
 import SignInWithOAuth from '~/auth/SignInOAuth';
@@ -8,60 +8,28 @@ import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 import EmailPassword from '~/auth/EmailPassword';
-import { useEffect } from 'react';
 import { supabase } from '~/lib/supabase';
-import { useGetExistingSessionQuery } from '~/store/api/appApi';
+import { useEffect, useState } from 'react';
+
+// Tells Supabase Auth to continuously refresh the session automatically if the app is in the foreground. When this is added, you will continue to receive `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event if the user's session is terminated. This should only be registered once.
+AppState.addEventListener('change', (state) => {
+  if (state === 'active') {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
 
 export default function Login() {
   const theme = useCustomTheme();
   const router = useRouter();
-
-  // TODO: Transform response so you don't need to do data.session
-  const { data, isLoading, isError } = useGetExistingSessionQuery();
-  console.log(data);
+  const { session, user } = useSession();
 
   useEffect(() => {
-    // !TODO: This is horrible and you shouldn't have to do this if you type the result of the queries correctly
-    if (data !== null && data !== undefined && data.session !== null) {
-      // Redirect to the /(app) route if session data exists
+    if (session && user) {
       router.replace('/(app)');
     }
-  }, [data]);
-
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <Text>LOADING...</Text>
-      </View>
-    );
-  }
-
-  // !TODO: ************************************************************
-  // !TODO: ************************************************************
-  // !TODO: ************************************************************
-
-  // !TODO: SIGN IN NOT NAVIGATING (SIGN OUT IS WORKING THOUGH)
-
-  // !TODO: ************************************************************
-  // !TODO: ************************************************************
-  // !TODO: ************************************************************
-  // const { data: session } = supabase.auth.onAuthStateChange((event, session) => {
-  //   console.log(event, session);
-
-  //   if (event === 'INITIAL_SESSION') {
-  //     // handle initial session
-  //   } else if (event === 'SIGNED_IN') {
-  //     // handle sign in event
-  //   } else if (event === 'SIGNED_OUT') {
-  //     // handle sign out event
-  //   } else if (event === 'PASSWORD_RECOVERY') {
-  //     // handle password recovery event
-  //   } else if (event === 'TOKEN_REFRESHED') {
-  //     // handle token refreshed event
-  //   } else if (event === 'USER_UPDATED') {
-  //     // handle user updated event
-  //   }
-  // });
+  }, [session, user]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

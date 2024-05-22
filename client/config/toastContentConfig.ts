@@ -55,12 +55,23 @@ export const success: {
 };
 
 export const toastError: {
+  unknown: ToastShowParams;
   login: ToastShowParams;
   logout: ToastShowParams;
   signUp: ToastShowParams;
+  profile: ToastShowParams;
   hitGetEndpoint: ToastShowParams;
   hitPostEndpoint: ToastShowParams;
 } = {
+  unknown: {
+    type: 'error',
+    text1: 'Error',
+    text2: 'Something went wrong',
+    visibilityTime: 3000,
+    swipeable: true,
+    position: 'bottom',
+    autoHide: false,
+  },
   login: {
     type: 'error',
     text1: 'Login Error',
@@ -83,6 +94,14 @@ export const toastError: {
     type: 'error',
     text1: 'Account Creation Failed',
     text2: 'We want you to join. But something went wrong',
+    visibilityTime: 2000,
+    swipeable: true,
+    position: 'bottom',
+  },
+  profile: {
+    type: 'error',
+    text1: 'Fetch Profile Error',
+    text2: "We couldn't find your profile",
     visibilityTime: 2000,
     swipeable: true,
     position: 'bottom',

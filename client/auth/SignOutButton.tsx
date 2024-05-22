@@ -1,13 +1,18 @@
+import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useSession } from './AuthContext';
+import { supabase } from '~/lib/supabase';
+import { useGetExistingSessionQuery, useSignOutMutation } from '~/store/api/appApi';
+// import { useSession } from './AuthContext';
 
 export default function SignOutButton() {
   const theme = useCustomTheme();
-  const { signOut } = useSession();
+  const router = useRouter();
+  const [signOut, { isLoading, isError }] = useSignOutMutation();
 
   return (
     <TouchableOpacity

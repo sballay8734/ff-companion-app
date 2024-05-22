@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, View, AppState } from 'react-native';
 import { supabase } from '../lib/supabase';
 import { Button, Input } from 'react-native-elements';
-import { useSession } from './AuthContext';
+import { useSignInWithEmailMutation, useSignUpWithEmailMutation } from '~/store/api/appApi';
+// import { useSession } from './AuthContext';
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -19,7 +20,8 @@ AppState.addEventListener('change', (state) => {
 export default function EmailPassword() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signInWithEmail, signUpWithEmail, isLoading } = useSession();
+  const [signInWithEmail, { isLoading: signInLoading }] = useSignInWithEmailMutation();
+  const [signUpWithEmail, { isLoading: signUpLoading }] = useSignUpWithEmailMutation();
 
   return (
     <View style={styles.container}>
@@ -47,15 +49,15 @@ export default function EmailPassword() {
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
           title="Sign in"
-          disabled={isLoading}
-          onPress={() => signInWithEmail(email, password)}
+          disabled={signInLoading || signUpLoading}
+          onPress={() => signInWithEmail({ email, password })}
         />
       </View>
       <View style={styles.verticallySpaced}>
         <Button
           title="Sign up"
-          disabled={isLoading}
-          onPress={() => signUpWithEmail(email, password)}
+          disabled={signInLoading || signUpLoading}
+          onPress={() => signUpWithEmail({ email, password })}
         />
       </View>
     </View>

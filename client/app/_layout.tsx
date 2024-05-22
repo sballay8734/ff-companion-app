@@ -1,6 +1,6 @@
 import { store } from '~/store/store';
 import { Slot } from 'expo-router';
-import { SessionProvider } from '~/auth/AuthContext';
+// import { SessionProvider } from '~/auth/AuthContext';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
 import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
@@ -35,21 +35,21 @@ export default function Root() {
   }
 
   return (
-    <SessionProvider>
-      <Provider store={store}>
-        <ThemeProvider value={theme}>
-          <SafeAreaProvider style={{ ...styles.root, backgroundColor: theme.colors.background }}>
-            <SafeAreaView style={{ flex: 1 }} edges={['right', 'left']} onLayout={onLayoutRootView}>
-              <Slot />
-              <ModalLogout />
-              <LoadingSpinner />
-              <Toast config={toastConfig} />
-            </SafeAreaView>
-          </SafeAreaProvider>
-          <StatusBar style={'light'} />
-        </ThemeProvider>
-      </Provider>
-    </SessionProvider>
+    // <SessionProvider>
+    <Provider store={store}>
+      <ThemeProvider value={theme}>
+        <SafeAreaProvider style={{ ...styles.root, backgroundColor: theme.colors.background }}>
+          <SafeAreaView style={{ flex: 1 }} edges={['right', 'left']} onLayout={onLayoutRootView}>
+            <Slot />
+            <ModalLogout />
+            <LoadingSpinner />
+            <Toast config={toastConfig} />
+          </SafeAreaView>
+        </SafeAreaProvider>
+        <StatusBar style={'light'} />
+      </ThemeProvider>
+    </Provider>
+    // </SessionProvider>
   );
 }
 

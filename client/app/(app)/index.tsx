@@ -12,45 +12,27 @@ import {
   showLoadingSpinner,
 } from '~/store/features/LoadingSpinner/loadingSpinnerSlice';
 import SignOutButton from '~/auth/SignOutButton';
-import { useSession } from '~/auth/AuthContext';
-import { useGetUserProfileQuery } from '~/store/api/appApi';
+// import { useSession } from '~/auth/AuthContext';
+import { useGetExistingSessionQuery, useGetUserProfileQuery } from '~/store/api/appApi';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import { useEffect } from 'react';
 
 export default function HomePage() {
-  const { session } = useSession();
+  // const { session } = useSession();
   const theme = useCustomTheme();
   const dispatch = useAppDispatch();
+  const { data: session } = useGetExistingSessionQuery();
 
-  const userId = session?.user.id;
+  const userId = session.session?.user.id;
   const { data, isLoading, isError } = useGetUserProfileQuery(userId || '');
-
-  // REMOVE: Temporary - Just to make styling easier
-  function temporarySpin() {
-    dispatch(showLoadingSpinner());
-
-    setTimeout(() => {
-      dispatch(hideLoadingSpinner());
-    }, 2000);
-  }
 
   // REMOVE: Testing
   function showTestToast(obj: ToastShowParams) {
     Toast.show(obj);
   }
 
-  // !TODO: Error and loading handling needs to be improved.
-
-  // !TODO: This screen should not be popping up briefly for loading. This was just for testing
-  if (isError || !data) {
-    // Handle error case
-    return (
-      <View>
-        <Text>ERROR</Text>
-      </View>
-    );
-  }
-
-  // useLoadingSpinner(isLoading);
+  // TODO: Loading should happen before navigate
+  useLoadingSpinner(isLoading);
 
   return (
     <SafeAreaView edges={['right', 'left']}>
@@ -96,8 +78,6 @@ export default function HomePage() {
         </View>
 
         <Button title="Hit 'get' endpoint" onPress={() => console.error('Disabled')} />
-
-        <Button title="Show Spinner" onPress={() => temporarySpin()} />
       </View>
     </SafeAreaView>
   );

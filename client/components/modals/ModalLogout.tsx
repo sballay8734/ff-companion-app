@@ -5,19 +5,18 @@ import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useRouter } from 'expo-router';
-import { useSession } from '../../auth/AuthContext';
 import { pageContainerPadding } from '~/constants/themes';
+import { useSignOutMutation } from '~/store/api/appApi';
 
 export default function ModalLogout() {
   const isVisible = useAppSelector((state: RootState) => state.modalLogout.isVisible);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const theme = useCustomTheme();
-  const { signOut } = useSession();
 
   // TODO: Eventually move logic to ReduxAPI (waiting on decision for backend)
   async function handleLogout() {
-    signOut();
+    useSignOutMutation();
     dispatch(hideLogoutModal());
   }
 

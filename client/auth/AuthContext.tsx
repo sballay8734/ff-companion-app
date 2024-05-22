@@ -10,7 +10,7 @@ const AuthContext = React.createContext<{
   signInWithEmail: (email: string, password: string) => Promise<void>;
   signUpWithEmail: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
-  getUserProfile: (userId: string) => Promise<void>;
+  setUserProfile: (userId: string) => Promise<void>;
   session: Session | null;
   isLoading: boolean;
   user: UserProfile | null;
@@ -18,7 +18,7 @@ const AuthContext = React.createContext<{
   signInWithEmail: async () => Promise.resolve(),
   signUpWithEmail: async () => Promise.resolve(),
   signOut: async () => Promise.resolve(),
-  getUserProfile: async () => Promise.resolve(),
+  setUserProfile: async () => Promise.resolve(),
   session: null,
   isLoading: false,
   user: null,
@@ -42,23 +42,23 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const [user, setUser] = React.useState<UserProfile | null>(null);
   const router = useRouter();
 
-  console.log('SESSION:', session);
-  console.log('USER:', user);
-
   //   // First, check for existing session
   React.useEffect(() => {
     const getExistingSession = async () => {
+      setIsLoading(true);
       try {
         const {
           data: { session },
         } = await supabase.auth.getSession();
         if (session) {
-          getUserProfile(session.user.id);
           setSession(session);
+          setUserProfile(session.user.id);
         }
       } catch (error) {
         console.error('Error getting existing session:', error);
         setSession(null);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -68,9 +68,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
         setSession(session);
-        router.replace('/(app)');
-      } else {
-        router.replace('/');
+        setUserProfile(session.user.id);
       }
     });
 
@@ -90,7 +88,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         Toast.show(toastError.login);
       } else if (session) {
         // get user profile
-        getUserProfile(session.user.id);
+        await setUserProfile(session.user.id);
         setSession(session);
         Toast.show(success.login);
       }
@@ -146,7 +144,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
   };
 
   // void because your not returning, just setting state
-  async function getUserProfile(userId: string): Promise<void> {
+  async function setUserProfile(userId: string): Promise<void> {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -173,7 +171,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         signInWithEmail,
         signUpWithEmail,
         signOut,
-        getUserProfile,
+        setUserProfile,
         session,
         isLoading,
         user,

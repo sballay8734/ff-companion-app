@@ -8,12 +8,22 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
-import { StyleSheet, useColorScheme } from 'react-native';
+import { AppState, StyleSheet, useColorScheme } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import ModalLogout from '~/components/modals/ModalLogout';
 import LoadingSpinner from '~/components/modals/LoadingSpinner';
 import Toast from 'react-native-toast-message';
 import { toastConfig } from '~/config/toastStyleConfig';
+import { supabase } from '~/lib/supabase';
+
+// Tells Supabase Auth to continuously refresh the session automatically if the app is in the foreground. When this is added, you will continue to receive `onAuthStateChange` events with the `TOKEN_REFRESHED` or `SIGNED_OUT` event if the user's session is terminated. This should only be registered once.
+AppState.addEventListener('change', (state) => {
+  if (state === 'active') {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
 
 export default function Root() {
   const colorScheme = useColorScheme();

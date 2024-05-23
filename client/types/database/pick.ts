@@ -1,5 +1,9 @@
+// !TODO: Parlays and Teasers to be added later (Will likely need new tables)
+
 // WAGERS ******************************************************
 // TODO: Do you allow props to update?
+// TODO: Add "payout on a dollar" for readability like you did for lloea
+// (-110 => 0.91) so, "bet a dollar, win 91 cents"
 
 interface MoneyLine {
   id: string;
@@ -147,15 +151,16 @@ export interface BettingProp {
   sport: string;
   prop_type: 'moneyline' | 'spread' | 'over_under' | 'player_prop';
 
-  home_team_id?: string;
+  // NOTE: Not sure if api will provide team id or player id (they should)
+  // home_team_id?: string;
   home_team_name?: string;
-  away_team_id?: string;
+  // away_team_id?: string;
   away_team_name?: string;
 
   team_id?: string;
-  team_name?: string;
+  team_name?: string; // if bet is on a single team
 
-  player_id?: string;
+  // player_id?: string;
   player_name?: string;
 
   favorite?: string;
@@ -173,21 +178,22 @@ export interface BettingProp {
   over_odds?: number;
   under_odds?: number;
 
-  favorite_implied_prob?: number;
-  underdog_implied_prob?: number;
-  home_team_implied_prob?: number;
-  away_team_implied_prob?: number;
-  over_implied_prob?: number;
-  under_implied_prob?: number;
+  favorite_implied_prob?: number; // FLOAT4
+  underdog_implied_prob?: number; // FLOAT4
+  home_team_implied_prob?: number; // FLOAT4
+  away_team_implied_prob?: number; // FLOAT4
+  over_implied_prob?: number; // FLOAT4
+  under_implied_prob?: number; // FLOAT4
 
-  stat_type?: string;
+  stat_type?: string; // points, runs, yards, fgm, etc...
 
   home_team_final_score?: number;
   away_team_final_score?: number;
-  team_final_stat?: number;
-  player_final_stat?: number;
+  team_final_stat?: number; // for single team
+  player_final_stat?: number; // for single player
 
-  winner?: string | 'over' | 'under' | 'push';
+  result?: 'over' | 'under' | 'push';
+  winner?: string;
 
   voided: boolean;
   void_reason?: string;

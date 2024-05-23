@@ -42,7 +42,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const [user, setUser] = React.useState<UserProfile | null>(null);
   const router = useRouter();
 
-  //   // First, check for existing session
+  // First, check for existing session
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {

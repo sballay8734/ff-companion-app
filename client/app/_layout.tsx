@@ -44,6 +44,8 @@ export default function Root() {
     return null;
   }
 
+  console.log('Loading root _layout...');
+
   return (
     <SessionProvider>
       <Provider store={store}>

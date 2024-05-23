@@ -10,7 +10,6 @@ export const useLoadingSpinner = (isLoading: boolean) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // console.log('isLoading', isLoading);
     if (isLoading) {
       dispatch(showLoadingSpinner());
     } else {

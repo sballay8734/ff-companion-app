@@ -12,8 +12,6 @@ export default function HomePage() {
   const theme = useCustomTheme();
   const { session, isLoading, user } = useSession();
 
-  console.log('Loading (app) index...');
-
   useLoadingSpinner(isLoading);
 
   return (

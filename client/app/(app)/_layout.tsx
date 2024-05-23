@@ -14,8 +14,6 @@ export default function AppLayout() {
   const theme = useCustomTheme();
   const router = useRouter();
 
-  console.log('Loading (app) _layout...');
-
   useEffect(() => {
     if (!session || !user) {
       router.replace('/');

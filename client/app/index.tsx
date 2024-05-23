@@ -16,8 +16,6 @@ export default function Index() {
   const router = useRouter();
   const { session, user, isLoading } = useSession();
 
-  console.log('Loading root index...');
-
   useEffect(() => {
     if (session && user) {
       router.replace('/(app)');

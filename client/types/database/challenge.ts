@@ -1,20 +1,20 @@
 // Challenges ******************************************************
-// TODO: Need to add challenges also. You only added custom challenges
 interface Challenge {
+  leagueId: string;
   proposerId: string; // userId
   acceptorId: string; // userId
 
   proposerName: string;
   acceptorName: string;
 
-  proposerSelection: string;
-  acceptorSelection: string;
+  proposerSelection: string; // mTODO: Need to contstrain these in Supabase
+  acceptorSelection: string; // mTODO: Need to contstrain these in Supabase
 
   acceptedAt?: Date;
   settledAt?: Date;
 
   dateProposed: Date;
-  expiration: Date;
+  expiration: Date; // Proposer sets expiration when submitting
 
   propId: string;
   wagerAmount: number;
@@ -30,9 +30,11 @@ interface Challenge {
   proposerPayout: number;
   acceptorPayout: number;
 
+  voided: boolean;
+
   voidReason?: string;
 
-  status: string; // proposed, accepted, rejected, expired, settled, voided
+  status: string; // proposed, accepted, rejected, expired, settled, voided // mTODO: Need to contstrain these in supabase
 
   outcome: string; // score of game, total points of player, etc...
 
@@ -48,6 +50,7 @@ interface Challenge {
 // nobody else can accept the bet until the challenged owner has broadcasted it.
 
 interface CustomChallenge {
+  leagueId: string;
   proposerId: string; // userId
   challengedId: string; // userId
   acceptorId: string; // userId

@@ -1,27 +1,30 @@
 // Proposals for rule changes or other...
 interface Proposal {
   id: string;
-  proposer: string; // userId
+  leagueId: string;
+
+  proposerId: string; // userId
   proposerName: string;
-  title: string;
+  proposal_title: string;
   description: string;
+
   dateProposed: Date;
-  votingStartDate: Date;
-  votingEndDate: Date;
+  votingStartDate: Date; // only editable by commissioner
+  votingEndDate: Date; // only editable by commissioner
+
   status: string; // pending, active, passed, rejected, approved
   category: string; // rule change, league structure, scoring system, prize distribution, social events, traditions, other
 
   // Voting
-  upVoters: string[]; // userIds of users who voted in favor
-  downVoters: string[]; // userIds of users who voted against
+  upVoters: string[];
+  downVoters: string[];
 
   // Discussion (not sure this is neccessary)
-  comments?: Comment[];
+  // comments?: Comment[];
 
   // Resolution
-  resolution?: string;
-  resolutionDate?: Date;
-  implementationDate?: Date;
+  resolutionDate?: Date; // when decision is finalized
+  implementationDate?: Date; // immediately, or in the future
 }
 
 interface Comment {

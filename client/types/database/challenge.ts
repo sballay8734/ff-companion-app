@@ -1,3 +1,9 @@
+// TODO IN SUPABASE
+// TODO: picks (possibly multiple shapes - so do last)
+// TODO: records (possibly multiple shapes - so do last)
+
+// !TODO: All constraints, types, and foreign keeys need to be double checked. You are currently in the testing phase and setting things up quickly
+
 // Challenges ******************************************************
 interface Challenge {
   leagueId: string;
@@ -7,8 +13,8 @@ interface Challenge {
   proposerName: string;
   acceptorName: string;
 
-  proposerSelection: string; // mTODO: Need to contstrain these in Supabase
-  acceptorSelection: string; // mTODO: Need to contstrain these in Supabase
+  proposerSelection: string;
+  acceptorSelection: string;
 
   acceptedAt?: Date;
   settledAt?: Date;
@@ -34,7 +40,7 @@ interface Challenge {
 
   voidReason?: string;
 
-  status: string; // proposed, accepted, rejected, expired, settled, voided // mTODO: Need to contstrain these in supabase
+  status: string; // proposed, accepted, rejected, expired, settled, voided
 
   outcome: string; // score of game, total points of player, etc...
 

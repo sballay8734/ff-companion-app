@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Session } from '@supabase/supabase-js';
 import { supabase } from '~/lib/supabase';
 import { useRouter } from 'expo-router';
@@ -43,38 +43,20 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const router = useRouter();
 
   //   // First, check for existing session
-  React.useEffect(() => {
-    const getExistingSession = async () => {
-      setIsLoading(true);
-      try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession();
-        if (session) {
-          setSession(session);
-          setUserProfile(session.user.id);
-        }
-      } catch (error) {
-        console.error('Error getting existing session:', error);
-        setSession(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    getExistingSession();
-
-    // listen for auth state changes
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
         setSession(session);
         setUserProfile(session.user.id);
       }
     });
 
-    return () => {
-      listener?.subscription.unsubscribe();
-    };
+    supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        setSession(session);
+        setUserProfile(session.user.id);
+      }
+    });
   }, []);
 
   const signInWithEmail = async (email: string, password: string) => {

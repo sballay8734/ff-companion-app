@@ -2,7 +2,7 @@ import { DrawerToggleButton } from '@react-navigation/drawer';
 import { Redirect, useRouter } from 'expo-router';
 import Drawer from 'expo-router/drawer';
 import { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useSession } from '~/auth/AuthContext';

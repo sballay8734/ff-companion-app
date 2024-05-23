@@ -11,8 +11,6 @@ import { useEffect } from 'react';
 
 // !TODO: Need to smooth behavior on app refresh or app load (When session exists). Currently the login form is shown breifly before the proper navigation happens. NOT IDEAL - something is not right with the way the session provider is working I think. "You keep getting Attempt to navigate before mounting Root" errors when trying to change the routing behavior
 
-// REVIEW: Does root _layout.tsx go to the root index.tsx or to (app)/_layout.tsx?
-
 export default function Index() {
   const theme = useCustomTheme();
   const router = useRouter();

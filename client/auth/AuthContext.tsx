@@ -38,25 +38,36 @@ export function useSession() {
 
 export function SessionProvider(props: React.PropsWithChildren) {
   const [session, setSession] = React.useState<Session | null>(null);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [user, setUser] = React.useState<UserProfile | null>(null);
   const router = useRouter();
 
   // First, check for existing session
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const fetchData = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (session) {
+        await setUserProfile(session.user.id);
         setSession(session);
-        setUserProfile(session.user.id);
       }
+      setIsLoading(false); // Set loading to false after fetching session and user data
+    };
+
+    fetchData();
+
+    const subscription = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session) {
+        await setUserProfile(session.user.id);
+        setSession(session);
+      }
+      setIsLoading(false);
     });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        setSession(session);
-        setUserProfile(session.user.id);
-      }
-    });
+    return () => {
+      subscription.data.subscription.unsubscribe();
+    };
   }, []);
 
   const signInWithEmail = async (email: string, password: string) => {

@@ -17,6 +17,8 @@
     "@react-navigation/drawer": "^6.6.6",
     "@react-navigation/native": "^6.1.7",
     "@reduxjs/toolkit": "^2.2.3",
+    "@rneui/base": "^0.0.0-edge.2",
+    "@rneui/themed": "^0.0.0-edge.2",
     "@shopify/react-native-skia": "^1.2.3",
     "@supabase/supabase-js": "^2.43.2",
     "expo": "^50.0.17",

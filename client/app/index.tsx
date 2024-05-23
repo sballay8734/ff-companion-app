@@ -1,15 +1,14 @@
-import { Link, Redirect, useRouter } from 'expo-router';
-import { View, Image, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { useSession } from '~/auth/AuthContext';
+import { useEffect } from 'react';
 
 import SignInWithApple from '~/auth/SignInApple';
 import SignInWithOAuth from '~/auth/SignInOAuth';
 import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import EmailPassword from '~/auth/EmailPassword';
-import { useEffect } from 'react';
-
-// !TODO: Need to smooth behavior on app refresh or app load (When session exists). Currently the login form is shown breifly before the proper navigation happens. NOT IDEAL - something is not right with the way the session provider is working I think. "You keep getting Attempt to navigate before mounting Root" errors when trying to change the routing behavior
+import LoadingSkeleton from '~/components/LoadingSkeleton';
 
 export default function Index() {
   const theme = useCustomTheme();
@@ -17,10 +16,14 @@ export default function Index() {
   const { session, user, isLoading } = useSession();
 
   useEffect(() => {
-    if (session && user) {
+    if (!isLoading && session) {
       router.replace('/(app)');
     }
-  }, [session, user]);
+  }, [isLoading, session]);
+
+  // !TODO: THIS IS THE ISSUE HERE. A race condition. On initial load, "user" and "session" are briefly null which is why the page does not immediately redirect in the useEffect vvvvvvvv
+  // console.log('SESSION:', session);
+  // console.log('USER:', user);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

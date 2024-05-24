@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
 
 // TODO: Double check "Is Nullable" values for db
 
+// TODO: Need to make matchups Realtime DB
+
 // mTODO: Dynasty league support? Do you need it and how would you implement it?
 
 // mTODO: Add light theme colors

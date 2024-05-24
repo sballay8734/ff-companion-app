@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// mTODO: use login/logout/signup naming convention
+
 // TODO: Toasts that require action should also render overlay (global error management)
 
 // TODO: Set up DB

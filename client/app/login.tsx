@@ -8,7 +8,6 @@ import SignInWithOAuth from '~/auth/SignInOAuth';
 import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import EmailPassword from '~/auth/EmailPassword';
-import LoadingSkeleton from '~/components/LoadingSkeleton';
 
 export default function Login() {
   const theme = useCustomTheme();

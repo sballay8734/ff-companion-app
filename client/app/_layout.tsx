@@ -63,13 +63,9 @@ const styles = StyleSheet.create({
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
 // TODO: Toasts that require action should also render overlay (global error management)
 
-// TODO: Weird glitchy behavior when navigating from Sign In to Sign Up
-
 // TODO: Set up DB
 
 // TODO: Add apple, google, authentication methods
-
-// TODO: Style new email/password login
 
 // !TODO: You disabled email confirmation because of free account rate limiting on SupaBase. You need to re-enable it in production.
 
@@ -78,8 +74,6 @@ const styles = StyleSheet.create({
 // TODO: Bot signup protection (Within supabase)
 
 // TODO: Search for all "color" fields and replace with theme.colors.SOMETHING
-
-// TODO: Login/Logout Toasts should ideally happen after navigate (possible a Clerk limitation)
 
 // !TODO: Replace all Touchable Opacity with Pressables (Docs recommend this)
 

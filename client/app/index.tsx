@@ -1,14 +1,10 @@
-import { Link, Redirect, useRouter } from 'expo-router';
-import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
-import { useSession } from '~/auth/AuthContext';
-import { useEffect } from 'react';
+import { Redirect, useRouter } from 'expo-router';
+import { View, Image, StyleSheet, ActivityIndicator } from 'react-native';
 
-import SignInWithApple from '~/auth/SignInApple';
-import SignInWithOAuth from '~/auth/SignInOAuth';
-import { Text, pageContainerPadding } from '~/constants/themes';
+import { LinearProgress } from '@rneui/base';
+import { useSession } from '~/auth/AuthContext';
+import { pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import EmailPassword from '~/auth/EmailPassword';
-import LoadingSkeleton from '~/components/LoadingSkeleton';
 
 export default function Index() {
   const theme = useCustomTheme();
@@ -18,7 +14,11 @@ export default function Index() {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <Text>Loading...</Text>
+        <ActivityIndicator
+          style={{ position: 'absolute', zIndex: 2 }}
+          color={theme.colors.secondary}
+        />
+        <Image style={styles.heroImage} source={require('../assets/football.png')} />
       </View>
     );
   }
@@ -38,5 +38,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: pageContainerPadding,
+    position: 'relative',
+  },
+  heroImage: {
+    resizeMode: 'cover',
+    height: 125,
+    width: 125,
   },
 });

@@ -59,7 +59,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
     // make sure session is updated on logout
     const subscription = supabase.auth.onAuthStateChange(async (_event, session) => {
-      console.log('Running this also...');
       if (session) {
         await setUserProfile(session.user.id);
         setSession(session);

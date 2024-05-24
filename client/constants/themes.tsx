@@ -124,41 +124,42 @@ export const AppLightTheme: CustomTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#38bdf8',
-    primaryContent: '#030d15',
+    primary: '#419400',
+    primaryContent: '#040a00',
 
-    secondary: '#818cf8',
-    secondaryContent: '#080915',
+    secondary: '#bdc000',
+    secondaryContent: '#0d0e00',
 
-    accent: '#f471b5',
-    accentContent: '#15070d',
+    accent: '#edd000',
+    accentContent: '#140f00',
 
-    neutral: '#1e2a3b',
-    neutralContent: '#cdcfd5',
+    neutral: '#343200',
+    neutralContent: '#d2d2c7',
 
-    base100: '#0f182a',
-    base200: '#0d1425',
-    base300: '#0a1121', // background
-    baseText: '#c8cbd0', // main text (headers)
+    base100: '#f8fdef',
+    base200: '#e1e7d8',
+    base300: '#cbcfc4', // background
+    baseText: '#151614', // main text (headers)
+
+    // mTODO: Might need to adjust the 4 below
     baseTextFaded: '#c8cbd0', // main text (paragraphs under headers)
     baseTextXFaded: '#71757f', // faded text
-
     disabledText: '#484c5a',
     inputBorder: '#3b4250',
 
-    info: '#0ba5e9',
-    infoContent: '#000000',
+    info: '#b1d9e8',
+    infoContent: '#0b1114',
 
-    success: '#2dd4bf',
-    successContent: '#02110e',
+    success: '#b9dbc6',
+    successContent: '#0d110e',
 
-    warning: '#f4bf50',
-    warningContent: '#150e05',
+    warning: '#d8d3b0',
+    warningContent: '#11110b',
 
-    error: '#fb7085',
-    errorContent: '#150708',
+    error: '#efc6c2',
+    errorContent: '#140e0e',
 
-    background: '#0a1121',
+    background: '#cbcfc4',
 
     // SPECIAL *****************************************************************
     appleBg: '#000000',

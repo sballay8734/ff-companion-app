@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// TODO: Toasts that require action should also render overlay (global error management)
+
 // TODO: Weird glitchy behavior when navigating from Sign In to Sign Up
 
 // TODO: Set up DB

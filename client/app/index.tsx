@@ -1,4 +1,4 @@
-import { Link, useRouter } from 'expo-router';
+import { Link, Redirect, useRouter } from 'expo-router';
 import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { useSession } from '~/auth/AuthContext';
 import { useEffect } from 'react';
@@ -13,64 +13,21 @@ import LoadingSkeleton from '~/components/LoadingSkeleton';
 export default function Index() {
   const theme = useCustomTheme();
   const router = useRouter();
-  const { session, user, isLoading } = useSession();
+  const { session, isLoading } = useSession();
 
-  useEffect(() => {
-    if (!isLoading && session) {
-      router.replace('/(app)');
-    }
-  }, [isLoading, session]);
-
-  // !TODO: THIS IS THE ISSUE HERE. A race condition. On initial load, "user" and "session" are briefly null which is why the page does not immediately redirect in the useEffect vvvvvvvv
-  // console.log('SESSION:', session);
-  // console.log('USER:', user);
-
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
+  if (isLoading) {
+    return (
       <View style={styles.container}>
-        <View style={styles.heroSection}>
-          <Image style={styles.heroImage} source={require('../assets/football.png')} />
-        </View>
-        <View style={styles.onBoarding}>
-          <Text
-            style={{
-              ...styles.welcome,
-              fontFamily: 'RobotoBlack',
-              color: theme.colors.baseText,
-            }}>
-            Welcome Back
-          </Text>
-          <Text
-            style={{
-              ...styles.message,
-              fontFamily: 'RobotoMono',
-              color: theme.colors.baseTextXFaded,
-            }}>
-            Log in to your account
-          </Text>
-          <View
-            style={{
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              width: '100%',
-              flexGrow: 1,
-            }}>
-            <EmailPassword />
-            <View style={{ width: '100%' }}>
-              <SignInWithOAuth />
-              <SignInWithApple />
-              <View style={styles.noAccount}>
-                <Text style={{ color: theme.colors.baseTextXFaded }}>Don't have an account?</Text>
-                <Link style={{ ...styles.link, color: theme.colors.accent }} href="/register">
-                  Sign up
-                </Link>
-              </View>
-            </View>
-          </View>
-        </View>
+        <Text>Loading...</Text>
       </View>
-    </SafeAreaView>
-  );
+    );
+  }
+
+  if (!session) {
+    return <Redirect href={'/login'} />;
+  }
+
+  return <Redirect href={'/(app)'} />;
 }
 
 const styles = StyleSheet.create({
@@ -81,50 +38,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: pageContainerPadding,
-  },
-  heroSection: {
-    flexGrow: 3,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  heroImage: {
-    resizeMode: 'cover',
-    height: 125,
-    width: 125,
-  },
-  onBoarding: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    // justifyContent: 'space-between',
-    flexGrow: 4,
-  },
-  link: {
-    fontWeight: 'bold',
-  },
-  noAccount: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-    gap: 4,
-  },
-  welcome: {
-    fontSize: 40,
-  },
-  message: {
-    paddingTop: 20,
-    paddingBottom: 30,
-  },
-  divider: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-    width: '100%',
-    marginTop: 10,
   },
 });

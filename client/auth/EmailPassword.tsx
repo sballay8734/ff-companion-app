@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Pressable, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
-import { Button, Input } from 'react-native-elements';
+import { Button, Input, Overlay } from 'react-native-elements';
 import { useSession } from './AuthContext';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
+import Toast from 'react-native-toast-message';
 
 export default function EmailPassword() {
   const theme = useCustomTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signInWithEmail, signUpWithEmail, signOut, isLoading } = useSession();
+
+  const { signInWithEmail, isLoading } = useSession();
 
   const [emailIsFocused, setEmailIsFocused] = useState<boolean>(false);
   const [passIsFocused, setPassIsFocused] = useState<boolean>(false);
@@ -26,8 +28,6 @@ export default function EmailPassword() {
   // REVIEW: Views to wrap inputs, it seems to have poor performance I think
 
   // !TODO: Before laying lots of things out, make sure to handle the keyboard showing everywhere
-
-  // !TODO: FIRST ON FRI - FIX GLITCHING WHEN SWITCHING FROM SIGN UP (IT's related to the inputs/padding/available space, it flexes big then shrinks to fit the safearea)
 
   return (
     <View style={styles.container}>
@@ -49,13 +49,15 @@ export default function EmailPassword() {
           placeholderTextColor={theme.colors.disabledText}
           autoCapitalize="none"
           autoComplete="off"
-          autoFocus={true}
+          // TODO: autoFocus causes flickering but you do want it
+          // autoFocus={true}
           value={email}
           placeholder="Email address"
           onChangeText={(text) => setEmail(text)}
           style={{ color: theme.colors.baseText }}
           onFocus={() => setEmailIsFocused(true)}
           onBlur={() => setEmailIsFocused(false)}
+          maxLength={25}
         />
       </View>
       <View
@@ -83,6 +85,7 @@ export default function EmailPassword() {
           onChangeText={(text) => setPassword(text)}
           onFocus={() => setPassIsFocused(true)}
           onBlur={() => setPassIsFocused(false)}
+          maxLength={25}
         />
       </View>
       <TouchableOpacity
@@ -95,13 +98,6 @@ export default function EmailPassword() {
           Forgot password?
         </Text>
       </TouchableOpacity>
-      {/* <View style={styles.verticallySpaced}>
-        <Button
-          title="Sign up"
-          disabled={isLoading}
-          onPress={() => signUpWithEmail(email, password)}
-        />
-      </View> */}
     </View>
   );
 }
@@ -110,6 +106,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 0,
     padding: 0,
+    display: 'flex',
     // flexDirection: 'column',
     gap: 6,
   },

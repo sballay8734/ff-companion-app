@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// !TODO: FIRST FRIDAY - Using logout modal does not hide loading spinner
 // mTODO: use login/logout/signup naming convention
 
 // TODO: Toasts that require action should also render overlay (global error management)

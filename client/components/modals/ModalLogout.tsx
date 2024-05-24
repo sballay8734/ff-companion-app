@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useRouter } from 'expo-router';
 import { pageContainerPadding } from '~/constants/themes';
 import { useSession } from '~/auth/AuthContext';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function ModalLogout() {
   const isVisible = useAppSelector((state: RootState) => state.modalLogout.isVisible);

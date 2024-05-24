@@ -50,6 +50,7 @@ export type CustomTheme = Theme & {
     googleBg: string;
     black: string;
     white: string;
+    admin: string;
   };
 };
 
@@ -100,6 +101,7 @@ export const AppDarkTheme: CustomTheme = {
     googleBg: '#4c8cf2',
     black: '#000000',
     white: '#ffffff',
+    admin: '#e04034',
 
     // OLD
     // primaryText: '#FFFFFF',

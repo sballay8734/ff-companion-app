@@ -21,7 +21,7 @@ export default function Register() {
             style={{
               ...styles.welcome,
               fontFamily: 'RobotoBlack',
-              color: theme.colors.primaryText,
+              color: theme.colors.baseText,
             }}>
             Hi there!
           </Text>
@@ -29,7 +29,7 @@ export default function Register() {
             style={{
               ...styles.message,
               fontFamily: 'RobotoMono',
-              color: theme.colors.secondaryText,
+              color: theme.colors.baseTextXFaded,
             }}>
             Let's set up your account
           </Text>
@@ -52,17 +52,17 @@ export default function Register() {
                   marginBottom: 10,
                   paddingVertical: 10,
                 }}>
-                <Text style={{ textAlign: 'center', marginBottom: 10 }}>
+                <Text style={{ textAlign: 'center', marginBottom: 10, color: 'red' }}>
                   EMAIL MUST MATCH EMAIL USED ON FANTASY PLATFORM
                 </Text>
-                <Text>ACCOUNT ID ALSO NEEDS TO BE ENTERED</Text>
+                <Text style={{ color: 'red' }}>ACCOUNT ID ALSO NEEDS TO BE ENTERED</Text>
               </View>
               {/* REMOVE: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
               <SignInWithOAuth />
               <SignInWithApple />
               <View style={styles.noAccount}>
-                <Text style={{ color: theme.colors.disabledText }}>Already have an account?</Text>
-                <Link style={{ ...styles.link, color: theme.colors.primary }} href="/">
+                <Text style={{ color: theme.colors.baseTextXFaded }}>Already have an account?</Text>
+                <Link style={{ ...styles.link, color: theme.colors.accent }} href="/">
                   Log in
                 </Link>
               </View>

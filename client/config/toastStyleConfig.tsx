@@ -9,6 +9,24 @@ import Toast, {
 } from 'react-native-toast-message';
 
 const padding = 15;
+const backgroundColor = '#1e2a3b'; // base100
+const borderColor = '#374254';
+
+const successBorderLeftColor = '#2dd4bf'; // success
+const successTextColor = '#2dd4bf'; // success
+const successIconColor = '#2dd4bf'; // success
+
+const errorBorderLeftColor = '#fb7085'; // error
+const errorTextColor = '#fb7085'; // error
+const errorIconColor = '#fb7085'; // error
+
+const infoBorderLeftColor = '#0ba5e9'; // info
+const infoTextColor = '#0ba5e9'; // info
+const infoIconColor = '#0ba5e9'; // info
+
+const warningBorderLeftColor = '#f4bf50'; // warning
+const warningTextColor = '#f4bf50'; // warning
+const warningIconColor = '#f4bf50'; // warning
 
 export const toastConfig = {
   /*
@@ -21,16 +39,16 @@ export const toastConfig = {
     <BaseToast
       {...props}
       style={{
-        borderLeftColor: '#57ff47',
-        backgroundColor: '#242636',
-        borderColor: '#3b3e57',
+        borderLeftColor: successBorderLeftColor,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (
         <AntDesign
           name="checkcircle"
           size={24}
-          color="#57ff47"
+          color={successIconColor}
           style={{
             display: 'flex',
             alignSelf: 'center',
@@ -44,7 +62,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: '#57ff47',
+        color: successTextColor,
       }}
     />
   ),
@@ -56,23 +74,23 @@ export const toastConfig = {
     <ErrorToast
       {...props}
       style={{
-        borderLeftColor: '#ff4255',
-        backgroundColor: '#242636',
-        borderColor: '#3b3e57',
+        borderLeftColor: errorBorderLeftColor,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (
         <AntDesign
           name="closecircle"
           size={24}
-          color="#ff4255"
+          color={errorIconColor}
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
       renderTrailingIcon={() => (
         <View style={styles.trailingIconContainer}>
           <TouchableOpacity onPress={() => Toast.hide()}>
-            <AntDesign name="close" size={20} color="#3b3e57" style={styles.trailingIcon} />
+            <AntDesign name="close" size={20} color="#374254" style={styles.trailingIcon} />
           </TouchableOpacity>
         </View>
       )}
@@ -82,7 +100,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: '#ff4255',
+        color: errorTextColor,
       }}
     />
   ),
@@ -94,23 +112,23 @@ export const toastConfig = {
     <InfoToast
       {...props}
       style={{
-        borderLeftColor: '#597dff',
-        backgroundColor: '#242636',
-        borderColor: '#3b3e57',
+        borderLeftColor: infoBorderLeftColor,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (
         <AntDesign
           name="infocirlce"
           size={24}
-          color="#597dff"
+          color={infoIconColor}
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
       renderTrailingIcon={() => (
         <View style={styles.trailingIconContainer}>
           <TouchableOpacity onPress={() => Toast.hide()}>
-            <AntDesign name="close" size={20} color="#3b3e57" style={styles.trailingIcon} />
+            <AntDesign name="close" size={20} color="#374254" style={styles.trailingIcon} />
           </TouchableOpacity>
         </View>
       )}
@@ -120,7 +138,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: '#597dff',
+        color: infoTextColor,
       }}
     />
   ),
@@ -130,23 +148,23 @@ export const toastConfig = {
     <InfoToast
       {...props}
       style={{
-        borderLeftColor: '#fff945',
-        backgroundColor: '#242636',
-        borderColor: '#3b3e57',
+        borderLeftColor: warningBorderLeftColor,
+        backgroundColor: backgroundColor,
+        borderColor: borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (
         <AntDesign
           name="exclamationcircle"
           size={24}
-          color="#fff945"
+          color={warningIconColor}
           style={{ display: 'flex', alignSelf: 'center', paddingLeft: padding }}
         />
       )}
       renderTrailingIcon={() => (
         <View style={styles.trailingIconContainer}>
           <TouchableOpacity onPress={() => Toast.hide()}>
-            <AntDesign name="close" size={20} color="#3b3e57" style={styles.trailingIcon} />
+            <AntDesign name="close" size={20} color="#374254" style={styles.trailingIcon} />
           </TouchableOpacity>
         </View>
       )}
@@ -156,7 +174,7 @@ export const toastConfig = {
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        color: '#fff945',
+        color: warningTextColor,
       }}
     />
   ),
@@ -208,7 +226,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 60,
     borderLeftWidth: 1,
-    borderLeftColor: '#2b2c40',
+    borderLeftColor: '#374254',
   },
   trailingIcon: {},
 });

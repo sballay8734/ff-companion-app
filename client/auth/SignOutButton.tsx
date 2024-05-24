@@ -18,18 +18,18 @@ export default function SignOutButton() {
 
   return (
     <TouchableOpacity
-      style={{ ...styles.btn, backgroundColor: theme.colors.admin }}
+      style={{ ...styles.btn, backgroundColor: theme.colors.accent }}
       onPress={() => signOut()}>
-      <Text>Logout</Text>
+      <Text>LOGOUT</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   btn: {
-    borderColor: 'red',
-    borderWidth: 1,
-    borderRadius: 10,
+    // borderColor: 'red',
+    // borderWidth: 1,
+    borderRadius: 5,
     paddingVertical: 18,
     paddingHorizontal: 6,
     width: '100%',

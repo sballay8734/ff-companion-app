@@ -31,7 +31,7 @@ export default function AppLayout() {
           },
           drawerPosition: 'right',
           headerLeft: () => false,
-          headerRight: () => <DrawerToggleButton tintColor="#221b38" />,
+          headerRight: () => <DrawerToggleButton tintColor={theme.colors.accent} />,
         }}
         drawerContent={CustomDrawerContent}></Drawer>
     </GestureHandlerRootView>

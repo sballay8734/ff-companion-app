@@ -10,9 +10,15 @@ export default function RecordsPage() {
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Records' }} />
+      <Stack.Screen
+        options={{
+          title: 'Records',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
+        }}
+      />
       <View style={styles.container}>
-        <Text>Records</Text>
+        <Text style={{ color: theme.colors.baseText }}>Records</Text>
       </View>
     </SafeAreaView>
   );
@@ -20,7 +26,7 @@ export default function RecordsPage() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

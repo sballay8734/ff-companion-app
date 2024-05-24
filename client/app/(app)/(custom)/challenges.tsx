@@ -12,9 +12,15 @@ export default function ChallengesPage() {
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Challenges' }} />
+      <Stack.Screen
+        options={{
+          title: 'Challenges',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
+        }}
+      />
       <View style={styles.container}>
-        <Text>Challenges</Text>
+        <Text style={{ color: theme.colors.baseText }}>Challenges</Text>
       </View>
     </SafeAreaView>
   );
@@ -22,7 +28,7 @@ export default function ChallengesPage() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

@@ -13,6 +13,8 @@ export default function Settings() {
       <Stack.Screen
         options={{
           title: 'Settings',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
         }}
       />
       <View style={styles.container}>

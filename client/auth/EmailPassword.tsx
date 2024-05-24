@@ -23,6 +23,7 @@ export default function EmailPassword() {
 
   // TODO: On focus/blur ANIMATED states for inputs
   // REVIEW: Views to wrap inputs, it seems to have poor performance I think
+  // !TODO: Before laying lots of things out, make sure to handle the keyboard showing everywhere
 
   return (
     <View style={styles.container}>

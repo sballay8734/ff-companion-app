@@ -10,9 +10,15 @@ export default function KingOfTheHillPage() {
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'King of the Hill' }} />
+      <Stack.Screen
+        options={{
+          title: 'King of the Hill',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
+        }}
+      />
       <View style={styles.container}>
-        <Text>King of the Hill</Text>
+        <Text style={{ color: theme.colors.baseText }}>King of the Hill</Text>
       </View>
     </SafeAreaView>
   );
@@ -20,7 +26,7 @@ export default function KingOfTheHillPage() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

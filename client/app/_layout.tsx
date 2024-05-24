@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
+// TODO: Weird glitchy behavior when navigating from Sign In to Sign Up
+
 // TODO: Set up DB
 
 // TODO: Add apple, google, authentication methods

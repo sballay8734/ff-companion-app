@@ -45,13 +45,13 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
   ];
 
   return (
-    <View style={{ flex: 1, paddingBottom: insets.bottom, backgroundColor: '#202429' }}>
+    <View style={{ flex: 1, paddingBottom: insets.bottom, backgroundColor: theme.colors.base300 }}>
       <DrawerContentScrollView
         contentContainerStyle={{
           flexDirection: 'column',
           justifyContent: 'space-between',
           flex: 1,
-          backgroundColor: '#202429',
+          backgroundColor: theme.colors.base300,
         }}
         {...props}>
         {/* DEFAULT MODULES */}
@@ -84,7 +84,14 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
               <View style={styles.drawerItemView}>
                 <Text style={{ color }}>Proposals</Text>
                 <View style={styles.drawerTextWrapper}>
-                  <Text style={styles.drawerText}>77</Text>
+                  <Text
+                    style={{
+                      ...styles.drawerText,
+                      backgroundColor: theme.colors.accent,
+                      color: theme.colors.accentContent,
+                    }}>
+                    77
+                  </Text>
                 </View>
               </View>
             )}
@@ -98,7 +105,9 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
         {/* CUSTOM MODULES */}
         {/* TODO: Define routes for custom modules & map through */}
         <View style={{ flexDirection: 'column', flex: 1, justifyContent: 'flex-start' }}>
-          <Text style={styles.customHeader}>Custom Modules</Text>
+          <Text style={{ ...styles.customHeader, backgroundColor: theme.colors.base100 }}>
+            Custom Modules
+          </Text>
           {customModules.map((module) => {
             const path = `(custom)/${module.name}`;
 
@@ -109,7 +118,14 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
                   <View style={styles.drawerItemView}>
                     <Text style={{ color }}>{module.label}</Text>
                     <View style={styles.drawerTextWrapper}>
-                      <Text style={styles.drawerText}>77</Text>
+                      <Text
+                        style={{
+                          ...styles.drawerText,
+                          backgroundColor: theme.colors.accent,
+                          color: theme.colors.accentContent,
+                        }}>
+                        77
+                      </Text>
                     </View>
                   </View>
                 )}
@@ -167,8 +183,6 @@ const styles = StyleSheet.create({
   },
   customHeader: {
     width: '100%',
-    // mTODO: Eventually change this to secondary color
-    backgroundColor: '#1a1c1f',
     paddingLeft: 10,
     paddingVertical: 12,
     color: '#5b6980',

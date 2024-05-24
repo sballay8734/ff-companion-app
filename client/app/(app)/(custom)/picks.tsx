@@ -10,9 +10,15 @@ export default function PicksPage() {
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Picks' }} />
+      <Stack.Screen
+        options={{
+          title: 'Picks',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
+        }}
+      />
       <View style={styles.container}>
-        <Text>Picks</Text>
+        <Text style={{ color: theme.colors.baseText }}>Picks</Text>
       </View>
     </SafeAreaView>
   );
@@ -20,7 +26,7 @@ export default function PicksPage() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Link, Stack } from 'expo-router';
 import { View, StyleSheet, Button, Pressable, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -7,6 +7,9 @@ import { useCustomTheme } from '~/hooks/useCustomTheme';
 import SignOutButton from '~/auth/SignOutButton';
 import { useSession } from '~/auth/AuthContext';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import { color } from '@rneui/base';
+import Toast from 'react-native-toast-message';
+import { info, success, toastError, warning } from '~/config/toastContentConfig';
 
 export default function HomePage() {
   const theme = useCustomTheme();
@@ -17,9 +20,15 @@ export default function HomePage() {
   return (
     user && (
       <SafeAreaView edges={['right', 'left']}>
-        <Stack.Screen options={{ title: 'Home' }} />
+        <Stack.Screen
+          options={{
+            title: 'Home',
+            headerTitleStyle: { color: theme.colors.baseText },
+            headerStyle: { backgroundColor: theme.colors.base100 },
+          }}
+        />
         <View style={styles.container}>
-          <Text style={{ fontSize: 30 }}>
+          <Text style={{ fontSize: 30, color: theme.colors.baseText, textAlign: 'center' }}>
             Hello {user.full_name}! Or should we call you {user.username}?
           </Text>
           <Image
@@ -30,9 +39,11 @@ export default function HomePage() {
           <View style={styles.btnWrapper}>
             {/* TODO: Make custom pressable to opacity fades smoothly */}
             <SignOutButton />
+            <Button title="Show Error" onPress={() => Toast.show(toastError.login)} />
+            <Button title="Show Success" onPress={() => Toast.show(success.login)} />
+            <Button title="Show Info" onPress={() => Toast.show(info.updateAvailable)} />
+            <Button title="Show Warning" onPress={() => Toast.show(warning.waitWarning)} />
           </View>
-
-          <Button title="Hit 'get' endpoint" onPress={() => console.error('Disabled')} />
         </View>
       </SafeAreaView>
     )
@@ -41,12 +52,13 @@ export default function HomePage() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
     height: '100%',
+    gap: 20,
   },
   btnWrapper: {
     display: 'flex',

@@ -133,6 +133,8 @@ export default function ComparePage() {
       <Stack.Screen
         options={{
           title: 'Compare',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
           headerTransparent: false,
           // headerStyle: {
           //   backgroundColor: theme.colors.background,
@@ -157,11 +159,11 @@ export default function ComparePage() {
           <Text>Average Points Scored: {owner2Stats.averagePointsScored}</Text>
         </View>
         {/* Bottom Nav */}
-        <View style={styles.bottomNav}>
+        <View style={{ ...styles.bottomNav, backgroundColor: theme.colors.base100 }}>
           <TouchableOpacity
             style={styles.navButton}
             onPress={() => dispatch(showFilterSelectModal())}>
-            <FontAwesome6 name="filter" size={24} color="white" />
+            <FontAwesome6 name="filter" size={24} color={theme.colors.accent} />
           </TouchableOpacity>
         </View>
       </View>
@@ -211,7 +213,6 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     alignItems: 'center',
     width: Dimensions.get('window').width,
-    backgroundColor: '#121212',
     paddingVertical: 10,
   },
   navButton: {

@@ -3,17 +3,22 @@ import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Text } from '~/constants/themes';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export default function CommissionerTools() {
+  const theme = useCustomTheme();
+
   return (
     <SafeAreaView edges={['right', 'left']}>
       <Stack.Screen
         options={{
           title: 'Commissioner Tools',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
         }}
       />
       <View style={styles.container}>
-        <Text>Commissioner Tools</Text>
+        <Text style={{ color: theme.colors.baseText }}>Commissioner Tools</Text>
       </View>
     </SafeAreaView>
   );

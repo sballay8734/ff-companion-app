@@ -10,9 +10,15 @@ export default function ProposalsPage() {
 
   return (
     <SafeAreaView edges={['right', 'left']}>
-      <Stack.Screen options={{ title: 'Proposals' }} />
+      <Stack.Screen
+        options={{
+          title: 'Proposals',
+          headerTitleStyle: { color: theme.colors.baseText },
+          headerStyle: { backgroundColor: theme.colors.base100 },
+        }}
+      />
       <View style={styles.container}>
-        <Text>Proposals</Text>
+        <Text style={{ color: theme.colors.baseText }}>Proposals</Text>
       </View>
     </SafeAreaView>
   );
@@ -20,7 +26,7 @@ export default function ProposalsPage() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

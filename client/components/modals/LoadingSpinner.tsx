@@ -38,7 +38,7 @@ export default function LoadingSpinner() {
       visible={isVisible}
       presentationStyle="overFullScreen">
       <View style={styles.modalBg}>
-        <ActivityIndicator size="small" color={theme.colors.primary} />
+        <ActivityIndicator size="small" color={theme.colors.secondary} />
         {/* <Animated.View style={[styles.modalContent, animatedStyle]}>
           <AntDesign name="loading2" size={30} color="#b0b0b0" />
         </Animated.View> */}

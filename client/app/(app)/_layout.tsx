@@ -31,6 +31,8 @@ export default function AppLayout() {
           },
           drawerPosition: 'right',
           headerLeft: () => false,
+
+          // TODO: Fix background color of toggle button
           headerRight: () => <DrawerToggleButton tintColor={theme.colors.accent} />,
         }}
         drawerContent={CustomDrawerContent}></Drawer>

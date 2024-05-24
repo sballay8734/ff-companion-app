@@ -9,6 +9,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
   FontAwesome6,
+  Fontisto,
 } from '@expo/vector-icons';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch } from '~/hooks/reduxConfig';
@@ -41,6 +42,11 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
       name: 'kingOfTheHill',
       label: 'King of the Hill',
       icon: <MaterialCommunityIcons name="crown" size={24} color="#a6a7a9" />,
+    },
+    {
+      name: 'customWagers',
+      label: 'Custom Wagers',
+      icon: <FontAwesome6 name="money-bill-transfer" size={20} color="#a6a7a9" />,
     },
   ];
 
@@ -77,6 +83,13 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
               <MaterialCommunityIcons name="bookshelf" size={24} color={color} />
             )}
             focused={currentRoute === 'records'}
+            style={styles.drawerItem}
+          />
+          <DrawerItem
+            label={({ focused, color }) => <Text style={{ color }}>Matchup History</Text>}
+            onPress={() => navigation.navigate('matchupHistory')}
+            icon={({ color }) => <FontAwesome5 name="history" size={22} color={color} />}
+            focused={currentRoute === 'matchupHistory'}
             style={styles.drawerItem}
           />
           <DrawerItem

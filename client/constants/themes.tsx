@@ -124,17 +124,47 @@ export const AppLightTheme: CustomTheme = {
   dark: false,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#9d80ff',
-    primaryText: '#2dc225',
-    accentText: '#59498c',
-    secondaryText: '#2dc225',
-    disabledText: '#802dc225',
+    primary: '#38bdf8',
+    primaryContent: '#030d15',
 
-    statusBar: '#2dc225',
-    appBar: '#2dc225',
-    background: '#2dc225',
-    cards: '#2dc225',
-    google: '#4c8cf2',
+    secondary: '#818cf8',
+    secondaryContent: '#080915',
+
+    accent: '#f471b5',
+    accentContent: '#15070d',
+
+    neutral: '#1e2a3b',
+    neutralContent: '#cdcfd5',
+
+    base100: '#0f182a',
+    base200: '#0d1425',
+    base300: '#0a1121', // background
+    baseText: '#c8cbd0', // main text (headers)
+    baseTextFaded: '#c8cbd0', // main text (paragraphs under headers)
+    baseTextXFaded: '#71757f', // faded text
+
+    disabledText: '#484c5a',
+    inputBorder: '#3b4250',
+
+    info: '#0ba5e9',
+    infoContent: '#000000',
+
+    success: '#2dd4bf',
+    successContent: '#02110e',
+
+    warning: '#f4bf50',
+    warningContent: '#150e05',
+
+    error: '#fb7085',
+    errorContent: '#150708',
+
+    background: '#0a1121',
+
+    // SPECIAL *****************************************************************
+    appleBg: '#000000',
+    googleBg: '#4c8cf2',
+    black: '#000000',
+    white: '#ffffff',
     admin: '#e04034',
   },
 };
@@ -144,7 +174,7 @@ export function Text(props: TextProps) {
   const theme = useCustomTheme();
   const { style, ...otherProps } = props;
 
-  const color = theme.colors.primaryText;
+  const color = theme.colors.baseText;
   const fontFamily = 'RobotoBlack';
 
   return <DefaultText style={[{ color, fontFamily }, style]} {...otherProps} />;

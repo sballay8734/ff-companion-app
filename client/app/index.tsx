@@ -55,7 +55,6 @@ export default function Index() {
               width: '100%',
               flexGrow: 1,
             }}>
-            {/* <SignInWithEmailPassword /> */}
             <EmailPassword />
             <View style={{ width: '100%' }}>
               <SignInWithOAuth />

@@ -21,9 +21,13 @@ export default function EmailPassword() {
 
   useLoadingSpinner(isLoading);
 
-  // TODO: On focus/blur ANIMATED states for inputs
+  // mTODO: On focus/blur ANIMATED states for inputs
+
   // REVIEW: Views to wrap inputs, it seems to have poor performance I think
+
   // !TODO: Before laying lots of things out, make sure to handle the keyboard showing everywhere
+
+  // !TODO: FIRST ON FRI - FIX GLITCHING WHEN SWITCHING FROM SIGN UP (IT's related to the inputs/padding/available space, it flexes big then shrinks to fit the safearea)
 
   return (
     <View style={styles.container}>
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 0,
     padding: 0,
-    flexDirection: 'column',
+    // flexDirection: 'column',
     gap: 6,
   },
   btn: {

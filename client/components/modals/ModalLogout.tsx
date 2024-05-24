@@ -6,24 +6,25 @@ import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
 import { useRouter } from 'expo-router';
 import { pageContainerPadding } from '~/constants/themes';
-import { useSignOutMutation } from '~/store/api/appApi';
+import { useSession } from '~/auth/AuthContext';
 
 export default function ModalLogout() {
   const isVisible = useAppSelector((state: RootState) => state.modalLogout.isVisible);
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const { signOut } = useSession();
   const theme = useCustomTheme();
 
   // TODO: Eventually move logic to ReduxAPI (waiting on decision for backend)
   async function handleLogout() {
-    useSignOutMutation();
+    signOut();
     dispatch(hideLogoutModal());
   }
 
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
-      <View style={styles.modalContent}>
-        <View style={styles.titleContainer}>
+      <View style={{ ...styles.modalContent, backgroundColor: theme.colors.base300 }}>
+        <View style={{ ...styles.titleContainer, backgroundColor: theme.colors.base100 }}>
           <Text style={styles.title}>Are you sure you want to logout?</Text>
           <Pressable onPress={() => dispatch(hideLogoutModal())}>
             <MaterialIcons name="close" color="#fff" size={22} />
@@ -32,7 +33,7 @@ export default function ModalLogout() {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <TouchableOpacity
             style={{
-              backgroundColor: theme.colors.admin,
+              backgroundColor: theme.colors.accent,
               paddingHorizontal: pageContainerPadding,
               paddingVertical: 10,
               borderRadius: 10,
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
   modalContent: {
     height: '25%',
     width: '100%',
-    backgroundColor: '#25292e',
     borderTopRightRadius: 18,
     borderTopLeftRadius: 18,
     position: 'absolute',

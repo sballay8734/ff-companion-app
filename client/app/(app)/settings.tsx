@@ -18,7 +18,7 @@ export default function Settings() {
         }}
       />
       <View style={styles.container}>
-        <Text>Settings</Text>
+        <Text style={{ color: theme.colors.baseText }}>Settings</Text>
       </View>
     </SafeAreaView>
   );
@@ -26,7 +26,7 @@ export default function Settings() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

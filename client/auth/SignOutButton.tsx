@@ -20,7 +20,7 @@ export default function SignOutButton() {
     <TouchableOpacity
       style={{ ...styles.btn, backgroundColor: theme.colors.accent }}
       onPress={() => signOut()}>
-      <Text>LOGOUT</Text>
+      <Text style={{ color: theme.colors.accentContent }}>LOGOUT</Text>
     </TouchableOpacity>
   );
 }

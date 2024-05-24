@@ -26,7 +26,7 @@ export default function CommissionerTools() {
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: 'red',
+    // borderColor: 'red',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

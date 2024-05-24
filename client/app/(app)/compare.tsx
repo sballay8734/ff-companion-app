@@ -88,7 +88,7 @@ export default function ComparePage() {
               />
               <Line
                 points={points.owner2TotalPoints}
-                color={theme.colors.disabledText}
+                color={theme.colors.baseTextXFaded}
                 strokeWidth={1}
               />
             </>
@@ -143,20 +143,43 @@ export default function ComparePage() {
       />
       <View style={styles.container}>
         {/* Owner1 */}
-        <View style={styles.ownerCard}>
-          <Text>Owner 1 Stats:</Text>
-          <Text>Point Differential: {owner1Stats.pointDifferential}</Text>
-          <Text>Average Points Scored: {owner1Stats.averagePointsScored}</Text>
+        <View
+          style={{
+            ...styles.ownerCard,
+            backgroundColor: theme.colors.base100,
+            borderColor: theme.colors.neutral,
+          }}>
+          <Text style={{ color: theme.colors.baseText }}>Owner 1 Stats:</Text>
+          <Text style={{ color: theme.colors.baseText }}>
+            Point Differential: {owner1Stats.pointDifferential}
+          </Text>
+          <Text style={{ color: theme.colors.baseText }}>
+            Average Points Scored: {owner1Stats.averagePointsScored}
+          </Text>
         </View>
         {/* Chart */}
-        <View style={styles.chartView}>
+        <View
+          style={{
+            ...styles.chartView,
+            borderColor: theme.colors.neutral,
+            backgroundColor: theme.colors.base200,
+          }}>
           <TestChart />
         </View>
         {/* Owner2 */}
-        <View style={styles.ownerCard}>
-          <Text>Owner 2 Stats:</Text>
-          <Text>Point Differential: {owner2Stats.pointDifferential}</Text>
-          <Text>Average Points Scored: {owner2Stats.averagePointsScored}</Text>
+        <View
+          style={{
+            ...styles.ownerCard,
+            backgroundColor: theme.colors.base100,
+            borderColor: theme.colors.neutral,
+          }}>
+          <Text style={{ color: theme.colors.baseText }}>Owner 2 Stats:</Text>
+          <Text style={{ color: theme.colors.baseText }}>
+            Point Differential: {owner2Stats.pointDifferential}
+          </Text>
+          <Text style={{ color: theme.colors.baseText }}>
+            Average Points Scored: {owner2Stats.averagePointsScored}
+          </Text>
         </View>
         {/* Bottom Nav */}
         <View style={{ ...styles.bottomNav, backgroundColor: theme.colors.base100 }}>
@@ -186,9 +209,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: pageContainerPadding,
   },
   ownerCard: {
+    // borderColor: '#2e365e',
+    // backgroundColor: '#1f2440',
     borderWidth: 1,
-    borderColor: '#2e365e',
-    backgroundColor: '#1f2440',
     width: '100%',
     flexGrow: 2,
     borderRadius: 5,
@@ -197,14 +220,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   chartView: {
+    // borderColor: '#7660bf',
+    // backgroundColor: '#121212',
     flexGrow: 1.5,
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#7660bf',
-    backgroundColor: '#121212',
     borderRadius: 5,
   },
   bottomNav: {

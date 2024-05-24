@@ -25,7 +25,7 @@ export default function EmailPassword() {
 
   // mTODO: On focus/blur ANIMATED states for inputs
 
-  // REVIEW: Views to wrap inputs, it seems to have poor performance I think
+  // !TODO: NO Views to wrap inputs, it seems to have poor performance I think
 
   // !TODO: Before laying lots of things out, make sure to handle the keyboard showing everywhere
 

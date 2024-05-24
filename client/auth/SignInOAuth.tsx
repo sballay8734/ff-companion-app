@@ -24,9 +24,9 @@ const SignInWithOAuth = () => {
 
   return (
     <TouchableOpacity
-      style={{ ...styles.btn, backgroundColor: theme.colors.google }}
+      style={{ ...styles.btn, backgroundColor: theme.colors.googleBg }}
       onPress={onPress}>
-      <Text style={{ color: theme.colors.primaryText, fontSize: 16, fontFamily: 'RobotoBlack' }}>
+      <Text style={{ color: theme.colors.white, fontSize: 16, fontFamily: 'RobotoBlack' }}>
         Continue with Google (Needs setup)
       </Text>
       <AntDesign style={{ position: 'absolute', left: 20 }} name="google" size={16} color="white" />
@@ -37,9 +37,9 @@ export default SignInWithOAuth;
 
 const styles = StyleSheet.create({
   btn: {
-    borderColor: '#0063bf',
-    borderWidth: 1,
-    borderRadius: 10,
+    // borderColor: '#0063bf',
+    // borderWidth: 1,
+    borderRadius: 5,
     paddingVertical: 18,
     paddingHorizontal: 6,
     width: '100%',

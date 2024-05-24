@@ -36,7 +36,7 @@ export default function Index() {
             style={{
               ...styles.welcome,
               fontFamily: 'RobotoBlack',
-              color: theme.colors.primaryText,
+              color: theme.colors.baseText,
             }}>
             Welcome Back
           </Text>
@@ -44,7 +44,7 @@ export default function Index() {
             style={{
               ...styles.message,
               fontFamily: 'RobotoMono',
-              color: theme.colors.secondaryText,
+              color: theme.colors.baseTextXFaded,
             }}>
             Log in to your account
           </Text>
@@ -61,8 +61,8 @@ export default function Index() {
               <SignInWithOAuth />
               <SignInWithApple />
               <View style={styles.noAccount}>
-                <Text style={{ color: theme.colors.disabledText }}>Don't have an account?</Text>
-                <Link style={{ ...styles.link, color: theme.colors.primary }} href="/register">
+                <Text style={{ color: theme.colors.baseTextXFaded }}>Don't have an account?</Text>
+                <Link style={{ ...styles.link, color: theme.colors.accent }} href="/register">
                   Sign up
                 </Link>
               </View>

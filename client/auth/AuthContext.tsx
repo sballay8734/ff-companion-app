@@ -141,11 +141,11 @@ export function SessionProvider(props: React.PropsWithChildren) {
     try {
       const { data, error } = await supabase
         .from('profiles')
-        .select(`username, full_name, avatar_url, id, linkedLeagueIds, updated_at`)
+        .select(`username, full_name, avatar_url, id, linked_league_ids, updated_at`)
         .eq('id', userId)
         .single();
 
-      // Catch Supabase specific error
+      // Catch Supabase specific errrror
       if (error) {
         Toast.show(toastError.profile);
         return;

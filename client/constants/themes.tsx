@@ -10,23 +10,46 @@ export type CustomTheme = Theme & {
   dark: boolean;
   colors: {
     primary: string;
-    background: string;
-    card: string;
-    text: string;
-    border: string;
-    notification: string;
+    primaryContent: string;
 
-    // Your additions below
-    primaryText: string;
-    secondaryText: string;
-    accentText: string;
+    secondary: string;
+    secondaryContent: string;
+
+    accent: string;
+    accentContent: string;
+
+    neutral: string;
+    neutralContent: string;
+
+    base100: string;
+    base200: string;
+    base300: string;
+    baseText: string;
+    baseTextFaded: string;
+    baseTextXFaded: string;
+
     disabledText: string;
+    inputBorder: string;
 
-    statusBar: string;
-    appBar: string;
-    cards: string;
-    google: string;
-    admin: string;
+    info: string;
+    infoContent: string;
+
+    success: string;
+    successContent: string;
+
+    warning: string;
+    warningContent: string;
+
+    error: string;
+    errorContent: string;
+
+    background: string;
+
+    // SPECIAL *****************************************************************
+    appleBg: string;
+    googleBg: string;
+    black: string;
+    white: string;
   };
 };
 
@@ -35,19 +58,61 @@ export const AppDarkTheme: CustomTheme = {
   dark: true,
   colors: {
     ...DarkTheme.colors,
-    primary: '#9d80ff',
-    primaryText: '#FFFFFF',
-    accentText: '#59498c',
-    secondaryText: 'rgba(255, 255, 255, 0.7)',
-    disabledText: 'rgba(255, 255, 255, 0.5)',
 
-    statusBar: '#000000',
-    appBar: '#212121',
-    // try [#111c37, #2a3751, #222c47]
-    background: '#15192d',
-    cards: '#272842',
-    google: '#4c8cf2',
-    admin: '#e04034',
+    primary: '#38bdf8',
+    primaryContent: '#030d15',
+
+    secondary: '#818cf8',
+    secondaryContent: '#080915',
+
+    accent: '#f471b5',
+    accentContent: '#15070d',
+
+    neutral: '#1e2a3b',
+    neutralContent: '#cdcfd5',
+
+    base100: '#0f182a',
+    base200: '#0d1425',
+    base300: '#0a1121', // background
+    baseText: '#c8cbd0', // main text (headers)
+    baseTextFaded: '#c8cbd0', // main text (paragraphs under headers)
+    baseTextXFaded: '#71757f', // faded text
+
+    disabledText: '#484c5a',
+    inputBorder: '#3b4250',
+
+    info: '#0ba5e9',
+    infoContent: '#000000',
+
+    success: '#2dd4bf',
+    successContent: '#02110e',
+
+    warning: '#f4bf50',
+    warningContent: '#150e05',
+
+    error: '#fb7085',
+    errorContent: '#150708',
+
+    background: '#0a1121',
+
+    // SPECIAL *****************************************************************
+    appleBg: '#000000',
+    googleBg: '#4c8cf2',
+    black: '#000000',
+    white: '#ffffff',
+
+    // OLD
+    // primaryText: '#FFFFFF',
+    // accentText: '#59498c',
+    // secondaryText: 'rgba(255, 255, 255, 0.7)',
+    // disabledText: 'rgba(255, 255, 255, 0.5)',
+
+    // statusBar: '#000000',
+    // appBar: '#212121',
+    // background: '#15192d',
+    // cards: '#272842',
+    // google: '#4c8cf2',
+    // admin: '#e04034',
   },
 };
 

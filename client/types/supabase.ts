@@ -7,139 +7,208 @@ export type Json =
   | Json[]
 
 export type Database = {
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          operationName?: string
-          query?: string
-          variables?: Json
-          extensions?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       challenges: {
         Row: {
+          accepted_at: string | null
+          acceptor_id: string | null
+          acceptor_name: string | null
+          acceptor_payout: number
+          acceptor_selection: string | null
+          adjusted_line: number
+          adjusted_odds: number
+          auto_line: number
+          auto_odds: number
           created_at: string
+          date_proposed: string
+          expiration: string
           id: number
+          is_line_adjusted: boolean
+          league_id: number
+          outcome: string | null
+          proposer_id: string
+          proposer_name: string
+          proposer_payout: number
+          proposer_selection: string
+          settled_at: string | null
+          status: string
+          void_reason: string | null
+          voided: boolean
+          winner: string | null
         }
         Insert: {
+          accepted_at?: string | null
+          acceptor_id?: string | null
+          acceptor_name?: string | null
+          acceptor_payout: number
+          acceptor_selection?: string | null
+          adjusted_line: number
+          adjusted_odds: number
+          auto_line: number
+          auto_odds: number
           created_at?: string
+          date_proposed: string
+          expiration: string
           id?: number
+          is_line_adjusted: boolean
+          league_id: number
+          outcome?: string | null
+          proposer_id: string
+          proposer_name: string
+          proposer_payout: number
+          proposer_selection: string
+          settled_at?: string | null
+          status: string
+          void_reason?: string | null
+          voided?: boolean
+          winner?: string | null
         }
         Update: {
+          accepted_at?: string | null
+          acceptor_id?: string | null
+          acceptor_name?: string | null
+          acceptor_payout?: number
+          acceptor_selection?: string | null
+          adjusted_line?: number
+          adjusted_odds?: number
+          auto_line?: number
+          auto_odds?: number
           created_at?: string
+          date_proposed?: string
+          expiration?: string
           id?: number
+          is_line_adjusted?: boolean
+          league_id?: number
+          outcome?: string | null
+          proposer_id?: string
+          proposer_name?: string
+          proposer_payout?: number
+          proposer_selection?: string
+          settled_at?: string | null
+          status?: string
+          void_reason?: string | null
+          voided?: boolean
+          winner?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "challenges_acceptor_id_fkey"
+            columns: ["acceptor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "challenges_league_id_fkey"
+            columns: ["league_id"]
+            isOneToOne: false
+            referencedRelation: "leagues"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "challenges_proposer_id_fkey"
+            columns: ["proposer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       custom_challenges: {
         Row: {
-          acceptedAt: string | null
-          acceptorId: string | null
-          acceptorPayout: number
-          challengedId: string
-          challengedResponse: string | null
+          accepted_at: string | null
+          acceptor_id: string | null
+          acceptor_payout: number
+          challenged_id: string
+          challenged_response: string | null
           created_at: string
           description: string
           expiration: string | null
           id: number
-          imageUrl: string | null
-          isBroadcasted: boolean
+          image_url: string | null
+          is_broadcasted: boolean
+          league_id: number
           odds: number
           outcome: string | null
-          proposerId: string
-          proposerPayout: number
-          settledAt: string | null
+          proposer_id: string
+          proposer_payout: number
+          settled_at: string | null
           status: string
-          videoUrl: string | null
+          video_url: string | null
+          void_reason: string | null
           voided: boolean
-          voidReason: string | null
-          wagerAmount: number
+          wager_amount: number
           winner: string | null
         }
         Insert: {
-          acceptedAt?: string | null
-          acceptorId?: string | null
-          acceptorPayout: number
-          challengedId: string
-          challengedResponse?: string | null
+          accepted_at?: string | null
+          acceptor_id?: string | null
+          acceptor_payout: number
+          challenged_id: string
+          challenged_response?: string | null
           created_at?: string
           description: string
           expiration?: string | null
           id?: number
-          imageUrl?: string | null
-          isBroadcasted?: boolean
+          image_url?: string | null
+          is_broadcasted?: boolean
+          league_id: number
           odds: number
           outcome?: string | null
-          proposerId: string
-          proposerPayout: number
-          settledAt?: string | null
+          proposer_id: string
+          proposer_payout: number
+          settled_at?: string | null
           status: string
-          videoUrl?: string | null
+          video_url?: string | null
+          void_reason?: string | null
           voided?: boolean
-          voidReason?: string | null
-          wagerAmount: number
+          wager_amount: number
           winner?: string | null
         }
         Update: {
-          acceptedAt?: string | null
-          acceptorId?: string | null
-          acceptorPayout?: number
-          challengedId?: string
-          challengedResponse?: string | null
+          accepted_at?: string | null
+          acceptor_id?: string | null
+          acceptor_payout?: number
+          challenged_id?: string
+          challenged_response?: string | null
           created_at?: string
           description?: string
           expiration?: string | null
           id?: number
-          imageUrl?: string | null
-          isBroadcasted?: boolean
+          image_url?: string | null
+          is_broadcasted?: boolean
+          league_id?: number
           odds?: number
           outcome?: string | null
-          proposerId?: string
-          proposerPayout?: number
-          settledAt?: string | null
+          proposer_id?: string
+          proposer_payout?: number
+          settled_at?: string | null
           status?: string
-          videoUrl?: string | null
+          video_url?: string | null
+          void_reason?: string | null
           voided?: boolean
-          voidReason?: string | null
-          wagerAmount?: number
+          wager_amount?: number
           winner?: string | null
         }
         Relationships: [
           {
             foreignKeyName: "challenges_acceptorId_fkey"
-            columns: ["acceptorId"]
+            columns: ["acceptor_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "challenges_challengedId_fkey"
-            columns: ["challengedId"]
+            columns: ["challenged_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "challenges_proposerId_fkey"
-            columns: ["proposerId"]
+            columns: ["proposer_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -151,104 +220,172 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "custom_challenges_acceptor_id_fkey"
+            columns: ["acceptor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "custom_challenges_challenged_id_fkey"
+            columns: ["challenged_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "custom_challenges_league_id_fkey"
+            columns: ["league_id"]
+            isOneToOne: false
+            referencedRelation: "leagues"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "custom_challenges_proposer_id_fkey"
+            columns: ["proposer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      league_records: {
+        Row: {
+          created_at: string
+          id: number
+          league_id: number
+          record_category: string
+          record_description: string
+          record_name: string
+          top_records: Json[]
+          unit: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          league_id: number
+          record_category: string
+          record_description: string
+          record_name: string
+          top_records: Json[]
+          unit?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          league_id?: number
+          record_category?: string
+          record_description?: string
+          record_name?: string
+          top_records?: Json[]
+          unit?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "league_records_league_id_fkey"
+            columns: ["league_id"]
+            isOneToOne: false
+            referencedRelation: "leagues"
+            referencedColumns: ["id"]
+          },
         ]
       }
       leagues: {
         Row: {
-          activeMemeberIds: string[] | null
-          commissionerIds: string[] | null
+          active_member_ids: string[] | null
+          commissioner_ids: string[] | null
           created_at: string
-          customModuleIds: string[] | null
+          custom_module_ids: string[] | null
           id: number
         }
         Insert: {
-          activeMemeberIds?: string[] | null
-          commissionerIds?: string[] | null
+          active_member_ids?: string[] | null
+          commissioner_ids?: string[] | null
           created_at?: string
-          customModuleIds?: string[] | null
+          custom_module_ids?: string[] | null
           id?: number
         }
         Update: {
-          activeMemeberIds?: string[] | null
-          commissionerIds?: string[] | null
+          active_member_ids?: string[] | null
+          commissioner_ids?: string[] | null
           created_at?: string
-          customModuleIds?: string[] | null
+          custom_module_ids?: string[] | null
           id?: number
         }
         Relationships: []
       }
       matchups: {
         Row: {
-          awayOwnerId: string
-          awayScore: number
+          away_owner_id: string
+          away_score: number
           created_at: string
-          homeOwnerId: string
-          homeScore: number
+          home_owner_id: string
+          home_score: number
           id: number
-          isPlayoffMatchup: boolean
-          nflWeek: number
-          yearOfSeasonStart: number
+          is_playoff_matchup: boolean
+          nfl_week: number
+          year_of_season_start: number
         }
         Insert: {
-          awayOwnerId: string
-          awayScore: number
+          away_owner_id: string
+          away_score: number
           created_at?: string
-          homeOwnerId: string
-          homeScore: number
+          home_owner_id: string
+          home_score: number
           id?: number
-          isPlayoffMatchup: boolean
-          nflWeek: number
-          yearOfSeasonStart: number
+          is_playoff_matchup: boolean
+          nfl_week: number
+          year_of_season_start: number
         }
         Update: {
-          awayOwnerId?: string
-          awayScore?: number
+          away_owner_id?: string
+          away_score?: number
           created_at?: string
-          homeOwnerId?: string
-          homeScore?: number
+          home_owner_id?: string
+          home_score?: number
           id?: number
-          isPlayoffMatchup?: boolean
-          nflWeek?: number
-          yearOfSeasonStart?: number
+          is_playoff_matchup?: boolean
+          nfl_week?: number
+          year_of_season_start?: number
         }
         Relationships: [
           {
+            foreignKeyName: "matchups_away_owner_id_fkey"
+            columns: ["away_owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "matchups_awayOwnerId_fkey"
-            columns: ["awayOwnerId"]
+            columns: ["away_owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matchups_home_owner_id_fkey"
+            columns: ["home_owner_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "matchups_homeOwnerId_fkey"
-            columns: ["homeOwnerId"]
+            columns: ["home_owner_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]
       }
-      picks: {
-        Row: {
-          created_at: string
-          id: number
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-        }
-        Update: {
-          created_at?: string
-          id?: number
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           avatar_url: string | null
           full_name: string | null
           id: string
-          linkedLeagueIds: Json[] | null
+          linked_league_ids: Json[] | null
           updated_at: string | null
           username: string | null
         }
@@ -256,7 +393,7 @@ export type Database = {
           avatar_url?: string | null
           full_name?: string | null
           id: string
-          linkedLeagueIds?: Json[] | null
+          linked_league_ids?: Json[] | null
           updated_at?: string | null
           username?: string | null
         }
@@ -264,7 +401,7 @@ export type Database = {
           avatar_url?: string | null
           full_name?: string | null
           id?: string
-          linkedLeagueIds?: Json[] | null
+          linked_league_ids?: Json[] | null
           updated_at?: string | null
           username?: string | null
         }
@@ -280,251 +417,185 @@ export type Database = {
       }
       proposals: {
         Row: {
+          category: string
           created_at: string
+          date_proposed: string
+          down_voters: string
           id: number
+          implementation_date: string | null
+          league_id: number
+          proposal_description: string
+          proposal_title: string
+          proposer_id: string
+          proposer_name: string
+          resolution_date: string | null
+          status: string
+          up_voters: string[]
+          voting_end_date: string | null
+          voting_start_date: string | null
         }
         Insert: {
+          category: string
           created_at?: string
+          date_proposed: string
+          down_voters: string
           id?: number
+          implementation_date?: string | null
+          league_id: number
+          proposal_description: string
+          proposal_title: string
+          proposer_id: string
+          proposer_name: string
+          resolution_date?: string | null
+          status: string
+          up_voters: string[]
+          voting_end_date?: string | null
+          voting_start_date?: string | null
         }
         Update: {
+          category?: string
           created_at?: string
+          date_proposed?: string
+          down_voters?: string
           id?: number
+          implementation_date?: string | null
+          league_id?: number
+          proposal_description?: string
+          proposal_title?: string
+          proposer_id?: string
+          proposer_name?: string
+          resolution_date?: string | null
+          status?: string
+          up_voters?: string[]
+          voting_end_date?: string | null
+          voting_start_date?: string | null
         }
         Relationships: []
       }
-      records: {
+      props: {
         Row: {
+          away_team_final_score: number | null
+          away_team_implied_prop: number | null
+          away_team_name: string | null
+          away_team_odds: number | null
+          away_team_spread: number | null
           created_at: string
+          expiration: string
+          favorite: string | null
+          favorite_implied_prop: number | null
+          favorite_odds: number | null
+          home_team_final_score: number | null
+          home_team_implied_prob: number | null
+          home_team_name: string | null
+          home_team_odds: number | null
+          home_team_spread: number | null
           id: number
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-        }
-        Update: {
-          created_at?: string
-          id?: number
-        }
-        Relationships: []
-      }
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      [_ in never]: never
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-  storage: {
-    Tables: {
-      buckets: {
-        Row: {
-          allowed_mime_types: string[] | null
-          avif_autodetection: boolean | null
-          created_at: string | null
-          file_size_limit: number | null
-          id: string
-          name: string
-          owner: string | null
-          owner_id: string | null
-          public: boolean | null
+          league_id: number
+          over_implied_prop: number | null
+          over_odds: number | null
+          over_under_line: number | null
+          player_final_stat: number | null
+          player_name: string | null
+          prop_type: string
+          result: string | null
+          sport: string
+          stat_type: string | null
+          team_final_stat: number | null
+          team_name: string | null
+          under_implied_prop: number | null
+          under_odds: number | null
+          underdog: string | null
+          underdog_implied_prop: number | null
+          underdog_odds: number | null
           updated_at: string | null
+          void_reason: string | null
+          voided: boolean | null
+          winner: string | null
         }
         Insert: {
-          allowed_mime_types?: string[] | null
-          avif_autodetection?: boolean | null
-          created_at?: string | null
-          file_size_limit?: number | null
-          id: string
-          name: string
-          owner?: string | null
-          owner_id?: string | null
-          public?: boolean | null
-          updated_at?: string | null
-        }
-        Update: {
-          allowed_mime_types?: string[] | null
-          avif_autodetection?: boolean | null
-          created_at?: string | null
-          file_size_limit?: number | null
-          id?: string
-          name?: string
-          owner?: string | null
-          owner_id?: string | null
-          public?: boolean | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      migrations: {
-        Row: {
-          executed_at: string | null
-          hash: string
-          id: number
-          name: string
-        }
-        Insert: {
-          executed_at?: string | null
-          hash: string
-          id: number
-          name: string
-        }
-        Update: {
-          executed_at?: string | null
-          hash?: string
+          away_team_final_score?: number | null
+          away_team_implied_prop?: number | null
+          away_team_name?: string | null
+          away_team_odds?: number | null
+          away_team_spread?: number | null
+          created_at?: string
+          expiration: string
+          favorite?: string | null
+          favorite_implied_prop?: number | null
+          favorite_odds?: number | null
+          home_team_final_score?: number | null
+          home_team_implied_prob?: number | null
+          home_team_name?: string | null
+          home_team_odds?: number | null
+          home_team_spread?: number | null
           id?: number
-          name?: string
-        }
-        Relationships: []
-      }
-      objects: {
-        Row: {
-          bucket_id: string | null
-          created_at: string | null
-          id: string
-          last_accessed_at: string | null
-          metadata: Json | null
-          name: string | null
-          owner: string | null
-          owner_id: string | null
-          path_tokens: string[] | null
-          updated_at: string | null
-          version: string | null
-        }
-        Insert: {
-          bucket_id?: string | null
-          created_at?: string | null
-          id?: string
-          last_accessed_at?: string | null
-          metadata?: Json | null
-          name?: string | null
-          owner?: string | null
-          owner_id?: string | null
-          path_tokens?: string[] | null
+          league_id: number
+          over_implied_prop?: number | null
+          over_odds?: number | null
+          over_under_line?: number | null
+          player_final_stat?: number | null
+          player_name?: string | null
+          prop_type: string
+          result?: string | null
+          sport: string
+          stat_type?: string | null
+          team_final_stat?: number | null
+          team_name?: string | null
+          under_implied_prop?: number | null
+          under_odds?: number | null
+          underdog?: string | null
+          underdog_implied_prop?: number | null
+          underdog_odds?: number | null
           updated_at?: string | null
-          version?: string | null
+          void_reason?: string | null
+          voided?: boolean | null
+          winner?: string | null
         }
         Update: {
-          bucket_id?: string | null
-          created_at?: string | null
-          id?: string
-          last_accessed_at?: string | null
-          metadata?: Json | null
-          name?: string | null
-          owner?: string | null
-          owner_id?: string | null
-          path_tokens?: string[] | null
+          away_team_final_score?: number | null
+          away_team_implied_prop?: number | null
+          away_team_name?: string | null
+          away_team_odds?: number | null
+          away_team_spread?: number | null
+          created_at?: string
+          expiration?: string
+          favorite?: string | null
+          favorite_implied_prop?: number | null
+          favorite_odds?: number | null
+          home_team_final_score?: number | null
+          home_team_implied_prob?: number | null
+          home_team_name?: string | null
+          home_team_odds?: number | null
+          home_team_spread?: number | null
+          id?: number
+          league_id?: number
+          over_implied_prop?: number | null
+          over_odds?: number | null
+          over_under_line?: number | null
+          player_final_stat?: number | null
+          player_name?: string | null
+          prop_type?: string
+          result?: string | null
+          sport?: string
+          stat_type?: string | null
+          team_final_stat?: number | null
+          team_name?: string | null
+          under_implied_prop?: number | null
+          under_odds?: number | null
+          underdog?: string | null
+          underdog_implied_prop?: number | null
+          underdog_odds?: number | null
           updated_at?: string | null
-          version?: string | null
+          void_reason?: string | null
+          voided?: boolean | null
+          winner?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "objects_bucketId_fkey"
-            columns: ["bucket_id"]
+            foreignKeyName: "props_league_id_fkey"
+            columns: ["league_id"]
             isOneToOne: false
-            referencedRelation: "buckets"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      s3_multipart_uploads: {
-        Row: {
-          bucket_id: string
-          created_at: string
-          id: string
-          in_progress_size: number
-          key: string
-          owner_id: string | null
-          upload_signature: string
-          version: string
-        }
-        Insert: {
-          bucket_id: string
-          created_at?: string
-          id: string
-          in_progress_size?: number
-          key: string
-          owner_id?: string | null
-          upload_signature: string
-          version: string
-        }
-        Update: {
-          bucket_id?: string
-          created_at?: string
-          id?: string
-          in_progress_size?: number
-          key?: string
-          owner_id?: string | null
-          upload_signature?: string
-          version?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "s3_multipart_uploads_bucket_id_fkey"
-            columns: ["bucket_id"]
-            isOneToOne: false
-            referencedRelation: "buckets"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      s3_multipart_uploads_parts: {
-        Row: {
-          bucket_id: string
-          created_at: string
-          etag: string
-          id: string
-          key: string
-          owner_id: string | null
-          part_number: number
-          size: number
-          upload_id: string
-          version: string
-        }
-        Insert: {
-          bucket_id: string
-          created_at?: string
-          etag: string
-          id?: string
-          key: string
-          owner_id?: string | null
-          part_number: number
-          size?: number
-          upload_id: string
-          version: string
-        }
-        Update: {
-          bucket_id?: string
-          created_at?: string
-          etag?: string
-          id?: string
-          key?: string
-          owner_id?: string | null
-          part_number?: number
-          size?: number
-          upload_id?: string
-          version?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "s3_multipart_uploads_parts_bucket_id_fkey"
-            columns: ["bucket_id"]
-            isOneToOne: false
-            referencedRelation: "buckets"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "s3_multipart_uploads_parts_upload_id_fkey"
-            columns: ["upload_id"]
-            isOneToOne: false
-            referencedRelation: "s3_multipart_uploads"
+            referencedRelation: "leagues"
             referencedColumns: ["id"]
           },
         ]
@@ -534,91 +605,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      can_insert_object: {
-        Args: {
-          bucketid: string
-          name: string
-          owner: string
-          metadata: Json
-        }
-        Returns: undefined
-      }
-      extension: {
-        Args: {
-          name: string
-        }
-        Returns: string
-      }
-      filename: {
-        Args: {
-          name: string
-        }
-        Returns: string
-      }
-      foldername: {
-        Args: {
-          name: string
-        }
-        Returns: string[]
-      }
-      get_size_by_bucket: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          size: number
-          bucket_id: string
-        }[]
-      }
-      list_multipart_uploads_with_delimiter: {
-        Args: {
-          bucket_id: string
-          prefix_param: string
-          delimiter_param: string
-          max_keys?: number
-          next_key_token?: string
-          next_upload_token?: string
-        }
-        Returns: {
-          key: string
-          id: string
-          created_at: string
-        }[]
-      }
-      list_objects_with_delimiter: {
-        Args: {
-          bucket_id: string
-          prefix_param: string
-          delimiter_param: string
-          max_keys?: number
-          start_after?: string
-          next_token?: string
-        }
-        Returns: {
-          name: string
-          id: string
-          metadata: Json
-          updated_at: string
-        }[]
-      }
-      search: {
-        Args: {
-          prefix: string
-          bucketname: string
-          limits?: number
-          levels?: number
-          offsets?: number
-          search?: string
-          sortcolumn?: string
-          sortorder?: string
-        }
-        Returns: {
-          name: string
-          id: string
-          updated_at: string
-          created_at: string
-          last_accessed_at: string
-          metadata: Json
-        }[]
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
@@ -710,4 +697,3 @@ export type Enums<
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
     : never
-

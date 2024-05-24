@@ -21,9 +21,9 @@ const SignInWithApple = () => {
 
   return (
     <TouchableOpacity
-      style={{ ...styles.btn, backgroundColor: theme.colors.statusBar }}
+      style={{ ...styles.btn, backgroundColor: theme.colors.appleBg }}
       onPress={onPress}>
-      <Text style={{ color: theme.colors.primaryText, fontSize: 16, fontFamily: 'RobotoBlack' }}>
+      <Text style={{ color: theme.colors.white, fontSize: 16, fontFamily: 'RobotoBlack' }}>
         Continue with Apple (Needs setup)
       </Text>
       <AntDesign style={{ position: 'absolute', left: 20 }} name="apple1" size={16} color="white" />
@@ -35,7 +35,7 @@ export default SignInWithApple;
 const styles = StyleSheet.create({
   btn: {
     borderColor: '#000000',
-    borderRadius: 10,
+    borderRadius: 5,
     borderWidth: 1,
     paddingVertical: 18,
     paddingHorizontal: 6,

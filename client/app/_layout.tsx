@@ -61,12 +61,19 @@ const styles = StyleSheet.create({
 });
 
 // GENERAL PROJECT TODOS NOT YET SPECIFIC TO LOCATION *************************
-// !TODO: FIRST FRIDAY - Using logout modal does not hide loading spinner
+// !TODO: *******************************************************************
+// !TODO: *******************************************************************
+// !TODO: *******************************************************************
+
+// !TODO: FIRST TUESDAY - Using logout modal does not hide loading spinner
+
+// !TODO: *******************************************************************
+// !TODO: *******************************************************************
+// !TODO: *******************************************************************
+
 // mTODO: use login/logout/signup naming convention
 
 // TODO: Toasts that require action should also render overlay (global error management)
-
-// TODO: Set up DB
 
 // TODO: Add apple, google, authentication methods
 
@@ -95,24 +102,6 @@ const styles = StyleSheet.create({
 // mTODO: Add "View available modules" button to drawer
 
 // mTODO: ESPN & others, only keep data for so long. You will need to add ability to manually enter matchups and make sure to check for matchups already entered (teams, year, and week should be selected via dropdown NOT input manually. Only the scores should be input manually and even those should have extensive validation)
-
-/* mTODO:  - MODALS
-[
-  // NOTE: Full page (back button in top left) *********************************
-  modalFull,   - for forms and convenience features like the scoreboard in RorC
-
-  // NOTE: Popovers (clicking overlay cancels & closes) ************************
-  modalFloat,  - 
-  modalAlert,  - ("Hold on!", "Are you sure?", etc...)
-
-  // NOTE: Slide in from bottom (1/3 of screen) ********************************
-  modalBtm,    - for setting selection, filters, and other optional actions
-  modalAction, - when you want/need the user to do something
-
-  // NOTE: Slide in from bottom (1/3 of screen) ********************************
-  modalNotify  - for communicating api response (when desired)
-] 
-*/
 
 // REMINDERS TO AVOID POSSIBLE HEADACHES LATER *********************************
 

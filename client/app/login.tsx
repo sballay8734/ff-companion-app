@@ -1,19 +1,20 @@
 import { Link, useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { View, Image, StyleSheet, SafeAreaView } from 'react-native';
-import { useSession } from '~/auth/AuthContext';
-import { useEffect, useState } from 'react';
 
+import { useSession } from '~/auth/AuthContext';
+import EmailPassword from '~/auth/EmailPassword';
 import SignInWithApple from '~/auth/SignInApple';
 import SignInWithOAuth from '~/auth/SignInOAuth';
 import { Text, pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import EmailPassword from '~/auth/EmailPassword';
 
 export default function Login() {
   const theme = useCustomTheme();
   const router = useRouter();
-  const { session, isLoading } = useSession();
+  const { session } = useSession();
 
+  // !TODO: Session and user are not primatives so will be different on every render, possibly causing issues. Possibly use userId instead of user and sessionId instead of session
   useEffect(() => {
     if (session) {
       router.replace('/(app)');

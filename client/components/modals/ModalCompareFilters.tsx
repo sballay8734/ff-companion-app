@@ -1,22 +1,19 @@
-import { Modal, View, Pressable, StyleSheet } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { RootState } from '~/store/store';
-import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
-import { useRouter } from 'expo-router';
-import { pageContainerPadding } from '~/constants/themes';
-import { hideFilterSelectModal } from '~/store/features/ModalCompareFiltersSlice/ModalCompareFiltersSlice';
+import { Modal, View, Pressable, StyleSheet } from 'react-native';
 
-import { Text } from '~/constants/themes';
+import { pageContainerPadding, Text } from '~/constants/themes';
+import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { hideFilterSelectModal } from '~/store/features/ModalCompareFiltersSlice/ModalCompareFiltersSlice';
+import { RootState } from '~/store/store';
 
 export default function ModalCompareFilters() {
   const isVisible = useAppSelector((state: RootState) => state.modalCompareFilters.isVisible);
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const theme = useCustomTheme();
 
   return (
-    <Modal animationType="slide" transparent={true} visible={isVisible}>
+    <Modal animationType="slide" transparent visible={isVisible}>
       <View style={{ ...styles.modalContent, backgroundColor: theme.colors.base300 }}>
         <View style={{ ...styles.titleContainer, backgroundColor: theme.colors.base100 }}>
           <Text style={styles.title}>Choose filters</Text>

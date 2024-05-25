@@ -4,15 +4,14 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 
 import { useWarmUpBrowser } from '../hooks/useWarmUpBrowser';
+
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useAppDispatch } from '~/hooks/reduxConfig';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const SignInWithOAuth = () => {
   const theme = useCustomTheme();
-  const dispatch = useAppDispatch();
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();

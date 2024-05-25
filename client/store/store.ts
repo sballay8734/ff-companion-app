@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import modalLogoutReducer from './features/ModalLogout/modalLogoutSlice';
+import { appApi } from './api/appApi';
 import loadingSpinnerReducer from './features/LoadingSpinner/loadingSpinnerSlice';
 import modalCompareFiltersReducer from './features/ModalCompareFiltersSlice/ModalCompareFiltersSlice';
-import { appApi } from './api/appApi';
+import modalLogoutReducer from './features/ModalLogout/modalLogoutSlice';
 
 export const store = configureStore({
   reducer: {

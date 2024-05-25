@@ -1,5 +1,5 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import Toast, {
   BaseToast,
   ErrorToast,
@@ -40,8 +40,8 @@ export const toastConfig = {
       {...props}
       style={{
         borderLeftColor: successBorderLeftColor,
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
+        backgroundColor,
+        borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (
@@ -75,8 +75,8 @@ export const toastConfig = {
       {...props}
       style={{
         borderLeftColor: errorBorderLeftColor,
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
+        backgroundColor,
+        borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (
@@ -113,8 +113,8 @@ export const toastConfig = {
       {...props}
       style={{
         borderLeftColor: infoBorderLeftColor,
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
+        backgroundColor,
+        borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (
@@ -149,8 +149,8 @@ export const toastConfig = {
       {...props}
       style={{
         borderLeftColor: warningBorderLeftColor,
-        backgroundColor: backgroundColor,
-        borderColor: borderColor,
+        backgroundColor,
+        borderColor,
         borderWidth: 1,
       }}
       renderLeadingIcon={() => (

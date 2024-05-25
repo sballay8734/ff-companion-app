@@ -1,5 +1,6 @@
-import { Modal, View, StyleSheet, Image, ActivityIndicator } from 'react-native';
-import Animated, {
+import { useEffect } from 'react';
+import { Modal, View, StyleSheet, ActivityIndicator } from 'react-native';
+import {
   Easing,
   useAnimatedStyle,
   useSharedValue,
@@ -7,11 +8,9 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { RootState } from '~/store/store';
-import { useCustomTheme } from '~/hooks/useCustomTheme';
 import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
-import { useEffect } from 'react';
-import { AntDesign } from '@expo/vector-icons';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { RootState } from '~/store/store';
 
 // BUG: Making ANY change to this file and saving seems to break the animation (not sure if this is an expo bug or if it's your code) - Otherwise, the animation toggles without issues
 
@@ -32,11 +31,7 @@ export default function LoadingSpinner() {
   }));
 
   return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={isVisible}
-      presentationStyle="overFullScreen">
+    <Modal animationType="fade" transparent visible={isVisible} presentationStyle="overFullScreen">
       <View style={styles.modalBg}>
         <ActivityIndicator size="small" color={theme.colors.secondary} />
         {/* <Animated.View style={[styles.modalContent, animatedStyle]}>

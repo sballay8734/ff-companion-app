@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
 import { Session } from '@supabase/supabase-js';
-import { supabase } from '~/lib/supabase';
-import { useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
 import Toast from 'react-native-toast-message';
+
 import { success, toastError } from '~/config/toastContentConfig';
+import { supabase } from '~/lib/supabase';
 import { UserProfile } from '~/store/api/appApi';
 
 const AuthContext = React.createContext<{
@@ -40,7 +40,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
   const [session, setSession] = React.useState<Session | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
   const [user, setUser] = React.useState<UserProfile | null>(null);
-  const router = useRouter();
 
   // First, check for existing session
   useEffect(() => {
@@ -132,6 +131,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
       Toast.show(success.logout);
     } catch (error) {
       Toast.show(toastError.logout);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -154,6 +154,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
 
       setUser(data);
     } catch (error) {
+      console.error(error);
       Toast.show(toastError.unknown);
       throw new Error("We're sorry. We couldn't get your profile.");
     }

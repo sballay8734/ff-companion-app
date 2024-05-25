@@ -1,13 +1,15 @@
+import { FontAwesome6 } from '@expo/vector-icons';
+import { useFont } from '@shopify/react-native-skia';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CartesianChart, Line } from 'victory-native';
 
+import ModalCompareFilters from '~/components/modals/ModalCompareFilters';
 import { Text, pageContainerPadding } from '~/constants/themes';
+import { useAppDispatch } from '~/hooks/reduxConfig';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useFont } from '@shopify/react-native-skia';
-
 // REMOVE: TEST DATA
 import {
   TestOwnerData,
@@ -15,10 +17,7 @@ import {
   testOwner1Data,
   testOwner2Data,
 } from '~/mockData/mockData';
-import { useAppDispatch } from '~/hooks/reduxConfig';
 import { showFilterSelectModal } from '~/store/features/ModalCompareFiltersSlice/ModalCompareFiltersSlice';
-import ModalCompareFilters from '~/components/modals/ModalCompareFilters';
-import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function ComparePage() {
   const theme = useCustomTheme();

@@ -1,19 +1,18 @@
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import { StyleSheet, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 import {
   Entypo,
   FontAwesome5,
   MaterialCommunityIcons,
   MaterialIcons,
   FontAwesome6,
-  Fontisto,
 } from '@expo/vector-icons';
-import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useAppDispatch } from '~/hooks/reduxConfig';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { StyleSheet, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { Text } from '~/constants/themes';
+import { useAppDispatch } from '~/hooks/reduxConfig';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { showLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
 
 // TODO: Add active state bg to DrawerItems (already have opacity done)
 
@@ -114,7 +113,7 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             style={styles.drawerItem}
           />
         </View>
-        <View style={styles.spacer}></View>
+        <View style={styles.spacer} />
         {/* CUSTOM MODULES */}
         {/* TODO: Define routes for custom modules & map through */}
         <View style={{ flexDirection: 'column', flex: 1, justifyContent: 'flex-start' }}>
@@ -150,7 +149,7 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
             );
           })}
         </View>
-        <View style={styles.spacer}></View>
+        <View style={styles.spacer} />
         {/* BOTTOM DRAWER */}
         <View style={{ flexDirection: 'column' }}>
           <DrawerItem
@@ -175,7 +174,7 @@ export default function CustomDrawerContent({ navigation, state, props }: any) {
           />
           <DrawerItem
             labelStyle={{ color: theme.colors.admin }}
-            label={'Logout'}
+            label="Logout"
             onPress={() => dispatch(showLogoutModal())}
             icon={({ focused, color, size }) => (
               <MaterialIcons name="logout" size={24} color={theme.colors.admin} />

@@ -1,14 +1,12 @@
-import { Redirect, useRouter } from 'expo-router';
+import { Redirect } from 'expo-router';
 import { View, Image, StyleSheet, ActivityIndicator } from 'react-native';
 
-import { LinearProgress } from '@rneui/base';
 import { useSession } from '~/auth/AuthContext';
 import { pageContainerPadding } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
 
 export default function Index() {
   const theme = useCustomTheme();
-  const router = useRouter();
   const { session, isLoading } = useSession();
 
   if (isLoading) {
@@ -24,10 +22,10 @@ export default function Index() {
   }
 
   if (!session) {
-    return <Redirect href={'/login'} />;
+    return <Redirect href="/login" />;
   }
 
-  return <Redirect href={'/(app)'} />;
+  return <Redirect href="/(app)" />;
 }
 
 const styles = StyleSheet.create({

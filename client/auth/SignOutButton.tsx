@@ -1,17 +1,13 @@
-import { useRouter } from 'expo-router';
-import { useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+
+import { useSession } from './AuthContext';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { supabase } from '~/lib/supabase';
-import { useSession } from './AuthContext';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function SignOutButton() {
   const theme = useCustomTheme();
-  const router = useRouter();
   const { signOut, isLoading } = useSession();
 
   useLoadingSpinner(isLoading);

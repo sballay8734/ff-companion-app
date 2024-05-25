@@ -1,20 +1,20 @@
-import { store } from '~/store/store';
-import { Slot } from 'expo-router';
-import { SessionProvider } from '~/auth/AuthContext';
-import { Provider } from 'react-redux';
 import { ThemeProvider } from '@react-navigation/native';
-import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
+import { Slot } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from 'react';
-import { AppState, StyleSheet, useColorScheme } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import ModalLogout from '~/components/modals/ModalLogout';
-import LoadingSpinner from '~/components/modals/LoadingSpinner';
+import { useCallback } from 'react';
+import { StyleSheet, useColorScheme } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
+import { Provider } from 'react-redux';
+
+import { SessionProvider } from '~/auth/AuthContext';
+import LoadingSpinner from '~/components/modals/LoadingSpinner';
+import ModalLogout from '~/components/modals/ModalLogout';
 import { toastConfig } from '~/config/toastStyleConfig';
-import { supabase } from '~/lib/supabase';
+import { AppDarkTheme, AppLightTheme } from '~/constants/themes';
+import { store } from '~/store/store';
 
 export default function Root() {
   const colorScheme = useColorScheme();
@@ -47,7 +47,7 @@ export default function Root() {
               <Toast config={toastConfig} />
             </SafeAreaView>
           </SafeAreaProvider>
-          <StatusBar style={'light'} />
+          <StatusBar style="light" />
         </ThemeProvider>
       </Provider>
     </SessionProvider>

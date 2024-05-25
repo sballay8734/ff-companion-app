@@ -1,19 +1,18 @@
-import { Link, Stack } from 'expo-router';
-import { View, StyleSheet, Button, Pressable, Image } from 'react-native';
+import { Stack } from 'expo-router';
+import { View, StyleSheet, Button, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 
+import { useSession } from '~/auth/AuthContext';
+import SignOutButton from '~/auth/SignOutButton';
+import { info, success, toastError, warning } from '~/config/toastContentConfig';
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import SignOutButton from '~/auth/SignOutButton';
-import { useSession } from '~/auth/AuthContext';
 import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
-import { color } from '@rneui/base';
-import Toast from 'react-native-toast-message';
-import { info, success, toastError, warning } from '~/config/toastContentConfig';
 
 export default function HomePage() {
   const theme = useCustomTheme();
-  const { session, isLoading, user } = useSession();
+  const { isLoading, user } = useSession();
 
   useLoadingSpinner(isLoading);
 

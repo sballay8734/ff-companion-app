@@ -1,17 +1,15 @@
-import { Modal, View, Text, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { RootState } from '~/store/store';
-import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
-import { useCustomTheme } from '~/hooks/useCustomTheme';
-import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
-import { useRouter } from 'expo-router';
-import { pageContainerPadding } from '~/constants/themes';
+import { Modal, View, Text, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
+
 import { useSession } from '~/auth/AuthContext';
-import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
+import { pageContainerPadding } from '~/constants/themes';
+import { useAppDispatch, useAppSelector } from '~/hooks/reduxConfig';
+import { useCustomTheme } from '~/hooks/useCustomTheme';
+import { hideLogoutModal } from '~/store/features/ModalLogout/modalLogoutSlice';
+import { RootState } from '~/store/store';
 
 export default function ModalLogout() {
   const isVisible = useAppSelector((state: RootState) => state.modalLogout.isVisible);
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const { signOut } = useSession();
   const theme = useCustomTheme();
@@ -23,7 +21,7 @@ export default function ModalLogout() {
   }
 
   return (
-    <Modal animationType="slide" transparent={true} visible={isVisible}>
+    <Modal animationType="slide" transparent visible={isVisible}>
       <View style={{ ...styles.modalContent, backgroundColor: theme.colors.base300 }}>
         <View style={{ ...styles.titleContainer, backgroundColor: theme.colors.base100 }}>
           <Text style={styles.title}>Are you sure you want to logout?</Text>

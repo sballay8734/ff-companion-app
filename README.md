@@ -26,8 +26,6 @@ An app to enhance your league's experience. Inspired by the "Legendary League of
 - React
 - React Native
 - TypeScript
-- Express
-- Mongoose
 
 ## Status
 

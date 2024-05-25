@@ -1,5 +1,6 @@
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 import Toast from 'react-native-toast-message';
+
 import { toastError } from '~/config/toastContentConfig';
 import { supabase } from '~/lib/supabase';
 import { Database } from '~/types/supabase';
@@ -13,6 +14,7 @@ export const appApi = createApi({
   tagTypes: ['Session'],
   endpoints: (builder) => ({
     getUserProfile: builder.query<UserProfile, string>({
+      // NOTE: Giving error because data structure has changed
       queryFn: async (userId) => {
         try {
           const { data, error } = await supabase
@@ -28,6 +30,7 @@ export const appApi = createApi({
 
           return { data };
         } catch (error) {
+          console.error(error);
           Toast.show(toastError.login);
           throw new Error("We're sorry. We couldn't get your profile.");
         }

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
-import { Button, Input, Overlay } from 'react-native-elements';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+
 import { useSession } from './AuthContext';
-import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 import { Text } from '~/constants/themes';
 import { useCustomTheme } from '~/hooks/useCustomTheme';
-import Toast from 'react-native-toast-message';
+import { useLoadingSpinner } from '~/hooks/useLoadingSpinner';
 
 export default function EmailPassword() {
   const theme = useCustomTheme();
@@ -81,7 +80,7 @@ export default function EmailPassword() {
           autoCapitalize="none"
           value={password}
           placeholder="Password"
-          secureTextEntry={true}
+          secureTextEntry
           onChangeText={(text) => setPassword(text)}
           onFocus={() => setPassIsFocused(true)}
           onBlur={() => setPassIsFocused(false)}

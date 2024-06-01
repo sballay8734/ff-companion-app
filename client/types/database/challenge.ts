@@ -2,7 +2,7 @@
 // TODO: picks (possibly multiple shapes - so do last)
 // TODO: records (possibly multiple shapes - so do last)
 
-// !TODO: All constraints, types, and foreign keeys need to be double checked. You are currently in the testing phase and setting things up quickly
+// !TODO: All constraints, types, and foreign keys need to be double checked. You are currently in the testing phase and setting things up quickly
 
 // Challenges ******************************************************
 interface Challenge {
